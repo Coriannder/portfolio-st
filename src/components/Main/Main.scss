@@ -1,0 +1,14 @@
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-container {
+
+        width: 25%;
+        height: 7000px;
+        background-color: aquamarine;
+
+    }
+}
