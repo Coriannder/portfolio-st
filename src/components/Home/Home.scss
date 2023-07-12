@@ -1,0 +1,49 @@
+
+
+.home {
+
+    &__section {
+
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+
+    }
+
+    &__container {
+
+        width: 70%;
+    }
+
+    &__paragraph {
+        font-size: 1vw;
+    }
+
+    &__h1  {
+
+        font-size: 8vw;
+        font-weight: 100;
+        margin: 0;
+
+    }
+
+    &__name {
+        margin: 0;
+    }
+
+    &__name-logo {
+        width: 5.7vw;
+    }
+
+    &__h3 {
+        font-size: 5vw;
+        font-weight: 100;
+        margin: 0;
+    }
+
+
+}
