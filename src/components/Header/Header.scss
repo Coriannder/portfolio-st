@@ -1,11 +1,10 @@
 
 .header{
-    &__container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    }
+    backdrop-filter: blur(5px);
 
     &__navbar {
         display: flex;
@@ -13,18 +12,16 @@
         justify-content: space-between;
         margin: auto;
         z-index: 10;
-        width: 100%;
-        max-width: 1600px;
-        background-color: pink;
+        max-width: 1500px;
+        padding: 0 20px;
     }
 
     &__sections {
 
-        width: 400px;
         list-style: none;
-
         display: flex;
         justify-content: space-between;
+        padding: 0;
 
         li {
             display: flex;
