@@ -1,6 +1,6 @@
 
 .banter-BackgroundFigure {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   width: 288px;
@@ -8,6 +8,8 @@
   margin-left: -144px;
   margin-top: -144px;
   z-index: -10;
+  scroll-behavior:smooth;
+  
 }
 
 .banter-BackgroundFigure__box {
