@@ -1,0 +1,56 @@
+
+.about {
+    &__section {
+
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+
+    }
+    &__container {
+
+        width: 80%;
+
+    }
+    &__h2 {
+
+        font-size: 8vw;
+        font-weight: 100;
+        margin: 0;
+
+    }
+
+    &__img-container {
+        position: absolute;
+        right: 0;
+        //background-color: red;
+        width: 60vh;
+        height: 100vh;
+        overflow: hidden;
+
+        img {
+            height: 120vh;
+            filter: invert(20%);
+            opacity: 5%;
+
+
+        }
+    }
+
+    &__body {
+        width: 70%;
+        align-content: end;
+
+        p {
+            text-align: justify;
+        }
+    }
+}
+
+.logo1 {
+    background-color: green;
+}

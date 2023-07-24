@@ -9,13 +9,24 @@ export const PointerFollower = () => {
 
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
-      console.log({ x: e.clientX, y: e.clientY })
+      //console.log({ x: e.clientX, y: e.clientY })
+      //console.log(e.type)
     };
+
+    const handleScroll = () => {
+      const { clientX, clientY } = mousePos;
+      setMousePos({ x: clientX, y: clientY });
+    };
+
+    
 
     useEffect(() => {
       window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('onScroll', handleScroll);
+
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
+            window.addEventListener('scroll', handleScroll);
 
         };
     });
