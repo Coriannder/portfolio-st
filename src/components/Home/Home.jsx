@@ -9,19 +9,19 @@ export const Home = () => {
         <section className='home__section'>
 
             <div className='home__container'>
-                <p className='home__paragraph'>
-                    <div>Hola soy Sebas</div>
-                    <div>Un desarrollador web & Ingniero Biomedico</div>
-                    <div> viviendo en Argentina</div>
-                </p>
+                <div className='home__intro'>
+                    Hola como estas? Soy
+                    {/* <div>Soy un desarrollador web e Ingeniero Biomedico</div>
+                    <div> viviendo en Argentina</div> */}
+                </div>
 
                 <h1 className='home__h1'>
                     <span className='home__name'>SEBAS</span>
-                    <span><img className='home__name-logo' src={logo2}></img></span>
+                    <span style={{height: '100%'}}><img className='home__name-logo' src={logo2}></img></span>
                     <span className='home__lastName'>TABOADA</span>
                 </h1>
                 <h3 className='home__h3'>
-                    <span>FULLSTACK Web Developer</span>
+                    <span>desarrolladro web fullstack</span>
                 </h3>
 
             </div>
