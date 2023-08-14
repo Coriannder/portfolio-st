@@ -24,9 +24,23 @@
         border-top: 1px solid white;
         border-bottom: 1px solid white;
 
+        /* &:before {
+            content: &#8592
+        } */
+
+
+    /*     &:hover{
+            // &#8592;
+            //background-color: red
+        }
+
         & span {
             margin-right: 1rem;
-        }
+            width: 100px;
+            content: 'jojo';
+            color: black;
+            background-color: red;
+        } */
     }
 
     &__body {
