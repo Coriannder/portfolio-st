@@ -1,7 +1,9 @@
 import './Projects.scss'
 import { ProjectItemList } from './ProjectItemList/ProjectItemList'
-import { ImageContainer } from './ImageContainer/ImageContainer'
+//import { VisorProject } from './VisorProject/VisorProject'
 import { useState } from 'react'
+import { projects } from '../../json/project.json'
+import { VisorProjectsList } from './VisorProjectsList/VisorProjectsList'
 
 
 
@@ -12,27 +14,38 @@ export const Projects = () => {
 
     const getProjectId = (id) => {
         setProjectId(id)
+       // console.log(id)
     }
 
-    //console.log(projectId)
-
-
+    //console.log(ProjectId)
 
 
     return (
         <section className='projects__section'>
-            <div className='projects__container' onMouseLeave={()=>{setProjectId('')}}>
 
-                {projectId && <ImageContainer image ={`src/assets/project${projectId }.png`} />}
+            <div className='projects__container' onMouseLeave={()=>{setProjectId('')}}>
 
                 <div className='projects__list'>
                     <h2 className='projects__h2'>
                         /projects
                     </h2>
                     <div className='projects__body'>
-                        <ProjectItemList getProjectId={getProjectId} />
+                        <ProjectItemList projects={projects}  getProjectId={getProjectId} />
                     </div>
                 </div>
+
+
+                <div className='projects__visorProjects' >
+                    {/* ProjectId && <VisorProject src ={ProjectId} /> */}
+
+                    <VisorProjectsList projects={projects} id={projectId} />
+
+                </div>
+
+                {/* <iframe src='https://islagourmet.netlify.app/index.html'></iframe> */}
+
+
+
             </div>
         </section>
     )
