@@ -9,26 +9,27 @@ import { Projects } from './components/Projects/Projects';
 import { Contact } from './components/Contact/Contact';
 
 
+import { BrowserRouter as Router } from "react-router-dom";
+
+
 function App() {
 
   return (
 
-    <>
+    <Router>
 
       <Header/>
-      
-      <Main>
 
+      <Main>
         <Home/>
         <About/>
         <Projects/>
         <Contact/>
-
       </Main>
 
       <BackgroundFigure/>
-    </>
-
+      
+    </Router>
   );
 }
 export default App;
