@@ -1,4 +1,4 @@
-
+@import '../MediaQueries.scss';
 
 .contact {
 
@@ -8,63 +8,114 @@
         height: 100vh;
         font-size: 1.3rem;
         background-color: #F5B6CD;
-        color: black;
+        color: rgb(43, 43, 43);
         display: flex;
         align-items: center;
         justify-content: center;
+        //font-family: 'Oswald', sans-serif;
     }
 
     &__container {
-        width: 70%;
+        width: auto;
         height: 20%;
         display: flex;
-
         flex-direction: column;
 
-        //background-color: aquamarine;
+       /*  @include xlarge {
+            width: 80%;
+        } */
+
+        /* @include tablet {
+            width: 70%;
+        } */
+
+        @include mobile {
+            width: 90%;
+        }
     }
+
+    &__subtitle {
+        font-size: 20px;
+        font-weight: 1000;
+
+        @include mobile {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+
 
     &__h2 {
 
-        font-size: 8vw;
-        font-weight: 1000;
+        font-size: 10vw;
         line-height: 1;
         padding-bottom: 2rem;
         margin: 0;
-        border-bottom:5px solid black;
-    }
+        border-bottom:5px solid rgb(43, 43, 43);
 
-    &__media {
-        margin-top: 2rem;
-        color: black;
-        display: flex;
-        //font-size: 1rem;
-        font-weight: 600;
-    }
-
-    &__mailto {
-        display: flex;
-        width: 50%;
-
-        a {
-            color: black;
-            text-decoration: none;
+        @include large {
+            font-size: 11vw;
         }
 
 
+        @include mobile {
+            font-size: 50px;
+            padding: 0;
+        }
     }
 
-    &__social-media {
+    &__media-container {
+        margin-top: 2rem;
+        //color: rgb(43, 43, 43);
         display: flex;
-        flex-direction: row-reverse;
-        width: 50%;
-        text-align: end;
+        justify-content: space-between;
+        font-weight: 600;
+        width: 100%;
 
-        //background-color: aquamarine;
+
+        @include tablet {
+            flex-direction: column;
+        }
+    }
+
+    &__mail-container {
+        display: flex;
+        a {
+            color: rgb(43, 43, 43);
+            text-decoration: none;
+        }
+
+        @include tablet {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__mail-title {
+        margin-right: 30px;
+        font-weight: 500;
     }
 
 
+    &__social {
+        &-container {
+            display: flex;
+            text-align: end;
+            width: auto;
+        }
+        &-title {
+        margin-right: 30px;
+        }
+    }
 
+    &__link-container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    &__link {
+        color: rgb(43, 43, 43);
+    }
 
 
 
