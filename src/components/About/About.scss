@@ -1,56 +1,98 @@
+@import '../MediaQueries.scss';
 
 .about {
-    &__section {
 
+    &__section {
+        padding-top: 100vh;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        z-index: 10;
-
     }
+
     &__container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 40% 50%;
+        grid-template-rows: 20% 40% 40%;
 
-        width: 80%;
+        @include large {
+            grid-template-columns: 50% 40%;
+            grid-template-rows: 10% 40% 50%;
+        }
 
-    }
-    &__h2 {
+        @include tablet {
+            grid-template-columns: 100%;
+            grid-template-rows: 20% auto auto;
+            width: 70%;
+        }
 
-        font-size: 8vw;
-        font-weight: 100;
-        margin: 0;
-
+        @include mobile {
+            width: 90%;
+        }
     }
 
     &__img-container {
-        position: absolute;
-        right: 0;
-        //background-color: red;
-        width: 60vh;
-        height: 100vh;
-        overflow: hidden;
+        grid-row: 2/4;
+        grid-column: 1/2;
+        -webkit-mask-image: linear-gradient(to top, transparent 15%, black 100%);
+        mask-image: linear-gradient(to top, transparent 15%, black 100%);
+        
+        @include tablet {
+
+            grid-row: 3/4;
+            width: 80%;
+            margin: auto;
+            //border: 1px solid red;
+        }
 
         img {
-            height: 120vh;
-            filter: invert(20%);
-            opacity: 5%;
+            width: 100%;
+            opacity: 80%;
+            filter: grayscale(100%);
 
+            @include tablet {
+                opacity: 100%;
+                z-index: 10;
+            }
+        }
+    }
 
+    &__h2 {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        display: flex;
+        align-items: end;
+        justify-content: end;
+        font-size: 75px;
+
+        @include tablet {
+            grid-row: 1/2;
+            grid-column: auto;
+            font-size: 50px;
         }
     }
 
     &__body {
-        width: 40%;
-        align-content: end;
+        grid-row: 3/4;
+        display: flex;
+        justify-content: end;
+        text-align: justify;
+        padding-left: auto;
 
-        p {
-            text-align: start;
+        @include tablet {
+            grid-row: 2/3;
+        }
+
+        & p {
+            width: 70%;
+            @include xlarge {
+                width: 80%;
+            }
+            @include tablet {
+                width: 100%;
+            }
         }
     }
-}
-
-.logo1 {
-    background-color: green;
 }
