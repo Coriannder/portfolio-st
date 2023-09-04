@@ -20,8 +20,8 @@ export const Home = () => {
                     <span style={{height: '100%'}}><img className='home__name-logo' src={logo2}></img></span>
                     <span className='home__lastName'>TABOADA</span>
                 </h1>
-                <h3 className='home__h3'>
-                    <span>desarrolladro web fullstack</span>
+                <h3 className='home__h3 badge badge-succes'>
+                    <span>desarrollador web fullstack</span>
                 </h3>
 
             </div>
