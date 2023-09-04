@@ -1,6 +1,5 @@
 import './Contact.scss'
 
-
 export const Contact = () => {
 
 
@@ -9,34 +8,33 @@ export const Contact = () => {
 
             <div className='contact__container'>
 
-                <div className='contact__title'>
-                    <div style={{fontSize:'2vw'}}>
-                        Te gustaria que trabajemos juntos ?
-                    </div>
-                    <h2 className='contact__h2'>
-                        CONTACTAME
-                    </h2>
+                <div className='contact__subtitle'>
+                    Te gustaria que trabajemos juntos ?
                 </div>
 
-                <div className='contact__media'>
+                <h2 className='contact__h2'>
+                    CONTACTAME
+                </h2>
 
-                    <div className='contact__mailto'>
-                        <div style={{marginRight: '2rem'}}>EMAIL</div>
-                        <a href='mailto:hola@sebastaboada.com'>hola@sebastaboada.com</a>
+                <div className='contact__media-container data-scroll'>
+
+                    <div className='contact__mail-container'>
+
+                        <div className='contact__mail-title'>EMAIL</div>
+
+                        <a className='contact__mail-link' href='mailto:hola@sebastaboada.com'>hola@sebastaboada.com</a>
+
                     </div>
 
-                    <div className='contact__social-media'>
-                        <div style={{marginLeft: '2rem', textAlign: 'start'}}>
-                            <div>LinkedIn</div>
-                            <div>Github</div>
+                    <div className='contact__social-container'>
+
+                        <div className='contact__social-title'>SOCIAL</div>
+                        <div className='contact__link-container'>
+                            <a className='contact__link' href='https://www.linkedin.com/in/sebastian-taboada-1b96a956/' >LinkedIn</a>
+                            <a className='contact__link' href='https://github.com/Coriannder'>Github</a>
                         </div>
-                        <div>SOCIAL</div>
-                        
 
                     </div>
-
-
-
 
                 </div>
 
