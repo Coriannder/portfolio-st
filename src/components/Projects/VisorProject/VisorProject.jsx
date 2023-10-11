@@ -1,25 +1,32 @@
 //import { useState } from 'react'
 import './VisorProject.scss'
+import { motion } from 'framer-motion'
 
-export const VisorProject = ({src, visible}) => {
+export const VisorProject = ({ src , isVisible }) => {
 
-    //const [isShown, setIsShown] = useState( false )
+    //const [ isVisible, setIsVisible ] = useState( isVisible )
 
     // [position, setPosition] = useState()
 
 
     return (
 
-        <div
+        <motion.div
             className='visorProject__container'
+            style={{ zIndex : !isVisible && '-50'}}
             //onMouseEnter={() => setIsShown(true)}
             //onMouseLeave={() => setIsShown(false)}
 
-            style={{display: visible ?  "block" : "none"}}
+            //style={{display: visible ?  "block" : "none"}}
+
+            initial={{ opacity: 0 }}
+            animate={{opacity: isVisible ? 1 : 0 }}
+            //exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: .8}}
         >
             <iframe
                 src={src}
-                className='visorProject__iframe pp'
+                className='visorProject__iframe'
                 width='100%'
                 height='100%'
                 //onClick={console.log('hola')}
@@ -34,7 +41,7 @@ export const VisorProject = ({src, visible}) => {
                     </div>
                 </div>
                 )} */}
-        </div>
+        </motion.div>
     )
 }
 
