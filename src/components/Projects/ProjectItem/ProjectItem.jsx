@@ -1,28 +1,66 @@
 import './ProjectItem.scss'
 //import arrowRight from '../../../assets/arrowRight.svg'
 
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { motion } from "framer-motion"
+import { useContext, useState } from 'react';
+import { ButtonLink } from '../Button/Button';
+import { CursorContext } from '../../../Context/CursorContext';
 
 
 
 
+export const  ProjectItem = ({item , getId}) => {
 
-export const  ProjectItem = ({item , getProjectId}) => {
+    const contextValue = useContext(CursorContext)
+
+    const [arrow, setArrow] = useState(false)
+
+    const child = {
+        hidden: { opacity: 0 },
+        show: { opacity: 1 }
+    }
+
 
     return (
-        <div className='projectItem__container' onMouseEnter={()=>{getProjectId(item.id)}}>
+        <motion.div
+            className='projectItem__container'
+            onMouseOver={()=>{
+                getId(item.id)
+                setArrow(true)}}
+            onMouseLeave={()=>setArrow(false)}
+            variants={child}>
+
             <div className='projectItem__header'>
-                {/* <span>   &#8594;  </span> */}
-                <div className='projectItem__title'>
-                    {item.title}
-                </div>
+                <motion.div
+                    style={{display: 'flex'}}
+                    initial={{x: -18}}
+                    animate={{x: arrow? 0 : -18}}>
 
-                <div className='projectItem__links'>
-                    <Link to = "https://www.lagaceta.com.ar/?utm_source=web_app" className='projectItem__button'>web</Link>
-                    <Link to={"https://getbootstrap.com/docs/5.1/getting-started/introduction/"} className='projectItem__button' style={{marginLeft: '10px'}}>code</Link>
-                </div>
+                        <span style={{marginRight: '5px'}} > &#8594; </span>
 
-                
+                        <div className='projectItem__title'>
+                            {item.title}
+                        </div>
+
+                </motion.div>
+
+                <div className='projectItem__links' onMouseOver={contextValue.overButton} onMouseLeave={contextValue.outTag}>
+                    <ButtonLink
+                        to={'https://www.lagaceta.com.ar/?utm_source=web_app'}
+                        title={'web'}/>
+
+                   {/*  <Link to = "https://www.lagaceta.com.ar/?utm_source=web_app" className='projectItem__button'>
+                        <motion.div
+                        style={{position: 'absolute', backgroundColor:'red', height: '100%', width: '100%'}}
+                        initial={{scaleX: 1}}>
+                        </motion.div>
+                        web
+                    </Link> */}
+                    <ButtonLink to={'https://getbootstrap.com/docs/5.1/getting-started/introduction/'} title={'code'} style={{marginLeft: '15px'}}/>
+{/*                     <Link to={"https://getbootstrap.com/docs/5.1/getting-started/introduction/"} className='projectItem__button' style={{marginLeft: '10px'}}>code</Link>
+ */}            </div>
+
             </div>
             <div className='projectItem__body'>
                 {/* <div className='projectITem__web'>
@@ -33,8 +71,7 @@ export const  ProjectItem = ({item , getProjectId}) => {
                 </div> */}
             </div>
             {/* <div className='projectItem__linksContainer'>
-                
             </div> */}
-        </div>
+        </motion.div>
         )
 }

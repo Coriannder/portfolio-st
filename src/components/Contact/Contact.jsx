@@ -1,10 +1,12 @@
 import './Contact.scss'
 
+import { AnimatedContent } from '../AnimatedContent/AnimatedContent'
+
 export const Contact = () => {
 
 
     return(
-        <section className='contact__section'>
+        <section className='contact__section' /* data-scroll data-scroll-sticky data-scroll-target="#scroll-container" */>
 
             <div className='contact__container'>
 
@@ -12,11 +14,15 @@ export const Contact = () => {
                     Te gustaria que trabajemos juntos ?
                 </div>
 
-                <h2 className='contact__h2'>
-                    CONTACTAME
-                </h2>
+                <AnimatedContent initial={{opacity: 0 , x:-80}} animate={{opacity: 1, x:0}} position={.5}>
+                    <h2 className='contact__h2'>
+                        CONTACTAME
+                    </h2>
+                </AnimatedContent>
 
-                <div className='contact__media-container data-scroll'>
+                
+
+                <div className='contact__media-container'>
 
                     <div className='contact__mail-container'>
 
@@ -58,8 +64,8 @@ export const Contact = () => {
 
                 </form>
 
-            </div */}
-
+            </div>
+ */}
         </section>
     )
 }

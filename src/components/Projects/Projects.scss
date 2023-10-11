@@ -4,19 +4,21 @@
 .projects {
 
     &__section {
+        margin-top: 200px;
         width: 100vw;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: end;
         z-index: 10;
-        margin: 100px;
+        position: relative;
+        padding-bottom: 100px;
     }
 
     &__container {
 
         width: 80%;
-        height: 70%;
+        //height: 70%;
         display: flex;
         justify-content: space-between;
 
@@ -36,9 +38,10 @@
         display: flex;
         flex-direction: column;
         justify-content: end;
+        //font-family: 'Special Elite';
 
         @include large {
-            width: 42vw;
+            width: 60vw;
         }
 
         @include tablet {
@@ -48,25 +51,43 @@
 
     &__h2 {
 
-        font-size: 5vw;
+        font-size: 75px;
         font-weight: 400;
         line-height: 2;
         margin: 0;
         border-bottom: 1px solid #F5B6CD;
 
 
-        @include mobile {
+        @include tablet {
             font-size: 50px;
-            
         }
     }
 
+    &__body {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+          }
+    }
+
     &__visorProjects {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        justify-content: flex-end;
         width: 50vw;
-        height: 100%;
+        height: 60%;
         overflow: hidden;
 
-        @include tablet {
+        @include large {
+
+            width: 50vw;
+        }
+
+  
+
+
+        @include large {
             display: none;
         }
 

@@ -17,11 +17,9 @@
 
          width: auto;
 
-        @include xlarge {
-           width: 60%
-        }
+
         @include tablet {
-            width: 70%;
+            width: 55%;
             align-items: center;
         }
         @include mobile {
@@ -38,17 +36,16 @@
     }
 
     &__h1  {
-        font-size: 120px;
-        font-weight: 1000;
+        font-size: 140px;
+        //font-weight: 100;
         margin: 0;
         line-height: 0.9;
         width: auto;
+        font-family: 'Oswald', sans-serif;
 
-        //font-family: 'Oswald', sans-serif;
-        -webkit-text-stroke: 1.5px #F5B6CD;
-        color: transparent;
-
-
+        @include xlarge {
+            font-size: 130px;
+        }
 
         @include large {
             font-size: 100px;
@@ -56,9 +53,9 @@
         }
 
         @include tablet {
-            font-size: 5rem;
+            //font-size: 5rem;
             //-webkit-text-stroke: 1.5px #F5B6CD;
-            -webkit-text-stroke: 1px #F5B6CD;
+            //-webkit-text-stroke: 1px #F5B6CD;
 
         }
 
@@ -69,17 +66,22 @@
     }
 
     &__name-logo {
-        height: 85px;
-        margin: 0 10px;
+        height: 115px;
+        //margin: 0 10px;
+
+        @include xlarge {
+            height: 110px;
+        }
 
         @include large {
-            height: 70px;
+            height: 85px;
         }
         @include tablet {
-            height: 60px;
+            height: 82px;
         }
         @include mobile {
-            height: 47px;
+            height: 52px;
+            margin: 0 10px;
         }
     }
 
@@ -89,16 +91,23 @@
         margin: 0;
         line-height: 1.2;
 
+        -webkit-text-stroke: 1.5px #F5B6CD;
+        color: transparent;
+
+
         @include xlarge {
-            font-size: 40px;
+            font-size: 55px;
         }
         @include large {
-            font-size: 30px;
+            font-size: 40px;
             font-weight: 700;
+            -webkit-text-stroke: 1.1px #F5B6CD
 
         }
         @include tablet {
             font-size: 2rem;
+            -webkit-text-stroke: .8px #F5B6CD
+
 
         }
         @include mobile {

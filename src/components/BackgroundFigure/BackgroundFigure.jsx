@@ -1,22 +1,39 @@
 import './BackgroundFigure.scss'
 
+import { motion } from 'framer-motion'
+
 
 export const BackgroundFigure = () => {
 
 
+
+
     return (
-		<div>
-			<div className="banter-BackgroundFigure">
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-			<div className="banter-BackgroundFigure__box"></div>
-		</div>
+		<div
+			>
+			<motion.div className="banter-BackgroundFigure"
+				initial={{ scale: 100, }}
+				animate={{ scale:.7, }}
+				transition={{duration: .8}}>
+				{[...Array(9)].map((i) =>
+					<motion.div
+						className="banter-BackgroundFigure__box"
+
+						initial={{ background: '#00000000'}}
+						animate={{ background:"#00000016" }}
+						key = {i} />
+						//
+				)}
+				{/* <motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div>
+				<motion.div className="banter-BackgroundFigure__box"></motion.div> */}
+			</motion.div>
 
 		</div>
 
