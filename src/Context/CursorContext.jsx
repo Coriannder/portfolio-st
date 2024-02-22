@@ -1,13 +1,12 @@
 import './CursorContext.scss'
 
-import React, { useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 //import { Cursor } from "../components/Cursor/Cursor";
 import { motion } from 'framer-motion'
 
-export const CursorContext = React.createContext()
+export const CursorContext = createContext()
 
 export const CursorProvider = ({children}) => {
-
 
     const [ isInside, setIsInside] = useState('')
 
@@ -34,16 +33,6 @@ export const CursorProvider = ({children}) => {
         setIsInside(value)
         console.log(value)
     }
-        
-
-/*     const handleMouseOut = () => {
-        setIsInsideText(false)
-        //console.log('false')
-    } */
-
-
-
-
 
     const [mousePosition, setMousePosition] = useState({
         x: 0,
@@ -72,7 +61,6 @@ export const CursorProvider = ({children}) => {
 
             scale: 2,
             mixBlendMode: 'difference',
-        
             //backgroundColor: 'red'
         },
 
@@ -91,7 +79,6 @@ export const CursorProvider = ({children}) => {
     useEffect( () => {
 
         const handleMouseMove = e => {
-
             setMousePosition( {
                 x: e.clientX,
                 y: e.clientY
@@ -115,7 +102,7 @@ export const CursorProvider = ({children}) => {
                 transition={{
                     ease: "easeIn",
                     duration: .001,}}
-            />
+        />
 
 
             <CursorContext.Provider value={{ overName, overTitle, overButton, outTag, handleHover}}>

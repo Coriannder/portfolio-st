@@ -1,6 +1,7 @@
 import './Contact.scss'
+import { motion } from 'framer-motion'
 
-import { AnimatedContent } from '../AnimatedContent/AnimatedContent'
+//import { AnimatedContent } from '../AnimatedContent/AnimatedContent'
 
 export const Contact = () => {
 
@@ -10,39 +11,87 @@ export const Contact = () => {
 
             <div className='contact__container'>
 
-                <div className='contact__subtitle'>
-                    Te gustaria que trabajemos juntos ?
-                </div>
 
-                <AnimatedContent initial={{opacity: 0 , x:-80}} animate={{opacity: 1, x:0}} position={.5}>
+                <motion.div
+                    className='contact__subtitle'
+                    initial={{x:-100, opacity:0}}
+                        whileInView={{x: 0, opacity:1 }}
+                        transition= {{ duration: 1, type: "spring", delay: .5}}
+                        viewport={{ once: true }}>
+                    Te gustaria que trabajemos juntos ?
+                </motion.div>
+
+                <h2 className='contact__h2'>
+                    <div >
+                        CONTACTAME
+                    </div>
+                    <motion.div
+                        className='contact__h2--animation'
+                        initial={/* {x:-100, opacity:0} */ {y:0}}
+                        whileInView={/* {x: 0, opacity:1 } */ {y:200}}
+                        transition= {{ duration: 2, type: "spring", delay: .6}}
+                        viewport={{ once: true }}>
+                    </motion.div>
+
+                </h2>
+
+                <motion.div
+                        className='contact__media-container'
+                        initial={{x:-100, opacity:0}}
+                            whileInView={{x: 0, opacity:1 }}
+                            transition= {{ duration: 1, type: "spring", delay: 1}}
+                            viewport={{ once: true }}>
+
+                        <div className='contact__mail-container'>
+
+                            <div className='contact__mail-title'>EMAIL</div>
+
+                            <a className='contact__mail-link' href='mailto:hola@sebastaboada.com'>hola@sebastaboada.com</a>
+
+                        </div>
+
+                        <div className='contact__social-container'>
+
+                            <div className='contact__social-title'>SOCIAL</div>
+                            <div className='contact__link-container'>
+                                <a className='contact__link' href='https://www.linkedin.com/in/sebastian-taboada-1b96a956/' >LinkedIn</a>
+                                <a className='contact__link' href='https://github.com/Coriannder'>Github</a>
+                            </div>
+
+                        </div>
+
+                </motion.div>
+
+                {/* position (num entre 0 y 1 ): indica la posiciion del elemento en el viewport, 0 abajo, 1 arriba */}
+
+                {/* <AnimatedContent initial={{opacity: 0 , x:-400}} animate={{opacity: 1, x:0}} position={.5}> 
                     <h2 className='contact__h2'>
                         CONTACTAME
                     </h2>
-                </AnimatedContent>
 
-                
+                    <div className='contact__media-container'>
 
-                <div className='contact__media-container'>
+                        <div className='contact__mail-container'>
 
-                    <div className='contact__mail-container'>
+                            <div className='contact__mail-title'>EMAIL</div>
 
-                        <div className='contact__mail-title'>EMAIL</div>
+                            <a className='contact__mail-link' href='mailto:hola@sebastaboada.com'>hola@sebastaboada.com</a>
 
-                        <a className='contact__mail-link' href='mailto:hola@sebastaboada.com'>hola@sebastaboada.com</a>
+                        </div>
 
-                    </div>
+                        <div className='contact__social-container'>
 
-                    <div className='contact__social-container'>
+                            <div className='contact__social-title'>SOCIAL</div>
+                            <div className='contact__link-container'>
+                                <a className='contact__link' href='https://www.linkedin.com/in/sebastian-taboada-1b96a956/' >LinkedIn</a>
+                                <a className='contact__link' href='https://github.com/Coriannder'>Github</a>
+                            </div>
 
-                        <div className='contact__social-title'>SOCIAL</div>
-                        <div className='contact__link-container'>
-                            <a className='contact__link' href='https://www.linkedin.com/in/sebastian-taboada-1b96a956/' >LinkedIn</a>
-                            <a className='contact__link' href='https://github.com/Coriannder'>Github</a>
                         </div>
 
                     </div>
+                </AnimatedContent> */}
 
-                </div>
 
             </div>
 
