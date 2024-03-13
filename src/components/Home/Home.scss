@@ -4,7 +4,6 @@
 .home {
 
     &__section {
-
         width: 100vw;
         min-height: 100vh;
         display: flex;
@@ -15,15 +14,13 @@
 
     &__container {
 
-         width: auto;
-
-
+        width: auto;
         @include tablet {
             width: 55%;
             align-items: center;
         }
         @include mobile {
-            width: 90%;
+            width: 80%;
         }
     }
 
@@ -37,7 +34,6 @@
 
     &__h1  {
         font-size: 140px;
-        //font-weight: 100;
         margin: 0;
         line-height: 0.9;
         width: auto;
@@ -59,10 +55,10 @@
 
         }
 
-        @include mobile {
-            font-size: 4rem;
-            
-        }
+     /*    @include mobile {
+            font-size: 5rem;
+            width: fit-content;
+        } */
     }
 
     &__name-logo {
@@ -80,7 +76,7 @@
             height: 82px;
         }
         @include mobile {
-            height: 52px;
+            //height: 52px;
             margin: 0 10px;
         }
     }

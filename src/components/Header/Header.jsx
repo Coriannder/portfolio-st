@@ -2,11 +2,14 @@ import './Header.scss';
 
 import { Link as ScrollLink } from 'react-scroll'
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { CursorContext } from '../../Context/CursorContext';
+import { HeaderLink } from './HeaderLink/headerLink';
 
 
 export const Header = () => {
 
+    const contextValue = useContext(CursorContext)
     const [lastScrollPosition , setLastScrollPosition ] = useState(window.scrollY)
     const [scrollDirection , setScrollDirection ] = useState('default')
 
@@ -17,7 +20,7 @@ export const Header = () => {
 
     const variants = {
 
-        default: { opacity: 1 },
+        default: { opacity: 0 },
         up: {
             opacity: 1,
             y: 0,
@@ -36,38 +39,35 @@ export const Header = () => {
     },[lastScrollPosition])
 
     return (
-        <motion.header className='header'
+        <motion.header className='header__section'
             initial={ {opacity: 0 }}
             variants={ variants }
             animate={ scrollDirection }
             transition={{
                 ease: "easeOut",
                 duration: scrollDirection === 'default' ?  .5 : .3,
-                delay: scrollDirection === 'default' ?  .8 : 0
+                delay: scrollDirection === 'default' ?  .8 : .2
             }}
         >
 
-            <motion.nav className='header__navbar'
-                
-            
-            >
+            <motion.nav className='header__navbar'>
 
                 <div className='header__brandName'>
-                    <ScrollLink to="home__section" spy={true} smooth={'easeOutQuint'} offset={50} duration={40} >ST{scrollDirection}</ScrollLink>
+                    <ScrollLink to="home__section" spy={true} smooth={'easeOutQuint'} offset={50} duration={30}>ST</ScrollLink>
                 </div>
 
-                <ul className='header__sections'>
+                <ul className='header__menu'>
                     <li>
-                        <ScrollLink to="home__section" spy={true} smooth={'easeOutQuint'} offset={50} duration={30}>home</ScrollLink>
+                        <HeaderLink to={"home__section"} title={'Inicio'}/>
                     </li>
-                    <li >
-                        <ScrollLink to="about__section" spy={true} smooth={'easeOutQuint'} offset={50} duration={30}>about</ScrollLink>
+                    <li onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}>
+                        <HeaderLink to={"about__section"} title={'Quien soy'}/>
                     </li>
-                    <li >
-                        <ScrollLink to="projects__section" spy={true} smooth={'easeInQuint'} offset={50} duration={35}>project</ScrollLink>
+                    <li onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}>
+                        <HeaderLink to={"projects__section"} title={'Proyectos'} />
                     </li>
-                    <li>
-                        <ScrollLink to="contact__section" spy={true} smooth={'easeInQuint'} offset={50} duration={40}>contact</ScrollLink>
+                    <li onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}>
+                        <HeaderLink to={"contact__section"} title={'Contacto'}/>
                     </li>
                 </ul>
 

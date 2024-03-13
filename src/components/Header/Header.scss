@@ -1,39 +1,46 @@
+@import '../MediaQueries.scss';
 
 .header{
-    position: fixed;
-    top: 25px;
-    left: 0;
-    width: 100vw;
-    z-index: 100;
-    //background-color: aqua;
+
+    &__section {
+        position: fixed;
+        top: 25px;
+        left: 0;
+        width: 100vw;
+        z-index: 100;
+    }
 
     &__navbar {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
         margin: auto;
-        width: 1200px;
+        width: 90%;
+        max-width: 1300px;
         padding: 0 20px;
         border: 1px solid pink;
         border-radius: 15px;
-        //box-sizing: border-box;
-
-        //background-color: black;
-        backdrop-filter: blur(5px);
-
+        box-sizing: border-box;
+        background-color: rgb(43, 43, 43);
     }
 
     &____brandName {
         width: 20px;
     }
 
-    &__sections {
-
+    &__menu {
         width: 300px;
         list-style: none;
         display: flex;
         justify-content: space-between;
         padding: 0;
+        cursor: none;
+        margin: 5px;
+
+
+        @include mobile2 {
+            margin: 16px;
+        }
 
         li {
             display: flex;

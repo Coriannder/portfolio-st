@@ -7,19 +7,12 @@ import { useState, useContext} from 'react'
 import { VisorProjectsList } from './VisorProjectsList/VisorProjectsList'
 import { CursorContext } from '../../Context/CursorContext'
 import { motion } from 'framer-motion'
-//import { AnimatePresence, motion} from 'framer-motion'
-
 
 export const Projects = () => {
 
     const contextValue = useContext(CursorContext)
 
     const [id, setId] = useState('')
-
-
-    /* const getUrl = (src) => {
-        setUrl(src)
-    } */
 
     return (
         <section className='projects__section'>
@@ -34,12 +27,10 @@ export const Projects = () => {
                             transition= {{ duration: .5, type: "spring", delay: .4}}
                             viewport={{ once: true }}
 
-                            //onMouseOver={contextValue.overProjects}
-                            
                             onMouseOver={contextValue.overTitle}
                             onMouseOut={contextValue.outTag}
                         >
-                            /projects
+                            proyectos
                         </motion.h2>
                     <div className='projects__body'>
 

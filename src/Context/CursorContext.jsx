@@ -1,7 +1,6 @@
 import './CursorContext.scss'
 
 import { createContext, useState, useEffect } from "react";
-//import { Cursor } from "../components/Cursor/Cursor";
 import { motion } from 'framer-motion'
 
 export const CursorContext = createContext()
@@ -12,7 +11,7 @@ export const CursorProvider = ({children}) => {
 
     const overName = () => {
         setIsInside('name')
-        console.log('name')
+        //console.log('name')
     }
     const outTag = () => {
         setIsInside('')
@@ -22,16 +21,20 @@ export const CursorProvider = ({children}) => {
         setIsInside('title')
     }
 
-    const overButton = () => {
-        setIsInside('button')
+    const overLink = () => {
+        setIsInside('link')
     }
-/*     const outTitle = () => {
+    const outTitle = () => {
         setIsInside('')
-    } */
+    }
 
     const handleHover = (value) => {
         setIsInside(value)
         console.log(value)
+    }
+
+    const overButton = () => {
+        setIsInside('button')
     }
 
     const [mousePosition, setMousePosition] = useState({
@@ -62,6 +65,14 @@ export const CursorProvider = ({children}) => {
             scale: 2,
             mixBlendMode: 'difference',
             //backgroundColor: 'red'
+        },
+
+        link: {
+            x: mousePosition.x,
+            y: mousePosition.y,
+
+            mixBlendMode: 'difference',
+            opacity: 0
         },
 
         button: {
@@ -102,10 +113,10 @@ export const CursorProvider = ({children}) => {
                 transition={{
                     ease: "easeIn",
                     duration: .001,}}
-        />
+            />
 
 
-            <CursorContext.Provider value={{ overName, overTitle, overButton, outTag, handleHover}}>
+            <CursorContext.Provider value={{ overName, overTitle, outTag, handleHover, overButton, overLink}}>
                 {/* <Cursor/> */}
                 {children}
             </CursorContext.Provider>

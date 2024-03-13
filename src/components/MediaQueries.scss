@@ -28,3 +28,46 @@
     }
 };
 
+
+
+
+
+
+@mixin mobile2 {
+
+    @media screen and ( min-width: 576px) {
+        @content
+    }
+};
+
+@mixin tablet2 {
+
+    @media screen and ( min-width: 768px) {
+        @content
+    }
+};
+
+@mixin large2 {
+
+    @media screen and ( min-width: 992px) {
+        @content
+    }
+};
+
+@mixin xlarge2 {
+
+    @media screen and ( min-width: 1200px) {
+        @content
+    }
+};
+
+
+@mixin xxlarge2 {
+
+    @media screen and ( min-width: 1400px) {
+        @content
+    }
+};
+
+
+

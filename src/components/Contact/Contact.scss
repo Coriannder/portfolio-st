@@ -19,12 +19,9 @@
     }
 
     &__container {
-        //width: 80%;
         max-width: 733px;
-        height: 20%;
         display: flex;
         flex-direction: column;
-
 
         @include xlarge {
             max-width: 624px;
@@ -34,16 +31,15 @@
             max-width: 471px;
         }
 
-        @include mobile {
+       /*  @include mobile {
             width: 90%;
-        }
+        } */
     }
 
     &__subtitle {
         font-size: 20px;
         font-weight: 500;
         z-index: 10;
-        //overflow: hidden;
 
         @include mobile {
             font-size: 16px;
@@ -57,11 +53,12 @@
         font-size: 147px;
         font-family: 'Oswald', sans-serif;
         line-height: 1;
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
         margin: 0;
-        border-bottom:5px solid rgb(43, 43, 43);
         position: relative;
-        //overflow: hidden;
+        overflow: hidden;
+        //height: 140px;
+        //background-color: red;
 
         @include xlarge {
             font-size: 130px;
@@ -71,53 +68,54 @@
             font-size: 100px;
         }
 
-
         @include mobile {
             font-size: 18vw;
             padding: 0;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         &--animation {
-            position: absolute;
-            top: 0;
-            background: rgb(245,182,205);
-            width: 100%;
+            position: relative;
+            border-bottom: 5px solid rgb(43, 43, 43);
+            width: fit-content;
             height: 100%;
+            z-index: 0;
+            padding-bottom: 1rem;
+
+            @include mobile {
+                padding-bottom: 0;
+
+            }
+
         }
     }
 
-    &__media-container {
-        margin-top: 2rem;
-        //color: rgb(43, 43, 43);
-        display: flex;
-        justify-content: space-between;
-        font-weight: 600;
-        width: 100%;
-        z-index: 1000;
+    &__mail {
 
+        &-container {
 
-        @include tablet {
-            flex-direction: column;
+            display: flex;
+            a {
+                color: rgb(43, 43, 43);
+                text-decoration: none;
+            }
+
+            @include tablet {
+                //margin-bottom: 20px;
+            }
+        }
+
+        &-title {
+            margin-right: 30px;
+            font-weight: 500;
+            min-width:  54px;
+        }
+
+        &-link:hover {
+            font-weight: 900;
         }
     }
 
-    &__mail-container {
-        display: flex;
-        a {
-            color: rgb(43, 43, 43);
-            text-decoration: none;
-        }
-
-        @include tablet {
-            margin-bottom: 20px;
-        }
-    }
-
-    &__mail-title {
-        margin-right: 30px;
-        font-weight: 500;
-    }
 
 
     &__social {
@@ -128,65 +126,24 @@
         }
         &-title {
         margin-right: 30px;
+        min-width:  54px;
         }
     }
+
 
     &__link-container {
+
         display: flex;
-        flex-direction: column;
-        align-items: start;
-    }
-
-    &__link {
-        color: rgb(43, 43, 43);
-        text-decoration: none;
-    }
-
-
-
-
-
-    &__form-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 50%;
-        height: 60%;
-        align-self:center;
-
-
-        background-color: red;
-        z-index: 1000;
-    }
-
-    &__form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 50%;
-        height: 100%;
-        padding: 3rem;
-
-
-        
-        background-color: antiquewhite;
-    }
-
-    &__input {
-        background-color: transparent;
+        justify-content: space-between;
+        font-weight: 600;
         width: 100%;
-        height: 2rem;
-        font-size: 1rem;
-        margin: 1rem;
-        border:1px solid #F5B6CD;
+        z-index: 1000;
 
-        &--mensaje {
-            resize: none;
-            height: 12rem;
+        @include tablet {
+            font-size: 1rem;
         }
-
+        @include mobile {
+            margin-top: 1rem;
+        }
     }
-
 }

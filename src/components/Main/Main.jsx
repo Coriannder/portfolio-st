@@ -1,13 +1,13 @@
 import './Main.scss'
 
 
-export const Main = (props) => {
+export const Main = ({children}) => {
 
 
     return (
 
         <main className='main__container'>
-                {props.children}
+                {children}
         </main>
 
     )

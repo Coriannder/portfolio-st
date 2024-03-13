@@ -34,6 +34,7 @@ export const Cursor = () => {
             y: mousePosition.y,
 
             mixBlendMode: 'difference'
+            
         }
     }
 

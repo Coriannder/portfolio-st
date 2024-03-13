@@ -1,7 +1,5 @@
 import './ProjectItem.scss'
 //import arrowRight from '../../../assets/arrowRight.svg'
-
-//import { Link } from "react-router-dom";
 import { motion } from "framer-motion"
 import { useContext, useState } from 'react';
 import { ButtonLink } from '../Button/Button';
@@ -49,14 +47,6 @@ export const  ProjectItem = ({item , getId}) => {
                     <ButtonLink
                         to={'https://www.lagaceta.com.ar/?utm_source=web_app'}
                         title={'web'}/>
-
-                   {/*  <Link to = "https://www.lagaceta.com.ar/?utm_source=web_app" className='projectItem__button'>
-                        <motion.div
-                        style={{position: 'absolute', backgroundColor:'red', height: '100%', width: '100%'}}
-                        initial={{scaleX: 1}}>
-                        </motion.div>
-                        web
-                    </Link> */}
                     <ButtonLink to={'https://getbootstrap.com/docs/5.1/getting-started/introduction/'} title={'code'} style={{marginLeft: '15px'}}/>
 {/*                     <Link to={"https://getbootstrap.com/docs/5.1/getting-started/introduction/"} className='projectItem__button' style={{marginLeft: '10px'}}>code</Link>
  */}            </div>

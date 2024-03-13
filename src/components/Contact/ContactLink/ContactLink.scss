@@ -1,0 +1,60 @@
+@import '../../MediaQueries.scss';
+
+.contactLink{
+
+    &__container {
+        display: flex;
+    }
+
+    &__header {
+
+        height: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        overflow-x: hidden;
+        border-bottom: 1px solid #F5B6CD;
+
+        @include mobile {
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+
+    &__title {
+
+        font-size: 1.1rem;
+        margin-left: 5px;
+
+        @include mobile {
+            line-height: 2;
+            font-size: 1rem;
+        }
+
+        @include large {
+            //font-size: 1rem;
+        }
+    }
+
+
+
+    &__iconContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__button {
+        border: 2px solid #F5B6CD;
+        padding: 4px 15px 6px 15px;
+        font-size: 13px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        color: #F5B6CD;
+        text-decoration: none;
+        position: relative;
+    }
+}
