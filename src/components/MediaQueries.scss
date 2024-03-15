@@ -29,7 +29,12 @@
 };
 
 
+@mixin mobile2 {
 
+    @media screen and ( min-width: 576px) {
+        @content
+    }
+};
 
 
 

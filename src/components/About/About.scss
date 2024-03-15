@@ -9,8 +9,6 @@
         justify-content: center;
         align-items: end;
         position: relative;
-
-        //background-color: rgba(0, 255, 255, 0.499);
     }
 
     &__container {
@@ -19,30 +17,38 @@
         align-items: end;
         max-width: 1200px;
         width: 80%;
+        margin-top: 500px;
 
-        margin-top: 400px;
+        @include mobile2 {
+            margin-top: 400px;
+        }
 
-        //background-color: rgba(255, 0, 0, 0.404);
+        @include tablet2 {
+            margin-top: 380px;
+        }
+
     }
 
     &__img-container {
         position: absolute;
-        width: 70%;
-        min-width: 350px;
-        max-width: 615px;
+        width: 350px;
         top: 100px;
-        left: 0;
+        left: 0px;
         -webkit-mask-image: linear-gradient(to top, transparent 15%, black 100%);
         mask-image: linear-gradient(to top, transparent 15%, black 100%);
 
-        //background-color: rgba(0, 128, 0, 0.403);
-
+        @include mobile2 {
+            width: 60%;
+            max-width: 440px;
+        }
         @include tablet2 {
-            width: 70%;
+            min-width: 440px;
+
         }
 
-        @include large2 {
-
+       @include large2 {
+            width: 40%;
+            max-width: 550px;
         }
 
         img {
@@ -54,7 +60,7 @@
 
     &__h2 {
         display: flex;
-        width: 40%;
+        width: 80%;
         justify-content: end;
         font-size: 50px;
         font-weight: 400;
@@ -71,30 +77,20 @@
 
     &__body {
 
-
         display: flex;
         justify-content: end;
         width: 100%;
-
-        //background-color: rgba(255, 255, 0, 0.492);
-
-        @include large {
-            justify-content: end;
-            text-align: end;
-        }
+        margin-bottom: 30px;
 
         & p {
-            width: 40%;
-            text-align: end;
-
-            @include large {
+            @include tablet2 {
+                text-align: end;
                 width: 80%;
-                padding-bottom: 100px;
             }
-            @include tablet {
-                width: 100%;
-                padding-bottom: 50px;
+            @include xlarge2 {
+                width: 600px;
             }
         }
+
     }
 }
