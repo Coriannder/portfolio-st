@@ -13,45 +13,33 @@
         z-index: 10;
         position: relative;
         padding-bottom: 100px;
-
-        @include mobile {
-            margin: 0;
-            height: 80vh;
-        }
+        margin: 0;
     }
 
     &__container {
 
-        width: 80%;
-        //height: 70%;
+        width: 90%;
         max-width: 1200px;
         display: flex;
         justify-content: space-between;
 
-        @include tablet {
-            width: 70%;
+        @include mobile2 {
+            width: 80%;
         }
-
-        @include mobile {
+        @include tablet2 {
             width: 90%;
         }
     }
 
-
     &__list {
-        width: 35vw;
+        width: 468px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: end;
-        //font-family: 'Special Elite';
 
-        @include large {
-            width: 60vw;
-        }
-
-        @include tablet {
-            width: 100%;
+        @include mobile2 {
+            width: 468px;
         }
     }
 
@@ -59,10 +47,10 @@
 
         font-size: 75px;
         font-weight: 400;
+        width: fit-content;
         line-height: 2;
         margin: 0;
         border-bottom: 1px solid #F5B6CD;
-
 
         @include tablet {
             font-size: 50px;
@@ -73,7 +61,7 @@
         overflow-y: scroll;
         &::-webkit-scrollbar {
             display: none;
-          }
+        }
     }
 
     &__visorProjects {
@@ -86,12 +74,8 @@
         overflow: hidden;
 
         @include large {
-
             width: 50vw;
         }
-
-  
-
 
         @include large {
             display: none;
