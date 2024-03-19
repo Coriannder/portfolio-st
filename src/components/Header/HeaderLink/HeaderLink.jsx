@@ -1,6 +1,6 @@
 import './HeaderLink.scss'
 
-import { Link as ScrollLink } from 'react-scroll'
+import { Link } from 'react-scroll'
 import { motion } from 'framer-motion';
 import { useState , useContext } from 'react';
 import { CursorContext } from '../../../Context/CursorContext'
@@ -12,7 +12,7 @@ export const HeaderLink = ( {to , title , offset} ) => {
     const contextValue = useContext(CursorContext)
 
     return(
-        <ScrollLink
+        <Link
             className={'headerLink__link'} to={to} spy={true} smooth={'easeOutQuint'} offset={offset || 50} duration={30}
             onMouseEnter={() => setHover(true)} onMouseLeave={()=> setHover(false)}
             onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}
@@ -24,7 +24,7 @@ export const HeaderLink = ( {to , title , offset} ) => {
                 animate={{x: hover? 0 : -80}}
                 transition={{duration: .12, easings: 'spring'}}
             />
-        </ScrollLink>
+        </Link>
     )
 
     }
