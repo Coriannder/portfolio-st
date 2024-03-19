@@ -22,29 +22,29 @@ export const Contact = () => {
                     Te gustaria que trabajemos juntos ?
                 </motion.div>
 
-                <h2 className='contact__h2'>
-                    <motion.div
-                        className='contact__h2--animation'
+                <div className='contact__titleContainer'>
+                    <motion.h2
+                        className='contact__h2'
                         initial={{y:-100 , opacity: 0}}
                         whileInView={{y:0 , opacity:1}}
                         transition= {{ duration: .3, type: "spring", delay: .5}}
                         viewport={{ once: true }}
                     >
                     CONTACTAME
-                    </motion.div>
+                    </motion.h2>
 
-                </h2>
+                </div>
 
                 <motion.div
-                    className='contact__link-container'
+                    className='contact__linkContainer'
                     initial={{x:-100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .5, type: "spring", delay: .6}}
                     viewport={{ once: true }}
                 >
-                    <ContactLink title={'email'}><ImMail/></ContactLink>
-                    <ContactLink title={'linkedin'} children={<FaLinkedin/>}/>
-                    <ContactLink title={'github'}><FaGithubSquare/></ContactLink>
+                    <ContactLink title={'email'} to={'mailto:contacto@sebastaboada.com'} children={<ImMail/>}></ContactLink>
+                    <ContactLink title={'linkedin'} to={'https://www.linkedin.com/in/sebastian-taboada-1b96a956/'} children={<FaLinkedin/>}/>
+                    <ContactLink title={'github'} to={'https://github.com/Coriannder'} children={<FaGithubSquare/>}/>
                 </motion.div>
             </div>
         </section>

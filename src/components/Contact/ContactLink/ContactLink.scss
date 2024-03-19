@@ -4,10 +4,11 @@
 
     &__container {
         display: flex;
+        color: rgb(43, 43, 43);
+        text-decoration: none;
     }
 
     &__header {
-
         height: 100%;
         display: flex;
         flex-wrap: nowrap;
@@ -16,25 +17,14 @@
         flex-wrap: wrap;
         overflow-x: hidden;
         border-bottom: 1px solid #F5B6CD;
-
-        @include mobile {
-            font-size: 16px;
-            font-weight: 400;
-        }
     }
 
     &__title {
-
-        font-size: 1.1rem;
+        font-size: 16px;
         margin-left: 5px;
 
-        @include mobile {
-            line-height: 2;
-            font-size: 1rem;
-        }
-
-        @include large {
-            //font-size: 1rem;
+        @include mobile2 {
+            font-size: 18px;
         }
     }
 

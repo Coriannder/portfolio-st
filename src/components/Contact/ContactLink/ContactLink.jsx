@@ -1,15 +1,18 @@
 import './ContactLink.scss'
 import { motion } from 'framer-motion';
 import { useState } from 'react'
-import { Link } from 'react-scroll';
+import { Link } from 'react-router-dom';
 
 
-export const ContactLink = ({title , children }) => {
+export const ContactLink = ({title , children , to }) => {
 
     const [isMouseOver, setIsMouseOver] = useState(false)
 
     return (
         <motion.div
+
+            className='pp'
+
             style={{overflow:'hidden'}}
             onMouseOver={()=>setIsMouseOver(true)}
             onMouseLeave={()=>setIsMouseOver(false)}
@@ -18,7 +21,7 @@ export const ContactLink = ({title , children }) => {
             animate={{x: isMouseOver? 10 : 0}}
             transition={{duration: .1, easings: 'spring'}}
         >
-            <Link className='contactLink__container' to='projects'>
+            <Link className='contactLink__container' to={to}>
                 <span
                     className='contactLink__iconContainer'
                 >

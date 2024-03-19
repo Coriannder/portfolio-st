@@ -3,147 +3,83 @@
 .contact {
 
     &__section {
-
         width: 100vw;
         height: 100vh;
         font-size: 1.3rem;
-        //background-color: #F5B6CD;
         color: rgb(43, 43, 43);
         display: flex;
         align-items: center;
         justify-content: center;
-        //font-family: 'Oswald', sans-serif;
         background: rgb(245,182,205);
-        //background: linear-gradient(0deg, rgba(245,182,205,1) 0%, rgb(43, 43, 43) 90%);
-    
+
     }
 
     &__container {
-        max-width: 733px;
         display: flex;
         flex-direction: column;
-
-        @include xlarge {
-            max-width: 624px;
-        }
-
-        @include tablet {
-            max-width: 471px;
-        }
-
-       /*  @include mobile {
-            width: 90%;
-        } */
     }
 
     &__subtitle {
-        font-size: 20px;
         font-weight: 500;
+        font-size: 16px;
         z-index: 10;
 
-        @include mobile {
-            font-size: 16px;
-            font-weight: 500;
+        @include mobile2 {
+            font-size: 20px;
         }
     }
 
 
-    &__h2 {
-
-        font-size: 147px;
+    &__titleContainer {
         font-family: 'Oswald', sans-serif;
-        line-height: 1;
         padding-bottom: 1rem;
         margin: 0;
+        padding: 0;
         position: relative;
         overflow: hidden;
-        //height: 140px;
-        //background-color: red;
+        line-height: 1.4;
 
-        @include xlarge {
-            font-size: 130px;
+        @include mobile2 {
+            font-size: px;
         }
+    }
 
-        @include tablet {
-            font-size: 100px;
-        }
+    &__h2 {
+        font-size: 85px;
+        position: relative;
+        border-bottom: 4px solid rgb(43, 43, 43);
+        width: fit-content;
+        margin: 0;
 
-        @include mobile {
-            font-size: 18vw;
-            padding: 0;
-            line-height: 1.4;
-        }
-
-        &--animation {
-            position: relative;
-            border-bottom: 5px solid rgb(43, 43, 43);
-            width: fit-content;
-            height: 100%;
-            z-index: 0;
+        @include mobile2 {
             padding-bottom: 1rem;
-
-            @include mobile {
-                padding-bottom: 0;
-
-            }
-
+            font-size: 115px;
+        }
+        @include tablet2 {
+            font-size: 150px;
+            line-height: .9;
+        }
+        @include large2 {
+            font-size: 180px;
+        }
+        @include xlarge2 {
+            font-size: 200px;
+            height: 180px;
         }
     }
 
-    &__mail {
-
-        &-container {
-
-            display: flex;
-            a {
-                color: rgb(43, 43, 43);
-                text-decoration: none;
-            }
-
-            @include tablet {
-                //margin-bottom: 20px;
-            }
-        }
-
-        &-title {
-            margin-right: 30px;
-            font-weight: 500;
-            min-width:  54px;
-        }
-
-        &-link:hover {
-            font-weight: 900;
-        }
-    }
-
-
-
-    &__social {
-        &-container {
-            display: flex;
-            text-align: end;
-            width: auto;
-        }
-        &-title {
-        margin-right: 30px;
-        min-width:  54px;
-        }
-    }
-
-
-    &__link-container {
+    &__linkContainer {
 
         display: flex;
         justify-content: space-between;
         font-weight: 600;
         width: 100%;
         z-index: 1000;
+        font-size: 16px;
+        margin-top: 1rem;
 
-        @include tablet {
-            font-size: 1rem;
-        }
-        @include mobile {
-            margin-top: 1rem;
+        @include tablet2 {
+            font-size: 20px;
         }
     }
 }
