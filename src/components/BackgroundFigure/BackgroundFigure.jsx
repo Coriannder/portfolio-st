@@ -5,12 +5,8 @@ import { motion } from 'framer-motion'
 
 export const BackgroundFigure = () => {
 
-
-
-
     return (
-		<div
-			>
+		<div>
 			<motion.div className="banter-BackgroundFigure"
 				initial={{ scale: 100, }}
 				animate={{ scale:.7, }}
@@ -22,19 +18,8 @@ export const BackgroundFigure = () => {
 						initial={{ background: '#00000000'}}
 						animate={{ background:"#00000016" }}
 						key = {i} />
-						//
 				)}
-				{/* <motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div>
-				<motion.div className="banter-BackgroundFigure__box"></motion.div> */}
 			</motion.div>
-
 		</div>
 
     )

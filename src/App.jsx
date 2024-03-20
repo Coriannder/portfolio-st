@@ -33,8 +33,6 @@ function App() {
         
         <BackgroundFigure/>
 
-        {/* <Cursor/> */}
-
       </CursorProvider>
 
     </Router>

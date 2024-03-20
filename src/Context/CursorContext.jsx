@@ -11,10 +11,6 @@ export const CursorProvider = ({children}) => {
 
     const overName = () => {
         setIsInside('name')
-        //console.log('name')
-    }
-    const outTag = () => {
-        setIsInside('')
     }
 
     const overTitle = () => {
@@ -24,9 +20,6 @@ export const CursorProvider = ({children}) => {
     const overLink = () => {
         setIsInside('link')
     }
-    const outTitle = () => {
-        setIsInside('')
-    }
 
     const handleHover = (value) => {
         setIsInside(value)
@@ -35,6 +28,10 @@ export const CursorProvider = ({children}) => {
 
     const overButton = () => {
         setIsInside('button')
+    }
+
+    const outTag = () => {
+        setIsInside('')
     }
 
     const [mousePosition, setMousePosition] = useState({
@@ -54,7 +51,6 @@ export const CursorProvider = ({children}) => {
             y: mousePosition.y,
 
             scale: 3,
-            //backgroundColor: '#2B2B2B',
             mixBlendMode: 'difference'
         },
 
@@ -64,7 +60,6 @@ export const CursorProvider = ({children}) => {
 
             scale: 2,
             mixBlendMode: 'difference',
-            //backgroundColor: 'red'
         },
 
         link: {
@@ -109,7 +104,6 @@ export const CursorProvider = ({children}) => {
                 className='cursor'
                 variants={variants}
                 animate={ isInside || 'default'}
-                //transition={{ type: "spring", stiffness: 1000, duration: .0001, delay: 0 }}
                 transition={{
                     ease: "easeIn",
                     duration: .001,}}
@@ -117,7 +111,6 @@ export const CursorProvider = ({children}) => {
 
 
             <CursorContext.Provider value={{ overName, overTitle, outTag, handleHover, overButton, overLink}}>
-                {/* <Cursor/> */}
                 {children}
             </CursorContext.Provider>
 
