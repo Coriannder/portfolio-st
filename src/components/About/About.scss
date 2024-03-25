@@ -60,7 +60,7 @@
 
     &__h2 {
         display: flex;
-        width: 80%;
+        width: fit-content;
         justify-content: end;
         font-size: 50px;
         font-weight: 400;
@@ -71,20 +71,20 @@
 
         @include tablet2 {
             font-size: 75px;
-            width: 60%;
+            //width: 60%;
         }
     }
 
     &__body {
 
         display: flex;
+        text-align: end;
         justify-content: end;
         width: 100%;
         margin-bottom: 30px;
 
         & p {
             @include tablet2 {
-                text-align: end;
                 width: 80%;
             }
             @include xlarge2 {

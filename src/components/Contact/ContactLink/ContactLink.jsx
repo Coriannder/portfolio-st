@@ -22,15 +22,11 @@ export const ContactLink = ({title , children , to }) => {
             transition={{duration: .1, easings: 'spring'}}
         >
             <Link className='contactLink__container' to={to}>
-                <span
-                    className='contactLink__iconContainer'
-                >
+                <span className='contactLink__iconContainer'>
                     {children}
                 </span>
 
-                <div
-                    className='contactLink__title'
-                >
+                <div className='contactLink__title'>
                     {title}
                 </div>
             </Link>

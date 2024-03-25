@@ -43,14 +43,15 @@ export const  ProjectItem = ({item , getId}) => {
 
                 </motion.div>
 
-                <div className='projectItem__links' onMouseOver={contextValue.overButton} onMouseLeave={contextValue.outTag}>
+                <div className='projectItem__links' onMouseOver={ () => contextValue.overTag('button')} onMouseLeave={contextValue.outTag}>
                     <ButtonLink
                         to={'https://www.lagaceta.com.ar/?utm_source=web_app'}
                         title={'web'}/>
-                    <ButtonLink to={'https://getbootstrap.com/docs/5.1/getting-started/introduction/'} title={'code'} style={{marginLeft: '15px'}}/>
-{/*                     <Link to={"https://getbootstrap.com/docs/5.1/getting-started/introduction/"} className='projectItem__button' style={{marginLeft: '10px'}}>code</Link>
- */}            </div>
-
+                    <ButtonLink
+                        to={'https://getbootstrap.com/docs/5.1/getting-started/introduction/'}
+                        title={'code'}
+                        style={{marginLeft: '15px'}}/>
+                </div>
             </div>
             <div className='projectItem__body'>
                 {/* <div className='projectITem__web'>

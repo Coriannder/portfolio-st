@@ -15,7 +15,6 @@ export const ButtonLink = ( {to, title} ) => {
         >
             <motion.div
                 className="button__background"
-                /*   //style={{position: 'absolute', backgroundColor:'red', height: '100%', width: '100%'}}*/
                 initial={{x:-80}}
                 animate={{x: hover? 0 : -80}}
                 transition={{duration: .2, easings: 'spring'}}

@@ -13,11 +13,11 @@ export const BackgroundFigure = () => {
 				transition={{duration: .8}}>
 				{[...Array(9)].map((i) =>
 					<motion.div
+						key = {i}
 						className="banter-BackgroundFigure__box"
-
 						initial={{ background: '#00000000'}}
 						animate={{ background:"#00000016" }}
-						key = {i} />
+					/>
 				)}
 			</motion.div>
 		</div>

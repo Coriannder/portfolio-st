@@ -27,7 +27,7 @@ export const Projects = () => {
                             transition= {{ duration: .5, type: "spring", delay: .4}}
                             viewport={{ once: true }}
 
-                            onMouseOver={contextValue.overTitle}
+                            onMouseOver={ () => contextValue.overTag('title') }
                             onMouseOut={contextValue.outTag}
                         >
                             proyectos

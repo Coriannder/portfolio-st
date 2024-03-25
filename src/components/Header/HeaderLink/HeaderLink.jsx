@@ -15,7 +15,7 @@ export const HeaderLink = ( {to , title , offset} ) => {
         <Link
             className={'headerLink__link'} to={to} spy={true} smooth={'easeOutQuint'} offset={offset || 50} duration={30}
             onMouseEnter={() => setHover(true)} onMouseLeave={()=> setHover(false)}
-            onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}
+            onMouseOver={ () => contextValue.overTag('link') } onMouseOut={ contextValue.outTag}
         >
             {title}
             <motion.div

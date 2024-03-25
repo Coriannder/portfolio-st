@@ -12,11 +12,9 @@ export const Home = () => {
 
     return (
         <section className='home__section'>
-            {/* <div className='home__container'> */}
                 <motion.div className='home__container'
-                    onMouseOver={contextValue.overName}
+                    onMouseOver={ () => contextValue.overTag('name') }
                     onMouseOut={contextValue.outTag}
-
                     initial={{y: 10, opacity: 0}}
                     animate={{y: 0, opacity: 1}}
 
@@ -24,7 +22,6 @@ export const Home = () => {
                         {
                             ease: "easeOut",
                             damping: 30,
-                            //bounce: 10,
                             duration: .8,
                             delay: .8
                         }
@@ -33,8 +30,6 @@ export const Home = () => {
                 >
                     <div className='home__intro'>
                         Hola como estas? Soy
-                        {/* <div>Soy un desarrollador web e Ingeniero Biomedico</div>
-                        <div> viviendo en Argentina</div> */}
                     </div>
 
                 <h1
@@ -43,8 +38,7 @@ export const Home = () => {
                     <span className='home__name'>
                         SEBAS
                     </span>
-                    <span
-                        style={{height: '100%'}}>
+                    <span style={{height: '100%'}}>
                             <motion.img
                                 whileHover={{
                                     rotate: 90,
@@ -52,8 +46,6 @@ export const Home = () => {
                                 }}
                                 className='home__name-logo' src={logo2}
                             />
-
-                                {/* </motion.img> */}
                     </span>
                     <span className='home__lastName'>TABOADA</span>
                 </h1>
@@ -62,8 +54,6 @@ export const Home = () => {
                 </h3>
 
                 </motion.div>
-           {/*  </div> */}
-
         </section>
     )
 }

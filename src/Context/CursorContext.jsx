@@ -9,7 +9,7 @@ export const CursorProvider = ({children}) => {
 
     const [ isInside, setIsInside] = useState('')
 
-    const overName = () => {
+/*     const overName = () => {
         setIsInside('name')
     }
 
@@ -19,16 +19,15 @@ export const CursorProvider = ({children}) => {
 
     const overLink = () => {
         setIsInside('link')
-    }
+    } */
 
-    const handleHover = (value) => {
+    const overTag = (value) => {
         setIsInside(value)
-        console.log(value)
     }
 
-    const overButton = () => {
+/*     const overButton = () => {
         setIsInside('button')
-    }
+    } */
 
     const outTag = () => {
         setIsInside('')
@@ -110,7 +109,7 @@ export const CursorProvider = ({children}) => {
             />
 
 
-            <CursorContext.Provider value={{ overName, overTitle, outTag, handleHover, overButton, overLink}}>
+            <CursorContext.Provider value={{overTag, outTag}}>
                 {children}
             </CursorContext.Provider>
 

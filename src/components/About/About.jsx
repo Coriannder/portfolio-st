@@ -23,7 +23,7 @@ export const About = () => {
                     transition= {{ duration: .5, type: "spring", delay: .3}}
                     viewport={{ once: true }}
 
-                    onMouseOver={contextValue.overTitle}
+                    onMouseOver={ () => contextValue.overTag('title')}
                     onMouseOut={contextValue.outTag}
                 >
                     quien soy
