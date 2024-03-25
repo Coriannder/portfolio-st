@@ -50,7 +50,7 @@ export const CursorProvider = ({children}) => {
             y: mousePosition.y,
 
             scale: 3,
-            mixBlendMode: 'difference'
+            mixBlendMode: 'difference',
         },
 
         title: {
@@ -59,6 +59,18 @@ export const CursorProvider = ({children}) => {
 
             scale: 2,
             mixBlendMode: 'difference',
+        },
+
+        brandName : {
+            x: mousePosition.x,
+            y: mousePosition.y,
+
+            //mixBlendMode: 'difference',
+            scale: 1.5,
+            cursor: 'none',
+            backgroundColor: 'transparent',
+            border: 'solid 1px',
+            //boxShadow: '0px 0px 10px'
         },
 
         link: {

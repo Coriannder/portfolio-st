@@ -24,8 +24,16 @@
         background-color: rgb(43, 43, 43);
     }
 
-    &____brandName {
+    &__brandName {
         width: 20px;
+
+        &:hover {
+            cursor: none;
+            font-weight: bolder;
+            scale: 1.5;
+
+        }
+
     }
 
     &__menu {

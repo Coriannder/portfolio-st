@@ -52,23 +52,15 @@ export const Header = () => {
 
             <motion.nav className='header__navbar'>
 
-                <div className='header__brandName'>
+                <div className='header__brandName' onMouseOver={ () => contextValue.overTag('brandName') } onMouseOut={ contextValue.outTag}>
                     <ScrollLink to="home__section" spy={true} smooth={'easeOutQuint'} offset={50} duration={30}>ST</ScrollLink>
                 </div>
 
                 <ul className='header__menu'>
-                    <li>
-                        <HeaderLink to={"home__section"} title={'Inicio'}/>
-                    </li>
-                    <li onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}>
-                        <HeaderLink to={"about__section"} title={'Quien soy'}/>
-                    </li>
-                    <li onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}>
-                        <HeaderLink to={"projects__section"} title={'Proyectos'} />
-                    </li>
-                    <li onMouseOver={contextValue.overLink} onMouseOut={contextValue.outTag}>
-                        <HeaderLink to={"contact__section"} title={'Contacto'}/>
-                    </li>
+                    <li><HeaderLink to={"home__section"} title={'Inicio'}/></li>
+                    <li><HeaderLink to={"about__section"} title={'Quien soy'}/></li>
+                    <li><HeaderLink to={"projects__section"} title={'Proyectos'} /></li>
+                    <li><HeaderLink to={"contact__section"} title={'Contacto'}/></li>
                 </ul>
 
             </motion.nav>
