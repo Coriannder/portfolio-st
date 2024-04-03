@@ -11,7 +11,7 @@ export const VisorProjectsList = ({ id }) => {
             projects && projects.map( project => (
 
                             <VisorProject
-                                src={project.src}
+                                src={project.pageURL}
                                 isVisible={id==project.id ? true : false}
                                 key={project.id}
                             />

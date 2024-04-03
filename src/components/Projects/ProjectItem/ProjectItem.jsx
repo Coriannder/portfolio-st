@@ -11,7 +11,6 @@ import { CursorContext } from '../../../Context/CursorContext';
 export const  ProjectItem = ({item , getId}) => {
 
     const contextValue = useContext(CursorContext)
-
     const [arrow, setArrow] = useState(false)
 
     const child = {
@@ -45,24 +44,16 @@ export const  ProjectItem = ({item , getId}) => {
 
                 <div className='projectItem__links' onMouseOver={ () => contextValue.overTag('button')} onMouseLeave={contextValue.outTag}>
                     <ButtonLink
-                        to={'https://www.lagaceta.com.ar/?utm_source=web_app'}
+                        to={item.pageURL}
                         title={'web'}/>
                     <ButtonLink
-                        to={'https://getbootstrap.com/docs/5.1/getting-started/introduction/'}
+                        to={item.gitHubURL}
                         title={'code'}
                         style={{marginLeft: '15px'}}/>
                 </div>
             </div>
             <div className='projectItem__body'>
-                {/* <div className='projectITem__web'>
-                    Web
-                </div>
-                <div className='projectITem__gitHub'>
-                    Git
-                </div> */}
             </div>
-            {/* <div className='projectItem__linksContainer'>
-            </div> */}
         </motion.div>
         )
 }

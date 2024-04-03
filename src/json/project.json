@@ -4,24 +4,30 @@
             "id": 1,
             "title": "Sitio Web",
             "subTitle": "HTML CSS Bootstrap",
-            "src": "https://islagourmet.netlify.app/index.html"
+            "pageURL": "https://islagourmet.netlify.app/index.html",
+            "gitHubURL": "https://github.com/Coriannder/proyectoFinal-dw.git"
 
         },
         {
             "id": 2,
             "title": "Ecommerce",
             "subTitle": "JS Jquery Sass",
-            "src": "https://coriannder.github.io/JS_ProyectoFinal/"
+            "pageURL": "https://coriannder.github.io/proyectoFinal-js/",
+            "gitHubURL": "https://github.com/Coriannder/proyectoFinal-js.git"
         },
         {
             "id": 3,
             "title": "Ecommerce",
-            "subTitle": "React"
+            "subTitle": "React",
+            "pageURL":"",
+            "gitHubURL": "https://github.com/Coriannder/proyectoFinal-react.git"
         },
         {
             "id": 4,
             "title": "Ecommerce BackEnd",
-            "subTitle": "Node Express"
+            "subTitle": "Node Express",
+            "pageURL": "",
+            "gitHubURL": "https://github.com/Coriannder/proyectoFinal-backend.git"
         }
     ]
 }

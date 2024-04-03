@@ -1,5 +1,4 @@
 import './ProjectItemList.scss'
-//import {projects} from '../../../json/project.json'
 import { ProjectItem } from '../ProjectItem/ProjectItem'
 import { motion }  from 'framer-motion'
 import { cubicBezier } from "framer-motion"
@@ -23,7 +22,6 @@ export const ProjectItemList = ({ getId }) => {
             }
         }
     }
-
 
     return (
 

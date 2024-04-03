@@ -21,7 +21,7 @@ export const ContactLink = ({title , children , to }) => {
             animate={{x: isMouseOver? 10 : 0}}
             transition={{duration: .1, easings: 'spring'}}
         >
-            <Link className='contactLink__container' to={to}>
+            <Link className='contactLink__container' to={to} target="_blank" rel="noopener noreferrer">
                 <span className='contactLink__iconContainer'>
                     {children}
                 </span>
