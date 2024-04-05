@@ -19,22 +19,16 @@ function App() {
   return (
 
     <Router>
-
-      <CursorProvider>
-
-        <Header/>
-
-        <Main>
-          <Home/>
-          <About/>
-          <Projects/>
-          <Contact/>
-        </Main>
-        
-        <BackgroundFigure/>
-
-      </CursorProvider>
-
+		<CursorProvider>
+			<Header/>
+			<Main>
+			<Home/>
+			<About/>
+			<Projects/>
+			<Contact/>
+			</Main>
+			<BackgroundFigure/>
+		</CursorProvider>
     </Router>
   );
 }

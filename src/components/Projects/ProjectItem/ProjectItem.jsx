@@ -1,5 +1,4 @@
 import './ProjectItem.scss'
-//import arrowRight from '../../../assets/arrowRight.svg'
 import { motion } from "framer-motion"
 import { useContext, useState } from 'react';
 import { ButtonLink } from '../Button/Button';

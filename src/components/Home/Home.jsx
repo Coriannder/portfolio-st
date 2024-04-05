@@ -3,8 +3,6 @@ import logo2 from '../../assets/logo2.svg'
 import { CursorContext } from '../../Context/CursorContext'
 import { useContext } from 'react'
 import {  motion } from 'framer-motion'
-//import { RevealMotion } from '../RevealMotion/RevealMotion'
-
 
 export const Home = () => {
 

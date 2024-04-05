@@ -1,7 +1,6 @@
 @import '../MediaQueries.scss';
 
 .header{
-
     &__section {
         position: fixed;
         top: 25px;
@@ -46,7 +45,7 @@
         margin: 5px;
 
 
-        @include mobile2 {
+        @include mobile {
             margin: 16px;
         }
 

@@ -1,7 +1,6 @@
 @import '../MediaQueries.scss';
 
 .about {
-
     &__section {
         width: 100vw;
         min-height: 100vh;
@@ -19,14 +18,12 @@
         width: 90%;
         margin-top: 500px;
 
-        @include mobile2 {
+        @include mobile {
             margin-top: 400px;
         }
-
-        @include tablet2 {
+        @include tablet {
             margin-top: 380px;
         }
-
     }
 
     &__img-container {
@@ -37,16 +34,14 @@
         -webkit-mask-image: linear-gradient(to top, transparent 15%, black 100%);
         mask-image: linear-gradient(to top, transparent 15%, black 100%);
 
-        @include mobile2 {
+        @include mobile {
             width: 60%;
             max-width: 440px;
         }
-        @include tablet2 {
+        @include tablet {
             min-width: 440px;
-
         }
-
-       @include large2 {
+        @include large {
             width: 40%;
             max-width: 550px;
         }
@@ -69,14 +64,12 @@
         text-align: end;
         margin-bottom: 20px;
 
-        @include tablet2 {
+        @include tablet {
             font-size: 75px;
-            //width: 60%;
         }
     }
 
     &__body {
-
         display: flex;
         text-align: end;
         justify-content: end;
@@ -84,13 +77,12 @@
         margin-bottom: 30px;
 
         & p {
-            @include tablet2 {
+            @include tablet {
                 width: 80%;
             }
-            @include xlarge2 {
+            @include xlarge {
                 width: 600px;
             }
         }
-
     }
 }

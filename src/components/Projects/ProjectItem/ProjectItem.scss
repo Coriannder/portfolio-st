@@ -14,54 +14,22 @@
         align-content: center;
         justify-content: space-between;
         flex-wrap: wrap;
-
-        //font-size: 1.7rem;
-        //font-weight: 1000;
         border-bottom: 1px solid #F5B6CD;
-
-        /* &:before {
-            content: &#8592
-        } */
-
-
-    /*     &:hover{
-            // &#8592;
-            //background-color: red
-        }
-
-        & span {
-            margin-right: 1rem;
-            width: 100px;
-            content: 'jojo';
-            color: black;
-            background-color: red;
-        } */
-
-        @include mobile {
-            font-size: 16px;
-            font-weight: 400;
-
-        }
     }
 
     &__title {
-
-        font-size: 1.1rem;
-        font-weight: 500;
+        font-size: 16px;
+        line-height: 2;
 
         @include mobile {
-            line-height: 2;
-            font-size: 1rem;
-        }
-
-        @include large {
-            //font-size: 1rem;
+            line-height: 1.5;
+            font-size: 18px;
+            font-weight: 500;
         }
     }
 
     &__links {
             display: flex;
-            
         }
 
     &__button {

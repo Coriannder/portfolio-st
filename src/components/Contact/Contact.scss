@@ -10,7 +10,6 @@
         align-items: center;
         justify-content: center;
         background: rgb(245,182,205);
-
     }
 
     &__container {
@@ -18,7 +17,7 @@
         flex-direction: column;
         width: 90%;
 
-        @include mobile2 {
+        @include mobile {
             width: auto;
         }
     }
@@ -28,11 +27,10 @@
         font-size: 16px;
         z-index: 10;
 
-        @include mobile2 {
+        @include mobile {
             font-size: 20px;
         }
     }
-
 
     &__titleContainer {
         font-family: 'Oswald', sans-serif;
@@ -43,7 +41,7 @@
         overflow: hidden;
         line-height: 1.4;
 
-        @include mobile2 {
+        @include mobile {
             font-size: px;
         }
     }
@@ -55,18 +53,18 @@
         width: fit-content;
         margin: 0;
 
-        @include mobile2 {
+        @include mobile {
             padding-bottom: 1rem;
             font-size: 115px;
         }
-        @include tablet2 {
+        @include tablet {
             font-size: 150px;
             line-height: .9;
         }
-        @include large2 {
+        @include large {
             font-size: 180px;
         }
-        @include xlarge2 {
+        @include xlarge {
             font-size: 200px;
             height: 180px;
         }
@@ -82,7 +80,7 @@
         font-size: 16px;
         margin-top: 1rem;
 
-        @include tablet2 {
+        @include tablet {
             font-size: 20px;
         }
     }

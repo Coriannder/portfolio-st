@@ -2,7 +2,6 @@
 @import '../MediaQueries.scss';
 
 .home {
-
     &__section {
         width: 100vw;
         min-height: 100vh;
@@ -11,105 +10,82 @@
         justify-content: center;
         align-items: center;
     }
-
     &__container {
+        width: 80%;
 
-        width: auto;
-        @include tablet {
+        @include mobile {
             width: 55%;
             align-items: center;
         }
-        @include mobile {
-            width: 80%;
+        @include tablet {
+            width: auto;
         }
     }
 
     &__intro {
         font-size: 1rem;
-
-        @include tablet {
-            font-size: 1rem;
-        }
     }
 
     &__h1  {
-        font-size: 140px;
+        font-size: 100px;
         margin: 0;
         line-height: 0.9;
         width: auto;
         font-family: 'Oswald', sans-serif;
 
-        @include xlarge {
-            font-size: 130px;
-        }
-
-        @include large {
-            font-size: 100px;
+        @include tablet {
             margin: 10px 0;
         }
-
-        @include tablet {
-            //font-size: 5rem;
-            //-webkit-text-stroke: 1.5px #F5B6CD;
-            //-webkit-text-stroke: 1px #F5B6CD;
-
+        @include large {
+            font-size: 130px;
         }
-
-     /*    @include mobile {
-            font-size: 5rem;
-            width: fit-content;
-        } */
+        @include xlarge {
+            font-size: 140px;
+        }
     }
 
     &__name-logo {
-        height: 115px;
-        //margin: 0 10px;
+        height: 82px;
 
-        @include xlarge {
-            height: 110px;
-        }
-
-        @include large {
-            height: 85px;
-        }
-        @include tablet {
+        @include mobile {
             height: 82px;
         }
-        @include mobile {
-            //height: 52px;
-            margin: 0 10px;
+        @include tablet {
+            height: 85px;
+        }
+        @include large {
+            height: 110px;
+        }
+        @include xlarge {
+            height: 115px;
         }
     }
 
     &__h3 {
-        font-size: 60px;
-        font-weight: 500;
-        margin: 0;
+        margin: 10px;
         line-height: 1.2;
+
+        font-size: 25px;
+        font-weight: 500;
 
         -webkit-text-stroke: 1.5px #F5B6CD;
         color: transparent;
 
-
-        @include xlarge {
-            font-size: 55px;
+        @include mobile {
+            font-size: 32px;
+            -webkit-text-stroke: .8px #F5B6CD
         }
-        @include large {
+        @include tablet {
             font-size: 40px;
             font-weight: 700;
             -webkit-text-stroke: 1.1px #F5B6CD
-
         }
-        @include tablet {
-            font-size: 2rem;
-            -webkit-text-stroke: .8px #F5B6CD
-
-
+        @include large {
+            font-size: 55px;
         }
-        @include mobile {
-            font-size: 1.5rem;
-            font-weight: 600;
-
+        @include xlarge {
+            font-size: 60px;
+            font-weight: 500;
         }
     }
 }
