@@ -1,66 +1,28 @@
-
-
-/* @mixin mobile {
-
-    @media screen and ( max-width: 576px) {
-        @content
-    }
-};
-
-@mixin tablet {
-
-    @media screen and ( max-width: 768px) {
-        @content
-    }
-};
-
-@mixin large {
-
-    @media screen and ( max-width: 992px) {
-        @content
-    }
-};
-
-@mixin xlarge {
-
-    @media screen and ( max-width: 1200px) {
-        @content
-    }
-}; */
-
-
 @mixin mobile {
-
     @media screen and ( min-width: 576px) {
         @content
     }
 };
 
-
-
 @mixin mobile {
-
     @media screen and ( min-width: 576px) {
         @content
     }
 };
 
 @mixin tablet {
-
     @media screen and ( min-width: 768px) {
         @content
     }
 };
 
 @mixin large {
-
     @media screen and ( min-width: 992px) {
         @content
     }
 };
 
 @mixin xlarge {
-
     @media screen and ( min-width: 1200px) {
         @content
     }
@@ -68,7 +30,6 @@
 
 
 @mixin xxlarge {
-
     @media screen and ( min-width: 1400px) {
         @content
     }
