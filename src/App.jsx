@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";

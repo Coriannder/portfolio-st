@@ -46,6 +46,10 @@
             max-width: 550px;
         }
 
+        @include large {
+            left: 10%
+        }
+
         img {
             width: 100%;
             opacity: 80%;

@@ -1,15 +1,16 @@
 @import '../MediaQueries.scss';
+@import '../../color.scss';
 
 .contact {
 
     &__section {
         width: 100vw;
         height: 100vh;
-        color: rgb(43, 43, 43);
+        color: $blackLetter;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgb(245,182,205);
+        background: $pinkMiami;
     }
 
     &__container {
@@ -49,7 +50,7 @@
     &__h2 {
         font-size: 79px;
         position: relative;
-        border-bottom: 4px solid rgb(43, 43, 43);
+        border-bottom: 4px solid;
         width: fit-content;
         margin: 0;
 

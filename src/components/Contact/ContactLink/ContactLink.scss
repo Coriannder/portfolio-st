@@ -1,10 +1,11 @@
 @import '../../MediaQueries.scss';
+@import '../../../color.scss';
 
 .contactLink{
 
     &__container {
         display: flex;
-        color: rgb(43, 43, 43);
+        color: $blackLetter;
         text-decoration: none;
     }
 
@@ -16,7 +17,7 @@
         justify-content: space-between;
         flex-wrap: wrap;
         overflow-x: hidden;
-        border-bottom: 1px solid #F5B6CD;
+        border-bottom: 1px solid $pinkMiami;
     }
 
     &__title {
@@ -35,13 +36,13 @@
     }
 
     &__button {
-        border: 2px solid #F5B6CD;
+        border: 2px solid $pinkMiami;
         padding: 4px 15px 6px 15px;
         font-size: 13px;
         border-radius: 20px;
         display: flex;
         align-items: center;
-        color: #F5B6CD;
+        color: $pinkMiami;
         text-decoration: none;
         position: relative;
     }

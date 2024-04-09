@@ -28,12 +28,8 @@
     }
 };
 
-
 @mixin xxlarge {
     @media screen and ( min-width: 1400px) {
         @content
     }
 };
-
-
-

@@ -13,7 +13,7 @@ export const ButtonLink = ( {to, title} ) => {
         <Link to={to} className='button__link' target="_blank" rel="noopener noreferrer"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={()=> setHover(false)}
-            style={{color: hover? '#2B2B2B' : '#F5B6CD' , fontWeight: 700}}
+            //style={{color: hover? '#2B2B2B' : '#F5B6CD' , fontWeight: 700}}
         >
             <motion.div
                 className="button__background"

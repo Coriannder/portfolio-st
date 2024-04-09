@@ -1,5 +1,6 @@
 
 @import '../MediaQueries.scss';
+@import '../../color.scss';
 
 .home {
     &__section {
@@ -68,17 +69,17 @@
         font-size: 25px;
         font-weight: 500;
 
-        -webkit-text-stroke: 1.5px #F5B6CD;
+        -webkit-text-stroke: 1.5px $pinkMiami;
         color: transparent;
 
         @include mobile {
             font-size: 32px;
-            -webkit-text-stroke: .8px #F5B6CD
+            -webkit-text-stroke: .8px $pinkMiami
         }
         @include tablet {
             font-size: 40px;
             font-weight: 700;
-            -webkit-text-stroke: 1.1px #F5B6CD
+            -webkit-text-stroke: 1.1px $pinkMiami
         }
         @include large {
             font-size: 55px;
