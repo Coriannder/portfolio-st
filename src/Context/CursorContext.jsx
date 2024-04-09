@@ -9,25 +9,9 @@ export const CursorProvider = ({children}) => {
 
     const [ isInside, setIsInside] = useState('')
 
-/*     const overName = () => {
-        setIsInside('name')
-    }
-
-    const overTitle = () => {
-        setIsInside('title')
-    }
-
-    const overLink = () => {
-        setIsInside('link')
-    } */
-
     const overTag = (value) => {
         setIsInside(value)
     }
-
-/*     const overButton = () => {
-        setIsInside('button')
-    } */
 
     const outTag = () => {
         setIsInside('')
@@ -65,12 +49,10 @@ export const CursorProvider = ({children}) => {
             x: mousePosition.x,
             y: mousePosition.y,
 
-            //mixBlendMode: 'difference',
             scale: 1.5,
             cursor: 'none',
             backgroundColor: 'transparent',
             border: 'solid 1px',
-            //boxShadow: '0px 0px 10px'
         },
 
         link: {
@@ -94,7 +76,6 @@ export const CursorProvider = ({children}) => {
     }
 
     useEffect( () => {
-
         const handleMouseMove = e => {
             setMousePosition( {
                 x: e.clientX,
@@ -104,12 +85,9 @@ export const CursorProvider = ({children}) => {
 
         window.addEventListener('mousemove', handleMouseMove)
         return ( ) =>  window.removeEventListener('mousemove', handleMouseMove)
-
     }, [] )
 
-
     return(
-
         <>
             <motion.div
                 className='cursor'
@@ -120,14 +98,9 @@ export const CursorProvider = ({children}) => {
                     duration: .001,}}
             />
 
-
             <CursorContext.Provider value={{overTag, outTag}}>
                 {children}
             </CursorContext.Provider>
-
         </>
-
     )
-
-
 }
