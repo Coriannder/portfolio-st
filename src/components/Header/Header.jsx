@@ -4,7 +4,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { motion } from 'framer-motion';
 import { useEffect, useState, useContext } from 'react';
 import { CursorContext } from '../../Context/CursorContext';
-import { HeaderLink } from './HeaderLink/headerLink';
+import { HeaderLink } from './HeaderLink/HeaderLink';
 
 
 export const Header = () => {
