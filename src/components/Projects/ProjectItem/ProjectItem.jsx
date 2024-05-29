@@ -44,11 +44,13 @@ export const  ProjectItem = ({item , getId}) => {
                 <div className='projectItem__links' onMouseOver={ () => contextValue.overTag('button')} onMouseLeave={contextValue.outTag}>
                     <ButtonLink
                         to={item.pageURL}
-                        title={'web'}/>
+                        title={item.title !== "Ecommerce BackEnd" ? 'web' : 'API'}
+                    />
                     <ButtonLink
                         to={item.gitHubURL}
                         title={'code'}
-                        style={{marginLeft: '15px'}}/>
+                        style={{marginLeft: '15px'}}
+                    />
                 </div>
             </div>
             <div className='projectItem__body'>
