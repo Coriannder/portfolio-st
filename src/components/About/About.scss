@@ -8,6 +8,8 @@
         justify-content: center;
         align-items: end;
         position: relative;
+        scroll-snap-align: start;
+        overflow-y: hidden;
     }
 
     &__container {
@@ -31,7 +33,7 @@
         width: 350px;
         top: 100px;
         left: 0px;
-        -webkit-mask-image: linear-gradient(to top, transparent 15%, black 100%);
+        //-webkit-mask-image: linear-gradient(to top, transparent 15%, black 100%);
         mask-image: linear-gradient(to top, transparent 15%, black 100%);
 
         @include mobile {

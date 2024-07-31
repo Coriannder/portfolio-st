@@ -26,14 +26,11 @@
 
     &__brandName {
         width: 20px;
-
         &:hover {
             cursor: none;
             font-weight: bolder;
             scale: 1.5;
-
         }
-
     }
 
     &__menu {
@@ -45,11 +42,9 @@
         cursor: none;
         margin: 5px;
 
-
         @include mobile {
             margin: 16px;
         }
-
         li {
             display: flex;
         }

@@ -98,7 +98,7 @@ export const CursorProvider = ({children}) => {
                     duration: .001,}}
             />
 
-            <CursorContext.Provider value={{overTag, outTag}}>
+            <CursorContext.Provider style={{cursor: 'none'}} value={{overTag, outTag}}>
                 {children}
             </CursorContext.Provider>
         </>

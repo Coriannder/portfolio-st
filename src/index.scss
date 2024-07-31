@@ -9,12 +9,19 @@
     background-color: $blackLetter;
     cursor: crosshair;
     font-synthesis: none;
-    scroll-behavior: smooth;
+
   }
   
-  html::-webkit-scrollbar {
+  html{
+      //scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      overflow-x: hidden;
+  
+    &::-webkit-scrollbar {
     display: none;
-  }
+    
+  }}
   
   body {
     margin: 0;

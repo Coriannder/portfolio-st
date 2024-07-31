@@ -37,6 +37,9 @@ export const  ProjectItem = ({item , getId}) => {
 
                         <div className='projectItem__title'>
                             {item.title}
+                            <span className='projectItem__subtitle'>
+                            ( {item.subTitle} )
+                            </span>
                         </div>
 
                 </motion.div>
@@ -53,8 +56,7 @@ export const  ProjectItem = ({item , getId}) => {
                     />
                 </div>
             </div>
-            <div className='projectItem__body'>
-            </div>
+           
         </motion.div>
         )
 }

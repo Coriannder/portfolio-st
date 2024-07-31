@@ -10,6 +10,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        scroll-snap-align: start;
     }
     &__container {
         width: 80%;

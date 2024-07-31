@@ -11,8 +11,6 @@ export const ContactLink = ({title , children , to }) => {
     return (
         <motion.div
 
-            className='pp'
-
             style={{overflow:'hidden'}}
             onMouseOver={()=>setIsMouseOver(true)}
             onMouseLeave={()=>setIsMouseOver(false)}

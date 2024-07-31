@@ -9,14 +9,32 @@ import { HeaderLink } from './HeaderLink/HeaderLink';
 
 export const Header = () => {
 
+    console.log(window.scrollY);
+
+
     const contextValue = useContext(CursorContext)
     const [lastScrollPosition , setLastScrollPosition ] = useState(window.scrollY)
     const [scrollDirection , setScrollDirection ] = useState('default')
 
+    console.log(scrollDirection);
+    
+
     const handleScroll = () => {
+        /* if(window.scrollY < 20){
+            window.scroll(0, 0)
+        } */
         setScrollDirection( window.scrollY > lastScrollPosition ? 'down' : 'up' )
         setLastScrollPosition(window.scrollY)
+
+        scrollDirection === 'up' &&  setTimeout(()=> setScrollDirection('default'), 2500)
+
+        /* if(window.scrollY === 0){
+            setTimeout(()=> setScrollDirection('default'), 2500)
+            //setScrollDirection('default')
+        } */
     }
+
+    console.log('lolo',lastScrollPosition);
 
     const variants = {
 

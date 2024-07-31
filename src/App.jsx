@@ -22,10 +22,10 @@ function App() {
 		<CursorProvider>
 			<Header/>
 			<Main>
-			<Home/>
-			<About/>
-			<Projects/>
-			<Contact/>
+				<Home/>
+				<About/>
+				<Projects/>
+				<Contact/>
 			</Main>
 			<BackgroundFigure/>
 		</CursorProvider>

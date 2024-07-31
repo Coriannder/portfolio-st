@@ -32,21 +32,29 @@ export const About = () => {
                 <motion.div
                     className='about__body'
                     initial={{x:100, opacity:0}}
-                        whileInView={{x: 0, opacity:1 }}
-                        transition= {{ duration: 1, type: "spring", delay: .5}}
-                        viewport={{ once: true }}>
+                    whileInView={{x: 0, opacity:1 }}
+                    transition= {{ duration: 1, type: "spring", delay: .5}}
+                    viewport={{ once: true }}
+                >
                     <p>{about}</p>
                 </motion.div>
 
+                {/* <div style={{position: 'relative', backgroundColor: '#F5B6CD', width: '100%', height: '100%'}}> */}
+
                 <motion.div
                     className='about__img-container'
-                    initial={{y:350}}
-                    whileInView={{y:0 , duration: .4}}
-                    transition= {{ ease: 'circOut' }}
+                    initial={{y:350 , opacity: 0}}
+                    whileInView={{y:0 , opacity: 1 }}
+                    transition= {{ duration: 1, type: "spring"}}
                     viewport={{ once: true }}
                 >
                     <img src={photo} />
                 </motion.div>
+
+
+                {/* </div> */}
+
+            
 
             </div>
 
