@@ -9,32 +9,27 @@ import { HeaderLink } from './HeaderLink/HeaderLink';
 
 export const Header = () => {
 
-    console.log(window.scrollY);
-
-
     const contextValue = useContext(CursorContext)
     const [lastScrollPosition , setLastScrollPosition ] = useState(window.scrollY)
     const [scrollDirection , setScrollDirection ] = useState('default')
 
-    console.log(scrollDirection);
-    
+
+    const [hover, setHover] = useState(false)
+
+
+    let disapear
+
+
 
     const handleScroll = () => {
-        /* if(window.scrollY < 20){
-            window.scroll(0, 0)
-        } */
-        setScrollDirection( window.scrollY > lastScrollPosition ? 'down' : 'up' )
+        if(window.scrollY > lastScrollPosition){
+            setScrollDirection('down')
+        } else {
+        setScrollDirection('up')
+        disapear = setTimeout( () => setScrollDirection( 'down') , 2500)
+        }
         setLastScrollPosition(window.scrollY)
-
-        scrollDirection === 'up' &&  setTimeout(()=> setScrollDirection('default'), 2500)
-
-        /* if(window.scrollY === 0){
-            setTimeout(()=> setScrollDirection('default'), 2500)
-            //setScrollDirection('default')
-        } */
     }
-
-    console.log('lolo',lastScrollPosition);
 
     const variants = {
 
@@ -44,10 +39,13 @@ export const Header = () => {
             y: 0,
         },
         down: {
-            opacity: 0,
-            y:-50
+            opacity: hover ? 1 : 0,
+            y: hover ? 0 : -50
         }
     }
+
+
+
 
     useEffect(()=>{
         window.addEventListener('scroll' , handleScroll);
@@ -56,6 +54,7 @@ export const Header = () => {
         }
     },[lastScrollPosition])
 
+   
     return (
         <motion.header className='header__section'
             initial={ {opacity: 0 }}
@@ -66,6 +65,7 @@ export const Header = () => {
                 duration: scrollDirection === 'default' ?  .5 : .3,
                 delay: scrollDirection === 'default' ?  .8 : .2
             }}
+            onMouseOver={ ()=>setHover(true) } onMouseOut={ ()=>setHover(false) }
         >
 
             <motion.nav className='header__navbar'>
