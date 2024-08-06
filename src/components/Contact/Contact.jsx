@@ -19,7 +19,7 @@ export const Contact = () => {
                     initial={{y:-30 , opacity: 0}}
                     whileInView={{y:0 , opacity:1}}
                     transition= {{ duration: .4, type: "spring", delay: .3}}
-                    viewport={{ once: true }}
+                    //viewport={{ once: true }}
                 >
                     Te gustaria que trabajemos juntos ?
                 </motion.div>
@@ -28,7 +28,7 @@ export const Contact = () => {
                     initial={{x:-200 , opacity: 0}}
                     whileInView={{x:0 , opacity:1}}
                     transition= {{ duration: .6, type: 'spring', delay: .5}}
-                    viewport={{ once: true }}
+                    //viewport={{ once: true }}
                     className='contact__titleContainer'
                 >
                     <h2
@@ -44,7 +44,7 @@ export const Contact = () => {
                     initial={{x:-100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .8, type: "spring", delay: .7}}
-                    viewport={{ once: true }}
+                    //viewport={{ once: true }}
                 >
                     <ContactLink title={'email'} to={'mailto:contacto@sebasdev.com'} children={<ImMail/>}></ContactLink>
                     <ContactLink title={'linkedin'} to={'https://www.linkedin.com/in/sebastian-taboada-1b96a956/'} children={<FaLinkedin/>}/>

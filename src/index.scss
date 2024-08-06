@@ -1,6 +1,7 @@
 @import './color.scss';
+@import './components/MediaQueries.scss';
 
-:root {
+:root{
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -9,29 +10,32 @@
     background-color: $blackLetter;
     cursor: crosshair;
     font-synthesis: none;
+}
 
-  }
-  
-  html{
-      //scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      overflow-x: hidden;
-  
+html{
+
+	overflow-y: scroll;
+	overflow-x: hidden;
+
     &::-webkit-scrollbar {
     display: none;
-    
-  }}
-  
-  body {
+	}
+
+	@include large {
+		scroll-snap-type: y mandatory;
+	}
+
+}
+
+body{
     margin: 0;
     display: flex;
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
-  }
-  
-  h1 {
+}
+
+h1{
     font-size: 3.2em;
     line-height: 1.1;
-  }
+}

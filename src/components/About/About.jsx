@@ -1,11 +1,9 @@
 import './About.scss'
 import { about } from  '../../json/about.json'
 import photo from '../../assets/profile-st-PhotoRoom.png'
-//import { RevealMotion } from '../RevealMotion/RevealMotion'
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
 import { CursorContext } from '../../Context/CursorContext'
-//import { AnimatedContent } from '../AnimatedContent/AnimatedContent'
 
 export const About = () => {
 
@@ -21,7 +19,7 @@ export const About = () => {
                     initial={{x: 180, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .5, type: "spring", delay: .3}}
-                    viewport={{ once: true }}
+                    //viewport={{ once: true }}
 
                     onMouseOver={ () => contextValue.overTag('title')}
                     onMouseOut={contextValue.outTag}
@@ -34,28 +32,20 @@ export const About = () => {
                     initial={{x:100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: 1, type: "spring", delay: .5}}
-                    viewport={{ once: true }}
+                    //viewport={{ once: true }}
                 >
                     <p>{about}</p>
                 </motion.div>
-
-                {/* <div style={{position: 'relative', backgroundColor: '#F5B6CD', width: '100%', height: '100%'}}> */}
 
                 <motion.div
                     className='about__img-container'
                     initial={{y:350 , opacity: 0}}
                     whileInView={{y:0 , opacity: 1 }}
                     transition= {{ duration: 1, type: "spring"}}
-                    viewport={{ once: true }}
+                    //viewport={{ once: true }}
                 >
                     <img src={photo} />
                 </motion.div>
-
-
-                {/* </div> */}
-
-            
-
             </div>
 
         </section>

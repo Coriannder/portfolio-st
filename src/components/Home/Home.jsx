@@ -14,14 +14,14 @@ export const Home = () => {
                     onMouseOver={ () => contextValue.overTag('name') }
                     onMouseOut={contextValue.outTag}
                     initial={{y: 10, opacity: 0}}
-                    animate={{y: 0, opacity: 1}}
+                    whileInView={{y: 0, opacity: 1}}
 
                     transition={
                         {
                             ease: "easeOut",
                             damping: 30,
                             duration: .8,
-                            delay: .8
+                            delay: .4
                         }
                     }
 

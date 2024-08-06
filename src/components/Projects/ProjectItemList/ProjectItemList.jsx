@@ -15,7 +15,6 @@ export const ProjectItemList = ({ getId }) => {
             transition: {
                 ease: easing,
                 damping: 30,
-                //delay: .2,
                 delayChildren: .6,
                 staggerChildren: .1,
                 duration: .0001
@@ -29,7 +28,8 @@ export const ProjectItemList = ({ getId }) => {
             variants={container}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}>
+            //viewport={{ once: true }}
+        >
 
             {projects && projects.map( project => (
 
