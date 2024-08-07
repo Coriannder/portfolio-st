@@ -38,7 +38,7 @@ export const  ProjectItem = ({item , getId}) => {
                         <div className='projectItem__title'>
                             {item.title}
                             <span className='projectItem__subtitle'>
-                            ( {item.subTitle} )
+                            ({item.subTitle})
                             </span>
                         </div>
 

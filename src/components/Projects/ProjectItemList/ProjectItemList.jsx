@@ -1,4 +1,3 @@
-import './ProjectItemList.scss'
 import { ProjectItem } from '../ProjectItem/ProjectItem'
 import { motion }  from 'framer-motion'
 import { cubicBezier } from "framer-motion"
@@ -25,6 +24,7 @@ export const ProjectItemList = ({ getId }) => {
     return (
 
         <motion.div
+            style={{ marginBottom: '1px' }}
             variants={container}
             initial="hidden"
             whileInView="show"

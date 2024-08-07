@@ -12,8 +12,9 @@
 
     &__navbar {
         display: flex;
+        justify-content: space-evenly;
+
         align-items: baseline;
-        justify-content: space-between;
         margin: auto;
         width: 90%;
         max-width: 1300px;
@@ -22,14 +23,22 @@
         border-radius: 15px;
         box-sizing: border-box;
         background-color: $blackLetter;
+
+        @include mobile {
+            justify-content: space-between;
+        }
     }
 
     &__brandName {
         width: 20px;
+        display: none;
         &:hover {
             cursor: none;
             font-weight: bolder;
             scale: 1.5;
+        }
+        @include mobile {
+            display: block;
         }
     }
 
@@ -37,13 +46,19 @@
         width: 300px;
         list-style: none;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         padding: 0;
         cursor: none;
         margin: 5px;
 
+        justify-content: space-around;
+
+        //background-color: red;
+
         @include mobile {
             margin: 16px;
+            justify-content: space-between;
+
         }
         li {
             display: flex;

@@ -27,13 +27,7 @@ export const Projects = () => {
                         >
                             proyectos
                         </motion.h2>
-                    <div className='projects__body'>
-
-                        <ProjectItemList
-                            getId={setId}
-                            />
-                    </div>
-
+                        <ProjectItemList getId={setId} />
                 </div>
 
                 <div className='projects__visorProjects'>

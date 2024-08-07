@@ -19,6 +19,7 @@
         max-width: 1200px;
         width: 90%;
         margin-top: 500px;
+        overflow-x: hidden;
 
         @include mobile {
             margin-top: 400px;

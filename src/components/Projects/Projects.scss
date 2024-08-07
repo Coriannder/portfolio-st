@@ -15,7 +15,8 @@
         padding-bottom: 100px;
         margin: 0;
         box-sizing: border-box;
-        scroll-snap-align: start;    }
+        scroll-snap-align: start;
+    }
 
     &__container {
 
@@ -23,6 +24,8 @@
         max-width: 1200px;
         display: flex;
         justify-content: space-between;
+        overflow-x: hidden;
+
         @include mobile {
             width: 80%;
         }
@@ -55,12 +58,12 @@
         }
     }
 
-    &__body {
+   /*  &__body {
         overflow-y: scroll;
         &::-webkit-scrollbar {
-            display: none;
+            //display: none;
         }
-    }
+    } */
 
     &__visorProjects {
         position: absolute;
