@@ -30,41 +30,55 @@ const ProjectMeta = ({
   codeUrl,
 }) => (
   <div className="project-meta">
-    {/* Title */}
-    <h3 className="project-meta__title">{title}</h3>
-    {/* Description */}
-    {description && <p className="project-meta__description">{description}</p>}
-    {/* Technology Chips */}
-    {stack.length > 0 && <Chips items={stack} />}
-    {/* Narrative cards */}
+    <div className="project-meta__header">
+      <h3 className="project-meta__title">
+        <span className="project-meta__title-highlight">{title}</span>
+      </h3>
+      {description && <p className="project-meta__description">{description}</p>}
+    </div>
+
+    {stack.length > 0 && (
+      <div className="project-meta__chips">
+        <Chips items={stack} />
+      </div>
+    )}
+
+    <div className="project-meta__divider" />
+
     <div className="project-meta__stats">
-      {problem && <StatCard label="Problema" value={problem} />}
-      {approach && <StatCard label="Enfoque" value={approach} />}
-      {result && <StatCard label="Resultado" value={result} />}
+      {problem && <StatCard label="Problema" value={problem} tone="pink" />}
+      {approach && <StatCard label="Enfoque" value={approach} tone="pink" />}
+      {result && <StatCard label="Resultado" value={result} tone="emerald" />}
     </div>
-    {/* Call-to-action buttons */}
-    <div className="project-meta__actions">
-      {demoUrl && (
-        <a
-          href={demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="project-meta__button project-meta__button--primary"
-        >
-          Ver demo
-        </a>
-      )}
-      {codeUrl && (
-        <a
-          href={codeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="project-meta__button project-meta__button--secondary"
-        >
-          Ver código
-        </a>
-      )}
-    </div>
+
+    {(demoUrl || codeUrl) && (
+      <div className="project-meta__actions">
+        {demoUrl && (
+          <a
+            href={demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-meta__button project-meta__button--primary"
+          >
+            Ver demo
+          </a>
+        )}
+        {codeUrl && (
+          <a
+            href={codeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-meta__button project-meta__button--secondary"
+          >
+            Ver código
+          </a>
+        )}
+      </div>
+    )}
+
+    {stack.length > 0 && (
+      <div className="project-meta__stack">Stack · {stack.join(' · ')}</div>
+    )}
   </div>
 );
 

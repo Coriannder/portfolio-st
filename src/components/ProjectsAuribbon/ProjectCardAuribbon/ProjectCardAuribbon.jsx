@@ -27,25 +27,31 @@ const ProjectCardAuribbon = ({ project }) => {
     codeUrl,
   } = project;
   return (
-    <div className="project-card-auribbon">
-      {/* Media Section */}
-      <div className="project-card-auribbon__media">
-        <ProjectMedia image={image} alt={alt} />
+    <article className="project-card-auribbon">
+      <span className="project-card-auribbon__glow project-card-auribbon__glow--left" aria-hidden />
+      <span className="project-card-auribbon__glow project-card-auribbon__glow--right" aria-hidden />
+      <span className="project-card-auribbon__ribbon project-card-auribbon__ribbon--top" aria-hidden />
+      <span className="project-card-auribbon__ribbon project-card-auribbon__ribbon--bottom" aria-hidden />
+
+      <div className="project-card-auribbon__body">
+        <div className="project-card-auribbon__media">
+          <ProjectMedia image={image} alt={alt} />
+        </div>
+
+        <div className="project-card-auribbon__content">
+          <ProjectMeta
+            title={title}
+            description={description}
+            stack={stack}
+            problem={problem}
+            approach={approach}
+            result={result}
+            demoUrl={demoUrl}
+            codeUrl={codeUrl}
+          />
+        </div>
       </div>
-      {/* Meta Section */}
-      <div className="project-card-auribbon__content">
-        <ProjectMeta
-          title={title}
-          description={description}
-          stack={stack}
-          problem={problem}
-          approach={approach}
-          result={result}
-          demoUrl={demoUrl}
-          codeUrl={codeUrl}
-        />
-      </div>
-    </div>
+    </article>
   );
 };
 

@@ -9,11 +9,19 @@ import './StatCard.scss';
  * - label: A short heading for the card.
  * - value: The content or description associated with the label.
  */
-const StatCard = ({ label, value }) => (
-  <div className="stat-card">
-    <h4 className="stat-card__label">{label}</h4>
-    <p className="stat-card__value">{value}</p>
-  </div>
-);
+const StatCard = ({ label, value, tone = 'pink' }) => {
+  const toneClass = {
+    pink: 'stat-card--pink',
+    emerald: 'stat-card--emerald',
+    sky: 'stat-card--sky',
+  }[tone] || 'stat-card--pink';
+
+  return (
+    <div className={`stat-card ${toneClass}`}>
+      <h4 className="stat-card__label">{label}</h4>
+      <p className="stat-card__value">{value}</p>
+    </div>
+  );
+};
 
 export default StatCard;
