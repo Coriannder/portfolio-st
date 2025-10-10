@@ -12,14 +12,17 @@ import './ProjectMedia.scss';
  */
 const ProjectMedia = ({ image, alt }) => (
   <div className="project-media">
-    {/* Image */}
-    <img
-      src={image}
-      alt={alt}
-      className="project-media__image"
-    />
-    {/* Dark gradient overlay from bottom to top to enhance contrast */}
-    <div className="project-media__overlay"></div>
+    <div className="project-media__frame">
+      <span className="project-media__gradient" aria-hidden />
+      <div className="project-media__tilt">
+        <img
+          src={image}
+          alt={alt}
+          className="project-media__image"
+        />
+        <span className="project-media__overlay" aria-hidden />
+      </div>
+    </div>
   </div>
 );
 
