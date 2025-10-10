@@ -1,0 +1,26 @@
+@import '../../../color.scss';
+
+.stat-card {
+  background: rgba(30, 20, 50, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin-bottom: 0;
+  backdrop-filter: blur(10px);
+
+  &__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #F5B6CD;
+    margin-bottom: 12px;
+    text-transform: capitalize;
+    letter-spacing: 0.05em;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  &__value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}

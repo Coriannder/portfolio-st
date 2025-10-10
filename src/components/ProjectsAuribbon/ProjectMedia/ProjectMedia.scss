@@ -1,0 +1,24 @@
+.project-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transform: skewY(-2deg);
+
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+    display: block;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+    pointer-events: none;
+  }
+}

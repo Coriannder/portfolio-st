@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "title": "Sistema de Gestión de Dispositivos Médicos",
+    "alt": "Sistema de Gestión de Dispositivos Médicos",
+    "description": "Un sistema integral para la gestión y seguimiento de dispositivos médicos, optimizando el inventario y el mantenimiento. Desarrollado con tecnologías backend robustas para asegurar la integridad y seguridad de los datos.",
+    "stack": ["Node.js", "Express", "MongoDB", "JWT", "Docker"],
+    "problem": "Los hospitales enfrentaban dificultades para rastrear y gestionar miles de dispositivos médicos, resultando en pérdidas y mantenimientos tardíos.",
+    "approach": "Desarrollé una API REST con Node.js y MongoDB que permite registro, seguimiento en tiempo real y alertas automáticas de mantenimiento.",
+    "result": "Reducción del 40% en pérdidas de equipos y mejora del 60% en la puntualidad del mantenimiento preventivo.",
+    "codeUrl": "https://github.com/tu-usuario/gestion-dispositivos-medicos",
+    "demoUrl": null,
+    "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "title": "E-commerce de Ropa",
+    "alt": "E-commerce de Ropa",
+    "description": "Plataforma de comercio electrónico moderna y responsiva para la venta de ropa, con funcionalidades de carrito de compras, pasarela de pagos y gestión de productos.",
+    "stack": ["React", "Redux", "Stripe", "Firebase", "Sass"],
+    "problem": "Las tiendas de ropa necesitaban una plataforma online robusta para aumentar sus ventas.",
+    "approach": "Desarrollé un e-commerce completo con React y Redux, integrando Stripe para pagos seguros.",
+    "result": "Plataforma funcional con gestión de inventario, carrito de compras y pasarela de pagos.",
+    "codeUrl": "https://github.com/tu-usuario/e-commerce-ropa",
+    "demoUrl": "https://tu-ecommerce-ropa.netlify.app",
+    "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&h=400&fit=crop",
+    "featured": false
+  },
+  {
+    "id": "3",
+    "title": "Aplicación de Tareas Pendientes (To-Do App)",
+    "alt": "Aplicación de Tareas Pendientes",
+    "description": "Una aplicación simple y eficiente para organizar tareas diarias, con funcionalidades de añadir, editar, eliminar y marcar tareas como completadas.",
+    "stack": ["Vue.js", "Vuex", "Tailwind CSS", "Local Storage"],
+    "problem": "Las personas necesitaban una forma simple de organizar sus tareas diarias.",
+    "approach": "Creé una aplicación con Vue.js y Vuex para gestionar el estado de las tareas.",
+    "result": "Aplicación funcional con persistencia de datos y una interfaz intuitiva.",
+    "codeUrl": "https://github.com/tu-usuario/todo-app",
+    "demoUrl": "https://tu-todo-app.netlify.app",
+    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
+    "featured": false
+  }
+]

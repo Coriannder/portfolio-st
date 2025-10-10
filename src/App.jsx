@@ -9,28 +9,25 @@ import { Contact } from './components/Contact/Contact';
 import { BackgroundFigure } from './components/BackgroundFigure/BackgroundFigure';
 
 import { BrowserRouter as Router } from "react-router-dom";
-//import { Cursor } from './components/Cursor/Cursor';
 import { CursorProvider } from './Context/CursorContext';
-
+import ProjectsAuribbon from './components/ProjectsAuribbon/ProjectsAuribbon';
 
 function App() {
-
-
   return (
-
     <Router>
-		<CursorProvider>
-			<Header/>
-			<Main>
-				<Home/>
-				<About/>
-				<Projects/>
-				<Contact/>
-			</Main>
-			<BackgroundFigure/>
-		</CursorProvider>
+      <CursorProvider>
+        <Header/>
+        <Main>
+          <Home/>
+          <About/>
+          <Projects/>
+          <ProjectsAuribbon/>
+          <Contact/>
+        </Main>
+        <BackgroundFigure/>
+      </CursorProvider>
     </Router>
   );
 }
-export default App;
 
+export default App;

@@ -1,0 +1,68 @@
+@import '../../../color.scss';
+
+.project-card-auribbon {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: linear-gradient(135deg, 
+    rgba(251, 69, 248, 0.4) 0%, 
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  border-radius: 32px;
+  padding: 40px 20px;
+  overflow: hidden;
+  border: 1px solid rgba(136, 58, 135, 0.4);
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top left, rgba(136, 58, 135, 0.2) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    padding: 60px 40px;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 90%;
+    max-width: 1400px;
+  }
+
+  &__media {
+    width: 100%;
+    padding: 0;
+
+    @media screen and (min-width: 768px) {
+      width: 50%;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    @media screen and (min-width: 768px) {
+      width: 50%;
+      padding: 0 0 0 40px;
+    }
+  }
+}

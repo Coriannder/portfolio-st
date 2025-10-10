@@ -11,9 +11,9 @@ export const BackgroundFigure = () => {
 				initial={{ scale: 100, }}
 				animate={{ scale:.7, }}
 				transition={{duration: .8}}>
-				{[...Array(9)].map((i) =>
+				{[...Array(9)].map((_, index) =>
 					<motion.div
-						key = {i}
+						key = {index}
 						className="banter-BackgroundFigure__box"
 						initial={{ background: '#00000000'}}
 						animate={{ background:"#00000016" }}

@@ -1,0 +1,73 @@
+@import '../../../color.scss';
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #F5B6CD;
+    line-height: 1.2;
+    font-family: 'Oswald', sans-serif;
+
+    @media (min-width: 768px) {
+      font-size: 40px;
+    }
+  }
+
+  &__description {
+    color: rgba(156, 163, 175, 1);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  &__button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+
+    &--primary {
+      background-color: #F5B6CD;
+      color: #2B2B2B;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: #f7c9db;
+      }
+    }
+
+    &--secondary {
+      border: 2px solid #F5B6CD;
+      color: #F5B6CD;
+      background-color: transparent;
+
+      &:hover {
+        background-color: #F5B6CD;
+        color: #2B2B2B;
+      }
+    }
+  }
+}
