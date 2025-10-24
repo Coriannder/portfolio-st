@@ -45,12 +45,13 @@ export const  ProjectItem = ({item , getId}) => {
                 </motion.div>
 
                 <div className='projectItem__links' onMouseOver={ () => contextValue.overTag('button')} onMouseLeave={contextValue.outTag}>
+                    {/* prefer demoUrl/codeUrl fields, fallback to existing item fields */}
                     <ButtonLink
-                        to={item.pageURL}
-                        title={item.title !== "Ecommerce BackEnd" ? 'web' : 'API'}
+                        to={item.demoUrl || item.pageURL || '#'}
+                        title={item.demoUrl || item.pageURL ? (item.title !== "Ecommerce BackEnd" ? 'web' : 'API') : 'web'}
                     />
                     <ButtonLink
-                        to={item.gitHubURL}
+                        to={item.codeUrl || item.gitHubURL || '#'}
                         title={'code'}
                         style={{marginLeft: '15px'}}
                     />

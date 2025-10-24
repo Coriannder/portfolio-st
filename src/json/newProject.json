@@ -1,31 +1,37 @@
 [
   {
     "id": "1",
-    "title": "Sistema de Gestión de Dispositivos Médicos",
-    "alt": "Sistema de Gestión de Dispositivos Médicos",
-    "description": "Un sistema integral para la gestión y seguimiento de dispositivos médicos, optimizando el inventario y el mantenimiento. Desarrollado con tecnologías backend robustas para asegurar la integridad y seguridad de los datos.",
-    "stack": ["Node.js", "Express", "MongoDB", "JWT", "Docker"],
-    "problem": "Los hospitales enfrentaban dificultades para rastrear y gestionar miles de dispositivos médicos, resultando en pérdidas y mantenimientos tardíos.",
-    "approach": "Desarrollé una API REST con Node.js y MongoDB que permite registro, seguimiento en tiempo real y alertas automáticas de mantenimiento.",
-    "result": "Reducción del 40% en pérdidas de equipos y mejora del 60% en la puntualidad del mantenimiento preventivo.",
-    "codeUrl": "https://github.com/tu-usuario/gestion-dispositivos-medicos",
+    "title": "Medevice",
+    "alt": "Sistema de Gestión de Equipamiento Médico",
+    "description": "Sistema backend para la gestión y seguimiento de dispositivos médicos y no médicos. API REST completa, roles, auditoría y pruebas automatizadas.",
+    "stack": ["Node.js", "TypeScript", "Express", "Sequelize", "MySQL", "Jest"],
+    "problem": "Los hospitales enfrentaban dificultades para rastrear y gestionar miles de dispositivos, resultando en pérdidas y mantenimientos tardíos.",
+    "approach": "Arquitectura en capas (Controllers/Services/DAOs/DTOs), autenticación JWT, migraciones y seeds para la BD, API REST con endpoints completos y testing automatizado.",
+    "result": "Backend implementado con documentación y tests; procesos de gestión y mantenimiento disponibles via API (métricas internas descriptas en README).",
+    "codeUrl": null,
     "demoUrl": null,
     "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop",
-    "featured": true
+    "featured": true,
+    "type": "backend",
+    "readme": "src/json/readme_project_1.json",
+    "visibility": "private"
   },
   {
     "id": "2",
-    "title": "E-commerce de Ropa",
-    "alt": "E-commerce de Ropa",
-    "description": "Plataforma de comercio electrónico moderna y responsiva para la venta de ropa, con funcionalidades de carrito de compras, pasarela de pagos y gestión de productos.",
-    "stack": ["React", "Redux", "Stripe", "Firebase", "Sass"],
-    "problem": "Las tiendas de ropa necesitaban una plataforma online robusta para aumentar sus ventas.",
-    "approach": "Desarrollé un e-commerce completo con React y Redux, integrando Stripe para pagos seguros.",
-    "result": "Plataforma funcional con gestión de inventario, carrito de compras y pasarela de pagos.",
-    "codeUrl": "https://github.com/tu-usuario/e-commerce-ropa",
-    "demoUrl": "https://tu-ecommerce-ropa.netlify.app",
-    "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&h=400&fit=crop",
-    "featured": false
+    "title": "Isla Gourmet — Sitio Corporativo (maquetado)",
+    "alt": "Isla Gourmet - catering y eventos",
+    "description": "Sitio estático corporativo para una empresa ficticia de catering (Isla Gourmet). Maquetado en HTML con SASS y diseñado usando Bootstrap; incluye secciones de servicios, galería y contacto.",
+    "stack": ["HTML", "Sass", "Bootstrap"],
+    "problem": "Necesidad de un sitio informativo y visualmente atractivo para presentar servicios de catering y captar clientes.",
+    "approach": "Maquetación responsive con HTML y SASS; componentes y layout apoyados por Bootstrap; deployment estático en Netlify.",
+    "result": "Sitio estático, responsive y estético desplegado en Netlify. Buen punto visual para portfolio y demostración de habilidades de maquetado.",
+    "codeUrl": "https://github.com/Coriannder/proyectoFinal-dw",
+    "demoUrl": "https://islagourmet.netlify.app/index.html",
+    "image": "https://islagourmet.netlify.app/fuentes/comidaIndex2.jpg",
+    "featured": false,
+    "type": "frontend",
+    "readme": "src/json/readme_project_2.json",
+    "visibility": "public"
   },
   {
     "id": "3",
@@ -39,6 +45,9 @@
     "codeUrl": "https://github.com/tu-usuario/todo-app",
     "demoUrl": "https://tu-todo-app.netlify.app",
     "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
-    "featured": false
+    "featured": false,
+    "type": "frontend",
+    "readme": null,
+    "visibility": "public"
   }
 ]
