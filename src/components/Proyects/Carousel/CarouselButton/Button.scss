@@ -1,0 +1,40 @@
+@import '../../../color.scss';
+
+.button {
+    &__link{
+        border: 2px solid $pinkMiami;
+        padding: 4px 15px 6px 15px;
+        margin-left: 15px;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        color: $pinkMiami;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        color:$pinkMiami;
+        cursor: none;
+
+        &:hover {
+            color: #2B2B2B
+        }
+    }
+
+    &__background {
+    position: absolute;
+    left: 0;
+    background-color: $pinkMiami;
+    height: 100%;
+    width: 100%;
+    transform: none;
+    border-radius: 15px;
+    border: 1px solid $pinkMiami;
+    z-index: -10;
+    cursor: none;
+    }
+}
+
+
+

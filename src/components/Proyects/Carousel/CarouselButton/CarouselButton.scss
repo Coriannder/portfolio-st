@@ -1,0 +1,11 @@
+@import "../../../MediaQueries.scss";
+
+.carouselButton__nav {
+    display: none;
+    margin: 50px;
+
+    @include tablet {
+        display: flex;
+        margin: 30px;
+    }
+}

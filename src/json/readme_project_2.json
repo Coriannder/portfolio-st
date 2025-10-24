@@ -1,0 +1,26 @@
+{
+  "title": "Isla Gourmet — Proyecto final (maquetado)",
+  "summary": "Maquetación estática para un sitio corporativo de catering (Isla Gourmet). Implementado en HTML con SASS y Bootstrap, desplegado en Netlify.",
+  "readme_text": "Proyecto final del curso de Desarrollo Web. Sitio maquetado de una empresa de catering (Isla Gourmet) de 5 secciones, realizado en HTML con SASS y usando Bootstrap.",
+  "site": {
+    "demoUrl": "https://islagourmet.netlify.app/index.html",
+    "screenshots": [
+      "https://islagourmet.netlify.app/fuentes/comidaIndex2.jpg",
+      "https://islagourmet.netlify.app/fuentes/cocinandoIndexSeparation.jpg",
+      "https://islagourmet.netlify.app/fuentes/betular.webp"
+    ],
+    "sections": ["Inicio", "Nosotros", "Servicios", "Galería", "Contacto"],
+    "contact": {
+      "email": "micorreo@islagourmet.com",
+      "phone": "+5493810303456"
+    }
+  },
+  "repo": {
+    "url": "https://github.com/Coriannder/proyectoFinal-dw",
+    "visibility": "public",
+    "notes": "Repositorio con HTML y SASS; no parece contener package.json (sitio estático)."
+  },
+  "tech": ["HTML", "Sass", "Bootstrap"],
+  "notes": "Proyecto estático y visual. Usar como demo de maquetado; mostrar botones: Ver repo y Ver sitio.",
+  "extracted_at": "2025-10-17"
+}

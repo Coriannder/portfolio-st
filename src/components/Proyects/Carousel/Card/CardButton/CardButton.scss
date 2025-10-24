@@ -1,0 +1,46 @@
+@import '../../../../../color.scss';
+
+.cardButton {
+    &__link{
+        padding: .2rem .5rem;
+        border: 1px solid $pinkMiami;
+        //padding: 4px 15px 6px 15px;
+        //margin-left: 15px;
+        font-size: 0.6rem;
+        font-weight: 400;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        color: $pinkMiami;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        color:$pinkMiami;
+        cursor: none;
+        width: min-content;
+
+
+
+         &--background {
+            position: absolute;
+            left: 0;
+            background-color: #aa8da0ad;
+            height: 100%;
+            width: 80%;
+            //transform: none;
+            //border-radius: 15px;
+            border: 1px solid aa8da0ad;
+            z-index: -10;
+            cursor: none;
+            right: 100px;
+            }
+
+
+
+    }
+
+   
+}
+
+
+
