@@ -5,7 +5,7 @@ import { CardButton } from './CardButton/CardButton';
 export const Card = ({ data, isActive }) => {
   if (!data) return null;
 
-  const [isFeatured, setIsFeatured] = useState(isActive || false);
+  //const [isFeatured, setIsFeatured] = useState(isActive || false);
 
 
   const {
@@ -22,7 +22,7 @@ export const Card = ({ data, isActive }) => {
   } = data;
 
   return (
-    <div className={`card ${isFeatured ? 'card--featured' : 'card--preview'}`}>
+    <div className={`card ${isActive ? 'card--featured' : 'card--preview'}`}>
 
 		<div
 			className="card__media"
