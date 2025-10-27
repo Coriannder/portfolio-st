@@ -18,6 +18,19 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        position: relative;
+        height: 595px;
+        overflow: hidden;
+
+        //background-color: red;
+
+        @include tablet {
+            overflow: visible;
+            height: auto;
+        }
+
+        
+
     }
 
     &__card {

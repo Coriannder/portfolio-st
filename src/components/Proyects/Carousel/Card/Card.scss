@@ -4,8 +4,16 @@
 
 .card {
 
-  	max-width: 400px;
-	
+    height: 592px;
+	display: flex;
+    flex-direction: column;
+
+	@include tablet {
+		height: 278px;
+	}
+
+
+	max-width: 400px;
 	background-color: rgba(39, 20, 79, 0.118);
 	backdrop-filter: blur(5px);
 	border: 1px solid $border-card;
@@ -19,6 +27,8 @@
 
  &--center {
 	max-width: 300px;
+  min-height: 562px;
+
   }
 
 
@@ -31,8 +41,8 @@
 
     @include tablet {
 
-      min-height: 100%;
-      max-height: 100%;
+      //min-height: 100%;
+      //max-height: 100%;
       min-width: 100%;
       aspect-ratio: 16/4.5;
       background-size: cover;
@@ -44,6 +54,12 @@
   &__body {
 
 	  padding: 1rem;
+    //height: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    //background-color: blueviolet;
 
     @include tablet {
       padding: 0.5rem;
@@ -120,6 +136,12 @@
     flex-wrap: wrap;
     gap: .4rem;
     margin: .5rem 0 .8rem 0;
+
+	@include tablet {
+		margin: auto 0;
+	}
+
+    //align-self: ;
   }
 
   &__tag {
@@ -140,9 +162,62 @@
     display: flex;
     gap: 10px;
 	margin-top: 20px;
+      flex-grow: 1;
+    align-items: flex-end;
 
 	@include tablet {
 		margin-top: 10px;
 	}
   }
+}
+
+/* ===== Hover for featured card (desktop only) ===== */
+@media (hover: hover) and (pointer: fine) {
+  .card--featured {
+    transition: transform .15s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .card--featured:hover,
+  .card--featured:focus-visible {
+    /* smaller scale to reduce layout-shift and a subtle inset glow in brand tone */
+    transform: translateY(-3px) translateZ(0) scale(1.005);
+    box-shadow: /* 0 20px 6px rgba(0, 0, 0, 0.30), */ inset 0 8px 36px rgba($primary, 0.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--featured {
+    transition: none !important;
+  }
+}
+
+/* Fallback: some touchscreen laptops report no primary hover but DO have a mouse -
+   use any-hover to detect if any input can hover (covers hybrid devices). */
+@media (any-hover: hover) {
+  .card--featured {
+    transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .card--featured:hover,
+  .card--featured:focus-visible {
+    /* smaller scale + inset tonal glow */
+    transform: translateY(-4px) translateZ(0) scale(1.015);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+  }
+}
+
+/* Fallback: use .has-mouse (set by runtime JS) for hybrid devices that don't
+   report hover/any-hover correctly. This lets us enable hover when a physical
+   mouse is actually used. */
+.has-mouse .card--featured {
+  transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+  will-change: transform, box-shadow;
+}
+
+.has-mouse .card--featured:hover,
+.has-mouse .card--featured:focus-visible {
+  transform: translateY(-4px) translateZ(0) scale(1.015);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
 }

@@ -1,4 +1,5 @@
 @import '../../../../../color.scss';
+@import '../../../../MediaQueries.scss';
 
 .cardButton {
     &__link{
@@ -6,7 +7,7 @@
         border: 1px solid $pinkMiami;
         //padding: 4px 15px 6px 15px;
         //margin-left: 15px;
-        font-size: 0.6rem;
+        font-size: 1rem;
         font-weight: 400;
         border-radius: 7px;
         display: flex;
@@ -18,6 +19,11 @@
         color:$pinkMiami;
         cursor: none;
         width: min-content;
+
+        @include tablet {
+            font-size: .6rem;
+
+        }
 
 
 
