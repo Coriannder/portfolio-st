@@ -16,6 +16,7 @@
         padding-bottom: 100px;
         box-sizing: border-box;
         scroll-snap-align: start;
+
     }
 
     &__container {
@@ -31,6 +32,9 @@
         }
         @include tablet {
             width: 90%;
+        }
+        @include xxlarge {
+            padding-top: 70px;
         }
     }
 
@@ -54,6 +58,10 @@
        // background-color: chartreuse;
         //height: 40vh;
         margin: 3rem 0 ;
+
+        @include tablet {
+            margin: 1rem 0 ;
+        }
 
     }
 

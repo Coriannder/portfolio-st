@@ -21,17 +21,23 @@ export const Projects = () => {
                     className='projects__h2'
                     initial={{x: 200, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
-                    transition= {{ duration: .5, type: "spring", delay: .4}}
+                    transition= {{ duration: .5, type: "spring", delay: .2}}
                     //viewport={{ once: true }}
                     onMouseOver={ () => contextValue.overTag('title') }
                     onMouseOut={contextValue.outTag}
                 >
                     proyectos
                 </motion.h2>
-                <div className='projects__carouselContainer'>
+                <motion.div
+                    className='projects__carouselContainer'
+                    initial={{ x: 200, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, type: 'spring', delay: 0.55 }}
+                    //viewport={{ once: true, amount: 0.35 }}
+                >
                     <Carousel />
                     {/* <Card data={items[0]} /> */}
-                </div>
+                </motion.div>
             </div>
         </div>
     )
