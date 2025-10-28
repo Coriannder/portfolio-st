@@ -77,7 +77,7 @@ export const Header = () => {
                 <ul className='header__menu'>
                     <li><HeaderLink to={"home__section"} title={'Inicio'}/></li>
                     <li><HeaderLink to={"about__section"} title={'Quien soy'}/></li>
-                    <li><HeaderLink to={"projects__section"} title={'Proyectos'} /></li>
+                    <li><HeaderLink to={"projects__section"} title={'Proyectos'} /* offset={-20} */ /></li>
                     <li><HeaderLink to={"contact__section"} title={'Contacto'}/></li>
                 </ul>
 

@@ -13,7 +13,7 @@ export const HeaderLink = ( {to , title , offset} ) => {
 
     return(
         <Link
-            className={'headerLink__link'} to={to} spy={true} smooth={'easeOutQuint'} offset={offset || 50} duration={30}
+            className={'headerLink__link'} to={to} spy={true} smooth={'easeOutQuint'} offset={offset || 0} duration={30}
             onMouseEnter={() => setHover(true)} onMouseLeave={()=> setHover(false)}
             onMouseOver={ () => contextValue.overTag('link') } onMouseOut={ contextValue.outTag}
         >
