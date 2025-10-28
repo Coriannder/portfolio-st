@@ -51,7 +51,7 @@ function App() {
 					<Home/> 
 					<About/>
 					<Projects/>
-					{/* <Contact/> */}
+					<Contact/>
 				</Main>
 				<BackgroundFigure/>
 			</CursorProvider>

@@ -11,6 +11,7 @@ export const CursorProvider = ({children}) => {
 
     const overTag = (value) => {
         setIsInside(value)
+        
     }
 
     const outTag = () => {
