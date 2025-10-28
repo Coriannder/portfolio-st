@@ -23,7 +23,13 @@
 };
 
 @mixin xxlarge {
-    @media screen and ( min-width: 1400px) {
+    @media screen and ( min-width: 1800px) {
+        @content
+    }
+};
+
+@mixin xxxlarge {
+    @media screen and ( min-width: 2800px) {
         @content
     }
 };
