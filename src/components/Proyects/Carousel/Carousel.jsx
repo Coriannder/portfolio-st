@@ -1,10 +1,12 @@
 // Carousel.jsx
 import './Carousel.scss'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { Card } from './Card/Card'
 import { motion, AnimatePresence } from 'framer-motion'
 import projectsData from '../../../json/newProject.json'
 import { CarouselButton } from './CarouselButton/CarouselButton'
+import { CursorContext } from '../../../Context/CursorContext'
+import Dots from './Dots/Dots'
 
 export const Carousel = () => {
 	const items = projectsData
@@ -36,29 +38,132 @@ export const Carousel = () => {
 	const leftIndex   = mod(activeIndex - 1, items.length)
 	const rightIndex  = mod(activeIndex + 1, items.length)
 
+	// refs + state for moving dot indicator
+	const dotsRef = useRef(null)
+	const INDICATOR_SIZE = 16
+	const [indicator, setIndicator] = useState({ left: 0, top: 0, width: INDICATOR_SIZE })
+
+	// update indicator position/size based on activeIndex (center the circular indicator)
+	useEffect(() => {
+		if (typeof window === 'undefined') return
+		const update = () => {
+			if (!dotsRef.current) return
+			const btn = dotsRef.current.querySelector(`button[data-idx="${activeIndex}"]`)
+			if (!btn) return
+			const rect = btn.getBoundingClientRect()
+			const containerRect = dotsRef.current.getBoundingClientRect()
+			// center the indicator on the button (horizontal + vertical)
+			const left = rect.left - containerRect.left + rect.width / 2 - (INDICATOR_SIZE / 2)
+			const top = rect.top - containerRect.top + rect.height / 2 - (INDICATOR_SIZE / 2)
+			setIndicator({ left, top, width: INDICATOR_SIZE })
+		}
+
+		// small rAF to ensure layout settled after animations
+		requestAnimationFrame(update)
+
+		window.addEventListener('resize', update)
+		return () => window.removeEventListener('resize', update)
+	}, [activeIndex, items.length])
+
+	// cursor context so dots can trigger the same cursor animation as the section title
+	const cursorContext = useContext(CursorContext)
+
 
 	// 4) Handlers de navegación
 	const goRight = () => {
   setDirection(-1)
-  console.debug('[carousel] before goRight scrollY', window.scrollY, 'activeElement', document.activeElement)
   setActiveIndex(i => mod(i + 1, items.length))
   // medir después del cambio / posible scroll programático
   requestAnimationFrame(() => {
     setTimeout(() => {
-      console.debug('[carousel] after goRight scrollY', window.scrollY)
+				// debug measurement placeholder
     }, 50) // ajustar tiempo si hay animaciones/timeout
   })
 }
 
 const goLeft = () => {
   setDirection(1)
-  console.debug('[carousel] before goLeft scrollY', window.scrollY, 'activeElement', document.activeElement)
   setActiveIndex(i => mod(i - 1, items.length))
   requestAnimationFrame(() => {
     setTimeout(() => {
-      console.debug('[carousel] after goLeft scrollY', window.scrollY)
+			// debug measurement placeholder
     }, 50)
   })
+}
+
+// Swipe handling for touch devices on the center card
+const swipe = useRef({ startX: 0, startY: 0, startTime: 0, isSwiping: false, pointerId: null, moved: 0, skipClick: false })
+const SWIPE_DISTANCE = 60 // px
+const SWIPE_TIME = 500 // ms for velocity consideration
+
+const handlePointerDown = (e) => {
+	// prefer touch/pen but also allow mouse for desktop testing (only primary button)
+	if (e.pointerType === 'mouse' && e.button !== 0) return
+	swipe.current.pointerId = e.pointerId
+	swipe.current.startX = e.clientX
+	swipe.current.startY = e.clientY
+	swipe.current.startTime = Date.now()
+	swipe.current.isSwiping = false
+	swipe.current.moved = 0
+	swipe.current.skipClick = false
+	try { e.currentTarget.setPointerCapture(e.pointerId) } catch (err) {}
+}
+
+const handlePointerMove = (e) => {
+	if (swipe.current.pointerId !== e.pointerId) return
+	const dx = e.clientX - swipe.current.startX
+	const dy = e.clientY - swipe.current.startY
+	// if vertical movement is larger, treat as scroll — ignore
+	if (!swipe.current.isSwiping && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 10) {
+		// abandon swipe tracking
+		swipe.current.pointerId = null
+		return
+	}
+	if (Math.abs(dx) > 10) {
+		swipe.current.isSwiping = true
+		swipe.current.moved = dx
+		swipe.current.skipClick = true
+	}
+}
+
+const handlePointerUp = (e) => {
+	if (swipe.current.pointerId !== e.pointerId) return
+	const dx = e.clientX - swipe.current.startX
+	const dt = Date.now() - swipe.current.startTime
+	// determine swipe by distance or speed
+	const velocity = Math.abs(dx) / Math.max(dt, 1)
+	if (Math.abs(dx) > SWIPE_DISTANCE || velocity > (SWIPE_DISTANCE / SWIPE_TIME)) {
+		if (dx < 0) {
+			// swipe left -> next
+			goRight()
+		} else {
+			// swipe right -> prev
+			goLeft()
+		}
+	}
+	swipe.current.pointerId = null
+	// release capture
+	try { e.currentTarget.releasePointerCapture(e.pointerId) } catch (err) {}
+	// small timeout before allowing clicks again
+	setTimeout(() => { swipe.current.skipClick = false }, 50)
+}
+
+const handlePointerCancel = (e) => {
+	if (swipe.current.pointerId !== e.pointerId) return
+	swipe.current.pointerId = null
+	swipe.current.isSwiping = false
+	swipe.current.skipClick = false
+}
+
+const handleCenterClick = (e) => {
+	if (swipe.current.skipClick) {
+		// prevent accidental click after swipe
+		e.preventDefault()
+		e.stopPropagation()
+		return
+	}
+	// fallback: clicking center advances
+	goRight()
 }
 
 		// jump to a specific index from the dots; pick direction based on shortest path
@@ -92,6 +197,7 @@ const goLeft = () => {
 			enter: (dir) => ({
 				x: -dir * OFFSET,
 				opacity: 0,
+				scale: .6,
 				transition: {
 					x: {
 						type: 'tween',
@@ -106,7 +212,7 @@ const goLeft = () => {
 			center: {
 				x: 0,
 				opacity: 1,
-				scale: isMobile ? 1 : 1.6,
+				scale: isMobile ? 1 : 1.4,
 				// use a tween for center to avoid any spring-like bounce when settling
 				transition: {
 					x: {
@@ -122,7 +228,7 @@ const goLeft = () => {
 			exit: (dir) => ({
 				x: dir * OFFSET,
 				opacity: 0,
-				scale: 1,
+				scale: .45,
 				transition: {
 					x:{
 						type: 'tween',
@@ -141,21 +247,26 @@ const goLeft = () => {
 		const previewVariants = {
 			enter: (dir) => ({
 				x: dir > 0 ? -PREVIEW_OFFSET : PREVIEW_OFFSET,
-				opacity: 0.6,
-				scale: 0.985,
-				transition: { x: { type: 'tween', duration: 0.28 }, opacity: { duration: 0.9 } }
+				opacity: 0.1,
+				scale: .9,
+				transition: {
+					x: { type: 'tween', duration: 0.28 },
+					opacity: { duration: 0.9 }}
 			}),
 			center: {
 				x: 0,
 				opacity: 0.72,
-				scale: 0.995,
+				scale: 0.7,
 				transition: { duration: 0.28 }
 			},
 			exit: (dir) => ({
 				x: dir > 0 ? PREVIEW_OFFSET : -PREVIEW_OFFSET,
-				opacity: 0.6,
-				scale: 0.985,
-				transition: { x: { type: 'tween', duration: 0.24 }, opacity: { duration: 0.18 } }
+				opacity: 0.1,
+				scale: .8,
+				transition: {
+					x: { type: 'tween', duration: .04 },
+					opacity: { duration: 0.5 }
+				}
 			}),
 		}
 
@@ -189,8 +300,11 @@ const goLeft = () => {
 
 							className='carousel__card carousel__card--center'
 							aria-live="polite"
-
-							onClick={goRight}
+							onPointerDown={handlePointerDown}
+							onPointerMove={handlePointerMove}
+							onPointerUp={handlePointerUp}
+							onPointerCancel={handlePointerCancel}
+							onClick={handleCenterClick}
 						>
 							<Card data={{...items[activeIndex]}} isActive={true} />
 						</motion.div>
@@ -215,33 +329,15 @@ const goLeft = () => {
 					<CarouselButton direction="right" onClick={goRight} ariaLabel="next" />
 				</div>
 
-				{/* dots / pagination */}
-				<div className="carousel__dots" role="tablist" aria-label="Carousel pagination">
-					{items.map((_, idx) => (
-							<button
-								key={idx}
-								type="button"
-								data-idx={idx}
-								className={`carousel__dot ${idx === activeIndex ? 'carousel__dot--active' : ''}`}
-								// stop propagation early in capture phase for pointer/touch to avoid ancestor handlers
-								//onPointerDownCapture={(e) => { try { e.stopPropagation(); } catch (err) {} }}
-								//onTouchStartCapture={(e) => { try { e.stopPropagation(); } catch (err) {} }}
-								aria-label={`Go to slide ${idx + 1}`}
-								aria-current={idx === activeIndex}
-								//onMouseDown={(e) => e.preventDefault()} // prevent focus jump on some browsers
-								//onPointerDown={(e) => e.preventDefault()} // prevent focus/activation via pointer (covers touch)
-								// prevent propagation and default behavior on click to avoid ancestor handlers / anchors
-								onClick={(e) => {
-									//e.preventDefault()
-									//e.stopPropagation()
-									//if (isAnimating) return
-									goToIndex(idx)
-									/* remove focus to avoid mobile scroll/jump */
-									e.currentTarget.blur()
-								}}
-							/>
-					))}
-				</div>
+				{/* dots / pagination (moved to Dots component) */}
+				<Dots
+					items={items}
+					activeIndex={activeIndex}
+					goToIndex={goToIndex}
+					dotsRef={dotsRef}
+					indicator={indicator}
+					cursorContext={cursorContext}
+				/>
 
 		</div>
 

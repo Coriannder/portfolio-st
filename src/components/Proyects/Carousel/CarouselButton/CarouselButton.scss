@@ -1,11 +1,40 @@
 @import "../../../MediaQueries.scss";
+@import "../../../../color.scss";
 
 .carouselButton__nav {
     display: none;
     margin: 50px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.42);
+    color: #ffffff;
+    border: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+    transition: transform .18s ease, box-shadow .18s ease, background .12s ease;
 
     @include tablet {
         display: flex;
-        margin: 30px;
+        margin: 10px;
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba($primary, 0.12);
+    }
+
+    &:hover {
+        background: rgba(0,0,0,0.52);
+        box-shadow: 0 14px 36px rgba(0,0,0,0.28);
+    }
+
+    span {
+        font-size: 22px;
+        line-height: 1;
+        display: inline-block;
+        transform: translateY(-1px);
     }
 }
