@@ -1,3 +1,10 @@
+// Small screens helper: used for subtle step-up from very small devices
+@mixin small {
+    @media screen and ( min-width: 400px) {
+        @content
+    }
+};
+
 @mixin mobile {
     @media screen and ( min-width: 576px) {
         @content

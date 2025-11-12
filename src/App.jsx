@@ -7,8 +7,9 @@ import { Home} from './components/Home/Home';
 import { About } from './components/About/About';
 import { Contact } from './components/Contact/Contact';
 import { BackgroundFigure } from './components/BackgroundFigure/BackgroundFigure';
-import { Projects } from './components/Proyects/Proyects';
-import { BrowserRouter as Router } from "react-router-dom";
+import { Projects } from './components/Projects/Projects';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProjectDetail from './components/Projects/ProjectDetail/ProjectDetail';
 import { CursorProvider } from './Context/CursorContext';
 
 
@@ -47,12 +48,17 @@ function App() {
 		<Router>
 			<CursorProvider>
 				<Header/>
-				<Main>
-					<Home/> 
-					<About/>
-					<Projects/>
-					<Contact/>
-				</Main>
+				<Routes>
+					<Route path="/projects/:identifier" element={<Main><ProjectDetail/></Main>} />
+					<Route path="/*" element={
+						<Main>
+							<Home/>
+							<About/>
+							<Projects/>
+							<Contact/>
+						</Main>
+					} />
+				</Routes>
 				<BackgroundFigure/>
 			</CursorProvider>
 		</Router>
