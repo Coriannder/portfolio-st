@@ -3,6 +3,16 @@
 .headerLink {
     &__link{
         overflow-x: hidden;
+    color: $pinkMiami;
+        text-decoration: none;
+
+        // force color for all link states to avoid browser default purple for visited
+        &:link,
+        &:visited,
+        &:active,
+        &:focus {
+            color: $pinkMiami;
+        }
 
         &:hover {
             scale: 1.1;
