@@ -1,8 +1,9 @@
 import './HeaderLink.scss'
 
-import { Link } from 'react-scroll'
+// route navigation: we'll always navigate to `/` and let Main handle the scroll/jump
 import { motion } from 'framer-motion';
 import { useState , useContext } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { CursorContext } from '../../../Context/CursorContext'
 
 
@@ -10,12 +11,29 @@ export const HeaderLink = ( {to , title , offset} ) => {
 
     const [hover, setHover] = useState(false)
     const contextValue = useContext(CursorContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const handleClick = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        // Always navigate to `/` and instruct Main to jump instantly to the section.
+        // Using `scrollToProjects: 'instant'` triggers the instant jump logic in Main.
+        try {
+            navigate('/', { state: { scrollTo: to, scrollToProjects: 'instant' } })
+        } catch (err) {
+            // ignore navigation errors
+        }
+    }
 
     return(
         <Link
-            className={'headerLink__link'} to={to} spy={true} smooth={'easeOutQuint'} offset={offset || 50} duration={30}
+            to="/"
+            className={'headerLink__link'}
+            onClick={handleClick}
             onMouseEnter={() => setHover(true)} onMouseLeave={()=> setHover(false)}
             onMouseOver={ () => contextValue.overTag('link') } onMouseOut={ contextValue.outTag}
+            onPointerDown={(e) => e.stopPropagation()}
         >
             {title}
             <motion.div
@@ -25,7 +43,8 @@ export const HeaderLink = ( {to , title , offset} ) => {
                 transition={{duration: .12, easings: 'spring'}}
             />
         </Link>
+
     )
 
-    }
+}
 

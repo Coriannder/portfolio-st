@@ -71,7 +71,7 @@ export const Header = () => {
             <motion.nav className='header__navbar'>
 
                 <div className='header__brandName' onMouseOver={ () => contextValue.overTag('brandName') } onMouseOut={ contextValue.outTag}>
-                    <ScrollLink to="home__section" spy={true} smooth={'easeOutQuint'} offset={50} duration={30}>ST</ScrollLink>
+                    <ScrollLink to="home__section" spy={true} smooth={true} offset={50} duration={800}>ST</ScrollLink>
                 </div>
 
                 <ul className='header__menu'>
