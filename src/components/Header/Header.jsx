@@ -1,6 +1,6 @@
 import './Header.scss';
 
-import { Link as ScrollLink } from 'react-scroll'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import { useEffect, useState, useContext } from 'react';
 import { CursorContext } from '../../Context/CursorContext';
@@ -18,6 +18,21 @@ export const Header = () => {
 
 
     let disapear
+
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const handleLogoClick = () => {
+        if (location.pathname !== '/') {
+            navigate('/', { state: { scrollTo: 'home__section', scrollToProjects: 'instant' } })
+            return
+        }
+        const el = document.getElementById('home__section')
+        if (el) {
+            const y = el.getBoundingClientRect().top + window.scrollY - 50
+            window.scrollTo({ top: y, behavior: 'smooth' })
+        }
+    }
 
 
 
@@ -70,8 +85,8 @@ export const Header = () => {
 
             <motion.nav className='header__navbar'>
 
-                <div className='header__brandName' onMouseOver={ () => contextValue.overTag('brandName') } onMouseOut={ contextValue.outTag}>
-                    <ScrollLink to="home__section" spy={true} smooth={true} offset={50} duration={800}>ST</ScrollLink>
+                <div className='header__brandName' onMouseOver={ () => contextValue.overTag('brandName') } onMouseOut={ contextValue.outTag} onClick={handleLogoClick} role="button" tabIndex={0}>
+                    ST
                 </div>
 
                 <ul className='header__menu'>
