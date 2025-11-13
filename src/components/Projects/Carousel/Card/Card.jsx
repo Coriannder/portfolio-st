@@ -17,6 +17,7 @@ export const Card = ({ data, isActive, revealActive, revealIndex }) => {
 		image,
 		stack,
 		type,
+		readme,
 			demoUrl,
 			codeUrl,
 		//featured,
@@ -81,14 +82,15 @@ export const Card = ({ data, isActive, revealActive, revealIndex }) => {
 
 
 				<div className="card__actions">
-					{visibility === 'private' ? (
+					{/* {visibility === 'private' ? (
 						<CardButton to={`/projects/${idOrSlug}`} title="Documentación" blank={false} disabled={!isActive} />
-					) : (
+					) : ( */}
 						<>
+							{readme && <CardButton to={`/projects/${data.id}`} title="Documentación" blank={false} disabled={!isActive} />}
 							{demoUrl && <CardButton to={demoUrl} title="Demo" disabled={!isActive} />}
 							{codeUrl && <CardButton to={codeUrl} title="Code" disabled={!isActive} />}
 						</>
-					)}
+					{/* )} */}
 				</div>
 			</motion.div>
 		</div>
