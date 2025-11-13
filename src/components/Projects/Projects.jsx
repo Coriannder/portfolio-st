@@ -32,7 +32,7 @@ export const Projects = () => {
                     className='projects__carouselContainer'
                     initial={{ x: 200, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, type: 'spring', delay: 0.55 }}
+                    transition={{ duration: 0.6, type: 'spring', delay: 0.3 }}
                     //viewport={{ once: true, amount: 0.35 }}
                 >
                     <Carousel />
