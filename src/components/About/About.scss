@@ -1,3 +1,4 @@
+@import '../../color.scss';
 @import '../MediaQueries.scss';
 
 .about {
@@ -18,7 +19,7 @@
         align-items: end;
         max-width: 1200px;
         width: 90%;
-        margin-top: 500px;
+        margin-top: 480px;
         overflow-x: hidden;
 
         @include mobile {
@@ -26,6 +27,7 @@
         }
         @include tablet {
             margin-top: 380px;
+            margin-bottom: 100px;
         }
     }
 
@@ -78,12 +80,14 @@
 
     &__body {
         display: flex;
+        flex-direction: column;
         text-align: end;
         justify-content: end;
         width: 100%;
         margin-bottom: 30px;
 
         & p {
+            align-self: end;
             @include tablet {
                 width: 80%;
             }
@@ -92,4 +96,6 @@
             }
         }
     }
+
+    // Styles for the CV button moved to ViewCVButton.scss
 }

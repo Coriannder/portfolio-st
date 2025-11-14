@@ -4,8 +4,11 @@ import photo from '../../assets/profile-st-PhotoRoom.png'
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
 import { CursorContext } from '../../Context/CursorContext'
+import { ViewCVButton } from './ViewCVButton/ViewCVButton'
 
 export const About = () => {
+
+    console.log(about)
 
     const contextValue = useContext(CursorContext)
 
@@ -35,6 +38,7 @@ export const About = () => {
                     //viewport={{ once: true }}
                 >
                     <p>{about}</p>
+                    <ViewCVButton />
                 </motion.div>
 
                 <motion.div
@@ -46,6 +50,8 @@ export const About = () => {
                 >
                     <img src={photo} />
                 </motion.div>
+                
+                
             </div>
 
         </section>
