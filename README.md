@@ -1,34 +1,57 @@
 # portfolio-st
 
-## Resumen
+Portfolio personal — Sebastián Taboada
 
-Hola a todos y todas, soy Sebastian Taboada pero podés llamarme Sebas; soy Desarrollador Web FULLSTACK además de Ingeniero Biomedico. Este proyecto es mi portfolio personal construido en React con un enfoque minimalista y animaciones para agregar dinamismo y atractivo estético. Para ello uso la biblioteca de animaciones para React "Framer Motion" y una paleta de colores inspirada en el club de fútbol Inter Miami CF donde juega el mejor jugador de todos los tiempos. El sitio incluye secciones como presentación, proyectos, habilidades y contacto, combinando un diseño limpio con transiciones dinámicas para ofrecer una experiencia atractiva.
+Este repositorio contiene mi portfolio personal, construido con React y Vite. Presenta una selección de proyectos, una breve biografía, enlaces de contacto y la posibilidad de ver/descargar el CV.
 
-## Instalación
+Resumen
 
-Instala las dependencias:
+- **Autor:** Sebastián (Sebas) Taboada
+- **Tecnologías:** React, Vite, Framer Motion, SCSS
+- **Objetivo:** Mostrar proyectos, habilidades y facilitar el contacto profesional.
 
-```bash
+Instalación y ejecución
+
+1. Instalar dependencias
+
+```pwsh
 npm install
 ```
 
-## Uso
+2. Ejecutar en modo desarrollo
 
-Inicia el servidor de desarrollo:
-
-```bash
+```pwsh
 npm run dev
 ```
 
-Genera la versión de producción:
+3. Generar build de producción
 
-```bash
+```pwsh
 npm run build
 ```
 
-Previsualiza la build:
+4. Previsualizar la build
 
-```bash
+```pwsh
 npm run preview
 ```
+
+Estructura general del proyecto
+
+- `src/` — código fuente de la aplicación
+	- `components/` — componentes React (Header, About, Projects, etc.)
+	- `assets/` — imágenes y recursos estáticos usados por la app
+	- `json/` — pequeños ficheros JSON que sirven como datos para proyectos o textos
+- `public/` — archivos estáticos expuestos (p. ej. `public/files/sebasdev-cv-2025.pdf`)
+
+Notas importantes
+
+- El botón "Ver CV" abre `public/files/sebasdev-cv-2025.pdf` en una nueva pestaña.
+- La navegación entre secciones combina rutas y desplazamiento programático (scroll) para que los enlaces y las páginas de proyecto funcionen correctamente.
+
+Contacto
+
+- Email: contacto@sebasdev.com
+- GitHub: https://github.com/Coriannder
+
 
