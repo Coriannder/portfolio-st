@@ -8,6 +8,9 @@ export const Main = ({children}) => {
     const navigate = useNavigate()
     const observerRef = useRef(null)
     const lastSectionRef = useRef('')
+    // Flag used to ignore IntersectionObserver callbacks while we perform
+    // programmatic pathname-driven jumps (prevents transient flips to other sections)
+    const programmaticScrollRef = useRef(false)
 
     useEffect(() => {
         // Soporta requests programáticas: location.state.scrollTo may indicar la sección a scrollear
@@ -54,7 +57,14 @@ export const Main = ({children}) => {
         const target = pathToSection[location.pathname]
         if (!target) return
 
-        // small delay to allow Main's children to render
+        // IMMEDIATELY scroll to top to prevent flash of wrong section during mount
+        window.scrollTo({ top: 0, behavior: 'auto' })
+
+        // Set a short guard so the observer doesn't react while we perform
+        // the programmatic jump to the target section.
+        programmaticScrollRef.current = true
+
+        // Small delay to allow Main's children to render
         const t = setTimeout(() => {
             const el = document.getElementById(target) || document.querySelector(`.${target}`)
             if (el) {
@@ -62,6 +72,17 @@ export const Main = ({children}) => {
                 const top = el.getBoundingClientRect().top + window.scrollY
                 window.scrollTo({ top, behavior: 'auto' })
             }
+            // Reconnect observer if it was disconnected and keep suspended briefly to stabilize
+            if (observerRef.current && typeof window !== 'undefined' && window.__mainObserver) {
+                const sections = [
+                    document.querySelector('.home__section'),
+                    document.querySelector('.about__section'),
+                    document.querySelector('.projects__section'),
+                    document.querySelector('.contact__section')
+                ].filter(Boolean)
+                sections.forEach(s => observerRef.current.observe(s))
+            }
+            setTimeout(() => { programmaticScrollRef.current = false }, 400)
         }, 50)
 
         return () => clearTimeout(t)
@@ -87,6 +108,9 @@ export const Main = ({children}) => {
         }
 
         observerRef.current = new IntersectionObserver((entries) => {
+            // If we're currently performing a programmatic jump, ignore observer callbacks.
+            if (programmaticScrollRef.current) return
+
             entries.forEach(entry => {
                 if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
                     const cls = Array.from(entry.target.classList).find(c => c.endsWith('__section'))
@@ -100,13 +124,21 @@ export const Main = ({children}) => {
                 }
             })
         }, options)
-
+        
+        // Store observer globally so ProjectDetail can disconnect it before navigation
+        if (typeof window !== 'undefined') {
+            window.__mainObserver = observerRef.current
+        }
+        
         sections.forEach(s => observerRef.current.observe(s))
 
         return () => {
             if (observerRef.current) {
                 observerRef.current.disconnect()
                 observerRef.current = null
+            }
+            if (typeof window !== 'undefined') {
+                window.__mainObserver = null
             }
         }
     }, [navigate])

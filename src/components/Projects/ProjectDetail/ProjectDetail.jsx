@@ -240,7 +240,16 @@ const ProjectDetail = () => {
     // animation without changing the Projects animation implementation.
     const NAV_DELAY = 130 // ms — tuned small so overlap feels natural
     setTimeout(() => {
-      navigate('/', { state: { scrollToProjects: 'instant' } })
+      // Disconnect the observer BEFORE navigation to prevent it from detecting
+      // intermediate sections (e.g., contact) while the page is navigating/mounting.
+      // Main will reconnect it after the programmatic jump completes.
+      try {
+        if (window.__mainObserver) {
+          window.__mainObserver.disconnect()
+        }
+      } catch (e) {}
+
+      navigate('/projects')
     }, NAV_DELAY)
   }
 
