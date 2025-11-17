@@ -8,7 +8,7 @@ import { ViewCVButton } from './ViewCVButton/ViewCVButton'
 
 export const About = () => {
 
-    console.log(about)
+    //console.log(about)
 
     const contextValue = useContext(CursorContext)
 

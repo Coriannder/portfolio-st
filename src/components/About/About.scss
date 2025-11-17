@@ -19,14 +19,14 @@
         align-items: end;
         max-width: 1200px;
         width: 90%;
-        margin-top: 480px;
+        //margin-top: 480px;
         overflow-x: hidden;
 
         @include mobile {
             margin-top: 400px;
         }
         @include tablet {
-            margin-top: 380px;
+            margin-top: 310px;
             margin-bottom: 100px;
         }
     }
