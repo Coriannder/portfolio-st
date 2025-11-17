@@ -27,12 +27,12 @@
 
 	&__media {
 		aspect-ratio: 16/9;
+		background-position: center;
 
 		@include tablet {
 			min-width: 100%;
 			aspect-ratio: 16/4.5;
 			background-size: cover;
-			background-position: center;
 		}
 	}
 
@@ -141,18 +141,20 @@
 
 	/* ===== Hover for featured card (desktop only) ===== */
 	@media (hover: hover) and (pointer: fine) {
-		.card--featured {
+		.card {
+			&--featured{
 			transition: transform .15s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
 			will-change: transform, box-shadow;
 		}
 
-		.card--featured:hover,
-		.card--featured:focus-visible {
+		&--featured:hover,
+		&--featured:focus-visible {
 				/* avoid scaling the whole card (which can make text render blurry)
 				   keep only a subtle lift + tonal glow */
 				transform: translateY(-3px) translateZ(0);
 				box-shadow: /* 0 20px 6px rgba(0, 0, 0, 0.30), */ inset 0 8px 36px rgba($primary, 0.16);
 			}
+		}
 	}
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,26 +162,24 @@
     transition: none !important;
   }
 }
-
 /* Fallback: some touchscreen laptops report no primary hover but DO have a mouse -
    use any-hover to detect if any input can hover (covers hybrid devices). */
 @media (any-hover: hover) {
-  .card--featured {
-    transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
-    will-change: transform, box-shadow;
-  }
+	.card {
+		&--featured {
+			transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+			will-change: transform, box-shadow;
+		}
 
-	.card--featured:hover,
-	.card--featured:focus-visible {
-		/* subtle lift without scaling to preserve text clarity */
-		transform: translateY(-4px) translateZ(0);
-		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+		&--featured:hover,
+		&--featured:focus-visible {
+			/* subtle lift without scaling to preserve text clarity */
+			transform: translateY(-4px) translateZ(0);
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+		}
 	}
 }
 
-/* Fallback: use .has-mouse (set by runtime JS) for hybrid devices that don't
-   report hover/any-hover correctly. This lets us enable hover when a physical
-   mouse is actually used. */
 .has-mouse .card--featured {
   transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
   will-change: transform, box-shadow;
@@ -188,7 +188,7 @@
 .has-mouse .card--featured:hover,
 .has-mouse .card--featured:focus-visible {
 	transform: translateY(-4px) translateZ(0);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
 }
 
 /* Improve text rendering when transforms are applied */
