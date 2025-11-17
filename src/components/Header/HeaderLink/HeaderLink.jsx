@@ -35,7 +35,7 @@ export const HeaderLink = ( {to , title , offset} ) => {
             if (location.pathname === targetPath) {
                 navigate(location.pathname, { state: { scrollTo: to, scrollToProjects: 'instant' } })
             } else {
-                navigate('/', { state: { scrollTo: to, scrollToProjects: 'instant' } })
+                navigate(targetPath, { state: { scrollTo: to, scrollToProjects: 'instant' } })
             }
         } catch (err) {
             // ignore navigation errors
