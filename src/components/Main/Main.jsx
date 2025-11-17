@@ -57,9 +57,6 @@ export const Main = ({children}) => {
         const target = pathToSection[location.pathname]
         if (!target) return
 
-        // IMMEDIATELY scroll to top to prevent flash of wrong section during mount
-        window.scrollTo({ top: 0, behavior: 'auto' })
-
         // Set a short guard so the observer doesn't react while we perform
         // the programmatic jump to the target section.
         programmaticScrollRef.current = true
