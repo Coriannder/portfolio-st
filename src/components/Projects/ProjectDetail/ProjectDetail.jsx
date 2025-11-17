@@ -226,6 +226,9 @@ const ProjectDetail = () => {
     : { x: -(window?.innerWidth || 1000), opacity: 0 }
 
   const handleFabClick = async () => {
+    // Scroll to top FIRST to prevent observer from seeing Contact section when Main mounts
+    window.scrollTo({ top: 0, behavior: 'auto' })
+    
     // Start the exit animation immediately but don't wait for it to finish.
     // This allows the Projects entry animation (on the main page) to begin earlier
     // and overlap, improving perceived fluidity. We still navigate after a short

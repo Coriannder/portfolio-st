@@ -17,6 +17,13 @@ export const HeaderLink = ( {to , title , offset} ) => {
     const handleClick = (e) => {
         e.preventDefault()
         e.stopPropagation()
+        
+        // If navigating from ProjectDetail route, scroll to top first to prevent flash
+        const isProjectDetailRoute = location.pathname.startsWith('/projects/') && location.pathname !== '/projects'
+        if (isProjectDetailRoute) {
+            window.scrollTo({ top: 0, behavior: 'auto' })
+        }
+        
         // Determine the pathname that normally corresponds to this section.
         const sectionPathMap = {
             'home__section': '/',
