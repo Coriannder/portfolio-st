@@ -1,3 +1,59 @@
 
 $pinkMiami: #F5B6CD;
+$border-card: #F5B6CD;
+$shadow-card-light: #cf9aac88;
+
+$pink-button: linear-gradient(135deg, #F5B6CD, #000000);
 $blackLetter: #2b2b2b;
+
+
+$card-background: linear-gradient(90deg, #F5B6CD, #a35f8f,  #c468cc, #664ed3);
+
+// === Nuevas variables para el Card Glassmorphism ===
+
+// Color de texto principal en fondo oscuro
+$text-light: #f5f5f5;
+
+// Acento principal (usado en bordes, links y efectos hover)
+$primary: #38bdf8; // Azul cian suave (puede reemplazarse por el que uses en botones o highlights)
+
+// Fondo de superficie oscura (para blur/transparencia)
+$surface-dark: rgba(255, 255, 255, 0.05);
+
+// Fondo de superficie clara (si usás modo claro o hover invertido)
+$surface-light: rgba(255, 255, 255, 0.1);
+
+// Color para sombras sutiles
+$shadow-dark: rgba(0, 0, 0, 0.35);
+
+// Color de borde translúcido (glassmorphism base)
+$border-glass: rgba(255, 255, 255, 0.1);
+
+// Color de borde en hover (ligeramente más fuerte)
+$border-glass-strong: rgba(255, 255, 255, 0.25);
+
+// ======== Carousel & Glassmorphism tokens ========
+
+// Color de texto principal sobre fondo oscuro
+$text-light: #f5f5f5;
+
+// Acento principal (azul cian, usá el mismo de tu paleta)
+$primary: #38bdf8;
+
+// Derivados del acento (para hover, focus, etc.)
+$primary-hover-bg: rgba($primary, 0.12);
+$primary-border: rgba($primary, 0.4);
+$primary-focus-ring: rgba($primary, 0.5);
+$primary-light-bg: rgba($primary, 0.08);
+
+// Colores base para botones oscuros
+$btn-bg: rgba($text-light, 0.06);
+$btn-border: rgba($text-light, 0.12);
+$btn-hover-bg: $primary-hover-bg;
+$btn-hover-border: $primary-border;
+$btn-focus-ring: $primary-focus-ring;
+
+// Fondo translúcido (para glassmorphism)
+$surface-dark: rgba(255, 255, 255, 0.05);
+$border-dark: rgba(255, 255, 255, 0.1);
+

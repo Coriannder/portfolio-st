@@ -1,36 +1,67 @@
 import './index.scss'
 
+import { useEffect } from 'react'
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
 import { Home} from './components/Home/Home';
 import { About } from './components/About/About';
-import { Projects } from './components/Projects/Projects';
 import { Contact } from './components/Contact/Contact';
 import { BackgroundFigure } from './components/BackgroundFigure/BackgroundFigure';
-
-import { BrowserRouter as Router } from "react-router-dom";
-//import { Cursor } from './components/Cursor/Cursor';
+import { Projects } from './components/Projects/Projects';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProjectDetail from './components/Projects/ProjectDetail/ProjectDetail';
 import { CursorProvider } from './Context/CursorContext';
 
 
 function App() {
 
+	// Add a lightweight runtime detection for hybrid (touch+mouse) laptops
+	// Some Windows laptops report no primary hover; when the user moves a mouse
+	// we add `has-mouse` to <body> so CSS can target hover styles safely.
+	useEffect(() => {
+		if (typeof window === 'undefined' || !document || !document.body) return;
 
-  return (
+		const onPointerMove = (e) => {
+			// pointerType 'mouse' indicates a real mouse is active
+			if (e && e.pointerType === 'mouse') {
+				document.body.classList.add('has-mouse');
+			}
+		};
 
-    <Router>
-		<CursorProvider>
-			<Header/>
-			<Main>
-				<Home/>
-				<About/>
-				<Projects/>
-				<Contact/>
-			</Main>
-			<BackgroundFigure/>
-		</CursorProvider>
-    </Router>
-  );
+		const onPointerDown = (e) => {
+			// if the user touches the screen, remove the class to avoid accidental hover
+			if (e && e.pointerType === 'touch') {
+				document.body.classList.remove('has-mouse');
+			}
+		};
+
+		window.addEventListener('pointermove', onPointerMove, { passive: true });
+		window.addEventListener('pointerdown', onPointerDown, { passive: true });
+
+		return () => {
+			window.removeEventListener('pointermove', onPointerMove);
+			window.removeEventListener('pointerdown', onPointerDown);
+		};
+	}, []);
+
+	return (
+		<Router>
+			<CursorProvider>
+				<Header/>
+				<Routes>
+					<Route path="/projects/:identifier" element={<Main><ProjectDetail/></Main>} />
+					<Route path="/*" element={
+						<Main>
+							<Home/>
+							<About/>
+							<Projects/>
+							<Contact/>
+						</Main>
+					} />
+				</Routes>
+				<BackgroundFigure/>
+			</CursorProvider>
+		</Router>
+		);
 }
 export default App;
-

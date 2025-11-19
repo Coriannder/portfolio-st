@@ -1,0 +1,83 @@
+@import '../../../color.scss';
+@import '../../MediaQueries.scss';
+
+
+.carousel {
+
+    width: 100%;
+    min-height: 60vh;
+    position: relative;
+    align-items: center;
+
+    @include tablet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__viewport {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        position: relative;
+        height: 595px;
+        overflow: hidden;
+
+        @include tablet {
+            overflow: visible;
+            height: auto;
+            width: 90%;
+        }
+    }
+
+    &__card {
+
+        &--preview {
+            display: none;
+
+
+            @include tablet {
+                display: block;
+                filter: blur(0.8px);
+                opacity: 0.8;
+            }
+        }
+
+        &--center {
+            position: absolute;
+            justify-self: anchor-center;
+
+            /* allow vertical page scrolling while still receiving horizontal pointer moves
+               so we can detect horizontal swipes without blocking scroll */
+            touch-action: pan-y;
+
+
+            @include tablet {
+                transform: scale(1.6);
+                z-index: 10;
+            }
+        }
+    }
+
+    &__nav {
+        position: absolute;
+       // background-color: violet;
+       // width: 100%;
+        width: 800px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+        @include large{
+            //max-width: 700px;
+        }
+
+
+    }
+
+    /* Dots container styles moved to Dots.scss */
+
+    /* On larger screens place dots above the cards and ensure they're on top */
+
+}

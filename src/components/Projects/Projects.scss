@@ -4,27 +4,28 @@
 .projects {
 
     &__section {
-        margin-top: 200px;
+        margin: 0;
+        padding-top: 100px;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
-        align-items: end;
+        align-items: start;
         z-index: 10;
         position: relative;
-        padding-bottom: 100px;
-        margin: 0;
+        padding-bottom: 40px;
         box-sizing: border-box;
         scroll-snap-align: start;
+
     }
 
     &__container {
 
         width: 90%;
+        height: 100%;
         max-width: 1200px;
         display: flex;
-        justify-content: space-between;
-        overflow-x: hidden;
+        flex-direction: column;
 
         @include mobile {
             width: 80%;
@@ -32,38 +33,39 @@
         @include tablet {
             width: 90%;
         }
-    }
-
-    &__list {
-        width: 468px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-
-        @include mobile {
-            width: 468px;
+        @include xxlarge {
+            padding-top: 70px;
         }
     }
 
     &__h2 {
+        display: flex;
+        width: fit-content;
+        justify-content: end;
         font-size: 50px;
         font-weight: 400;
-        line-height: 2;
         margin: 0;
-        border-bottom: 1px solid $pinkMiami;
+        line-height: .9;
+        text-align: end;
+        margin-bottom: 20px;
 
         @include tablet {
             font-size: 75px;
         }
     }
 
-   /*  &__body {
-        overflow-y: scroll;
-        &::-webkit-scrollbar {
-            //display: none;
+    &__carouselContainer{
+       // background-color: chartreuse;
+        //height: 40vh;
+        margin: 3rem 0 ;
+
+        @include tablet {
+            margin: 1rem 0 ;
         }
-    } */
+
+    }
+
+
 
     &__visorProjects {
         position: absolute;
@@ -78,5 +80,18 @@
         @include large {
             display: block;
         }
+    }
+
+    // Exit state used when navigating from Projects to a ProjectDetail
+    &__section.projects--exit-right {
+        transform: translateX(100%);
+        opacity: 0;
+        transition: transform 0.45s ease-in-out, opacity 0.35s ease-in-out;
+    }
+
+    &__section.projects--exit-left {
+        transform: translateX(-100%);
+        opacity: 0;
+        transition: transform 0.45s ease-in-out, opacity 0.35s ease-in-out;
     }
 }

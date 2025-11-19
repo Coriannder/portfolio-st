@@ -1,0 +1,198 @@
+@import "../../../../color.scss";
+@import "../../../MediaQueries.scss";
+
+
+.card {
+
+    height: 592px;
+	display: flex;
+    flex-direction: column;
+
+	max-width: 400px;
+	background-color: rgba(39, 20, 79, 0.118);
+	backdrop-filter: blur(5px);
+	border: 1px solid $border-card;
+	box-shadow: 0 4px 25px rgba(0, 0, 0, 0.45);
+	border-radius: 16px;
+	overflow: hidden;
+
+	@include tablet {
+		height: 285px;
+	}
+
+	&--center {
+		max-width: 300px;
+		min-height: 562px;
+	}
+
+	&__media {
+		aspect-ratio: 16/9;
+		background-position: center;
+
+		@include tablet {
+			min-width: 100%;
+			aspect-ratio: 16/4.5;
+			background-size: cover;
+		}
+	}
+
+	&__body {
+
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+
+		@include tablet {
+			padding: 0.5rem;
+		}
+	}
+
+	&__meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__type {
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color: rgba($text-light, 0.65);
+
+		@include tablet {
+			font-size: 0.55rem;
+		}
+	}
+
+
+	&__visibility {
+		text-transform: capitalize;
+		padding: 2px 8px;
+		border-radius: 6px;
+		white-space: nowrap;
+		&.public  { background: $primary-light-bg; color: $primary; }
+		&.private { background: rgba(255,255,255,0.08); color: rgba($text-light, 0.75); }
+
+		@include tablet {
+			font-size: 0.55rem;
+		}
+	}
+
+	&__title {
+
+		font-weight: 500;
+		line-height: 1.2;
+
+		@include tablet {
+			margin: 0 0 .35rem 0;
+			font-size: clamp(0.75rem, .5rem + .4vw, 1.2rem);
+		}
+	}
+
+	&__desc {
+		color: rgba($text-light, 0.86);
+		line-height: 1.45;
+		margin: 0 0 1rem 0;
+
+		@include tablet {
+			font-size: clamp(.6rem, .1rem + .2vw, 1rem);
+			margin-bottom: 0.5rem;
+		}
+	}
+
+    /* ===== Stack (tags) ===== */
+	&__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: .4rem;
+		margin: .5rem 0 .8rem 0;
+
+		@include tablet {
+			margin: auto 0;
+		}
+	}
+
+	&__tag {
+		line-height: 1;
+		padding: 5px 10px;
+		border-radius: 999px;
+		color: rgba($text-light, 0.7);
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(2px);
+
+		@include tablet {
+			font-size: .5rem;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		gap: 10px;
+		//margin-top: 20px;
+		flex-grow: 1;
+		align-items: flex-end;
+
+		@include tablet {
+			margin-top: 10px;
+		}
+	}
+}
+
+	/* ===== Hover for featured card (desktop only) ===== */
+	@media (hover: hover) and (pointer: fine) {
+		.card {
+			&--featured{
+			transition: transform .15s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+			will-change: transform, box-shadow;
+		}
+
+		&--featured:hover,
+		&--featured:focus-visible {
+				/* avoid scaling the whole card (which can make text render blurry)
+				   keep only a subtle lift + tonal glow */
+				transform: translateY(-3px) translateZ(0);
+				box-shadow: /* 0 20px 6px rgba(0, 0, 0, 0.30), */ inset 0 8px 36px rgba($primary, 0.16);
+			}
+		}
+	}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--featured {
+    transition: none !important;
+  }
+}
+/* Fallback: some touchscreen laptops report no primary hover but DO have a mouse -
+   use any-hover to detect if any input can hover (covers hybrid devices). */
+@media (any-hover: hover) {
+	.card {
+		&--featured {
+			transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+			will-change: transform, box-shadow;
+		}
+
+		&--featured:hover,
+		&--featured:focus-visible {
+			/* subtle lift without scaling to preserve text clarity */
+			transform: translateY(-4px) translateZ(0);
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+		}
+	}
+}
+
+.has-mouse .card--featured {
+  transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+  will-change: transform, box-shadow;
+}
+
+.has-mouse .card--featured:hover,
+.has-mouse .card--featured:focus-visible {
+	transform: translateY(-4px) translateZ(0);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+}
+
+/* Improve text rendering when transforms are applied */
+.card__body, .card__title, .card__tags, .card__desc {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}

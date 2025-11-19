@@ -1,8 +1,9 @@
 import './HeaderLink.scss'
 
-import { Link } from 'react-scroll'
+// route navigation: we'll always navigate to `/` and let Main handle the scroll/jump
 import { motion } from 'framer-motion';
 import { useState , useContext } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { CursorContext } from '../../../Context/CursorContext'
 
 
@@ -10,12 +11,52 @@ export const HeaderLink = ( {to , title , offset} ) => {
 
     const [hover, setHover] = useState(false)
     const contextValue = useContext(CursorContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const handleClick = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        
+        // If navigating from ProjectDetail route, scroll to top first to prevent flash
+        const isProjectDetailRoute = location.pathname.startsWith('/projects/') && location.pathname !== '/projects'
+        if (isProjectDetailRoute) {
+            window.scrollTo({ top: 0, behavior: 'auto' })
+        }
+        
+        // Determine the pathname that normally corresponds to this section.
+        const sectionPathMap = {
+            'home__section': '/',
+            'about__section': '/about',
+            'projects__section': '/projects',
+            'contact__section': '/contact'
+        }
+
+        const targetPath = sectionPathMap[to] || '/'
+
+        // If we're already on the target pathname, navigate to the same pathname
+        // but include the scroll state so Main handles the instant jump without
+        // switching to `/` (this avoids jumping back to root when clicking the
+        // currently active section link).
+        try {
+            if (location.pathname === targetPath) {
+                navigate(location.pathname, { state: { scrollTo: to, scrollToProjects: 'instant' } })
+            } else {
+                navigate(targetPath, { state: { scrollTo: to, scrollToProjects: 'instant' } })
+            }
+        } catch (err) {
+            // ignore navigation errors
+        }
+    }
 
     return(
         <Link
-            className={'headerLink__link'} to={to} spy={true} smooth={'easeOutQuint'} offset={offset || 50} duration={30}
+            to="/"
+            className={'headerLink__link'}
+            onClick={handleClick}
             onMouseEnter={() => setHover(true)} onMouseLeave={()=> setHover(false)}
             onMouseOver={ () => contextValue.overTag('link') } onMouseOut={ contextValue.outTag}
+            onPointerDown={(e) => e.stopPropagation()}
         >
             {title}
             <motion.div
@@ -25,7 +66,8 @@ export const HeaderLink = ( {to , title , offset} ) => {
                 transition={{duration: .12, easings: 'spring'}}
             />
         </Link>
+
     )
 
-    }
+}
 

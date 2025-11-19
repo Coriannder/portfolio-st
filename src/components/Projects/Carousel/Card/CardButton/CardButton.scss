@@ -1,0 +1,60 @@
+@import '../../../../../color.scss';
+@import '../../../../MediaQueries.scss';
+
+.cardButton {
+    &__link{
+        padding: .2rem .5rem;
+        border: 1px solid $pinkMiami;
+        //padding: 4px 15px 6px 15px;
+        //margin-left: 15px;
+        font-size: 1rem;
+        font-weight: 400;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        color: $pinkMiami;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        color:$pinkMiami;
+        cursor: none;
+        width: min-content;
+
+        @include tablet {
+            font-size: .6rem;
+
+        }
+
+        &--disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            cursor: not-allowed;
+            border-color: rgba($pinkMiami, 0.45);
+            color: rgba($pinkMiami, 0.6);
+        }
+
+
+
+         &--background {
+            position: absolute;
+            left: 0;
+            background-color: #aa8da0ad;
+            height: 100%;
+            width: 80%;
+            //transform: none;
+            //border-radius: 15px;
+            border: 1px solid aa8da0ad;
+            z-index: -10;
+            cursor: none;
+            right: 100px;
+            }
+
+
+
+    }
+
+   
+}
+
+
+
