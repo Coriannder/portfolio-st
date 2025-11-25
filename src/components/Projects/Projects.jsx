@@ -1,18 +1,11 @@
-import projectsData from '../../json/newProject.json'
-
-
 import './Projects.scss'
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
 import { CursorContext } from '../../Context/CursorContext'
 import { Carousel } from './Carousel/Carousel'
-import { Card } from './Carousel/Card/Card'
 
 export const Projects = () => {
         const contextValue = useContext(CursorContext)
-
-        const items = projectsData
-
 
     return (
         <div id="projects__section" className="projects__section">

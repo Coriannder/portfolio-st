@@ -3,7 +3,7 @@ import './CardButton.scss'
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import { useContext, useState } from "react"
-import { CursorContext, CursorProvider } from '../../../../../Context/CursorContext'
+import { CursorContext } from '../../../../../Context/CursorContext'
 
 export const CardButton = ( {to, title, blank = true, disabled = false} ) => {
 

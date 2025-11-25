@@ -14,21 +14,7 @@ export const Carousel = () => {
 	const [activeIndex, setActiveIndex] = useState(items.findIndex(p => p.featured) !== -1 ? items.findIndex(p => p.featured): 0)
 	const [direction, setDirection] = useState(0)
 
-	// detect mobile (match CSS breakpoint) so we can adjust center scale on small screens
-	const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false)
-
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-		const mq = window.matchMedia('(max-width: 767px)')
-		const handler = (e) => setIsMobile(e.matches)
-		if (mq.addEventListener) mq.addEventListener('change', handler)
-		else mq.addListener(handler)
-
-		return () => {
-			if (mq.removeEventListener) mq.removeEventListener('change', handler)
-			else mq.removeListener(handler)
-		}
-	}, [])
+	// (mobile breakpoint detection removed — not used currently)
 
 	// 3) Helpers para wrap-around
 	const mod = (n, m) => ((n % m) + m) % m
@@ -66,29 +52,13 @@ export const Carousel = () => {
 	const cursorContext = useContext(CursorContext)
 
 	/* ===== Autoplay (respect prefers-reduced-motion and hybrid devices) ===== */
-	const AUTOPLAY_INTERVAL = 5000
 	const AUTOPLAY_RESUME_DELAY = 3000
 
 	const autoplayRef = useRef(null)
 	const resumeTimeoutRef = useRef(null)
 	const isPausedRef = useRef(false)
 
-	const canAutoplay = () => {
-		if (typeof window === 'undefined') return false
-		if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-		const hasHoverFine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches
-		const hasMouseClass = typeof document !== 'undefined' && document.body.classList.contains('has-mouse')
-		return hasHoverFine || hasMouseClass
-	}
 
-	const startAutoplay = () => {
-		if (!canAutoplay()) return
-		if (autoplayRef.current) return
-		autoplayRef.current = setInterval(() => {
-			setDirection(-1)
-			setActiveIndex(i => mod(i + 1, items.length))
-		}, AUTOPLAY_INTERVAL)
-	}
 
 	const stopAutoplay = () => {
 		if (autoplayRef.current) {
@@ -103,7 +73,7 @@ export const Carousel = () => {
 		if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
 		resumeTimeoutRef.current = setTimeout(() => {
 			isPausedRef.current = false
-			//startAutoplay()
+			// autoplay resume intentionally left disabled
 		}, AUTOPLAY_RESUME_DELAY)
 	}
 
@@ -157,7 +127,7 @@ const handlePointerDown = (e) => {
 	swipe.current.isSwiping = false
 	swipe.current.moved = 0
 	swipe.current.skipClick = false
-	try { e.currentTarget.setPointerCapture(e.pointerId) } catch (err) {}
+	try { e.currentTarget.setPointerCapture(e.pointerId) } catch (err) { console.debug(err) }
 }
 
 const handlePointerMove = (e) => {
@@ -194,7 +164,7 @@ const handlePointerUp = (e) => {
 	}
 	swipe.current.pointerId = null
 	// release capture
-	try { e.currentTarget.releasePointerCapture(e.pointerId) } catch (err) {}
+	try { e.currentTarget.releasePointerCapture(e.pointerId) } catch (err) { console.debug(err) }
 	// small timeout before allowing clicks again
 	setTimeout(() => { swipe.current.skipClick = false }, 50)
 }

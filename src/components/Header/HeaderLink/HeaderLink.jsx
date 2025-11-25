@@ -7,7 +7,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { CursorContext } from '../../../Context/CursorContext'
 
 
-export const HeaderLink = ( {to , title , offset} ) => {
+export const HeaderLink = ( { to, title } ) => {
 
     const [hover, setHover] = useState(false)
     const contextValue = useContext(CursorContext)

@@ -1,12 +1,10 @@
 import './Contact.scss'
-import { cubicBezier, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ContactLink } from './ContactLink/ContactLink'
 import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 import { ImMail } from "react-icons/im";
 
 export const Contact = () => {
-
-    const easing = cubicBezier(.35,.17,.3,.86)
 
     return(
         <section className='contact__section'>
@@ -46,9 +44,9 @@ export const Contact = () => {
                     transition= {{ duration: .8, type: "spring", delay: .7}}
                     //viewport={{ once: true }}
                 >
-                    <ContactLink title={'email'} to={'mailto:contacto@sebasdev.com'} children={<ImMail/>}></ContactLink>
-                    <ContactLink title={'linkedin'} to={'https://www.linkedin.com/in/sebastian-taboada-1b96a956/'} children={<FaLinkedin/>}/>
-                    <ContactLink title={'github'} to={'https://github.com/Coriannder'} children={<FaGithubSquare/>}/>
+                    <ContactLink title={'email'} to={'mailto:contacto@sebasdev.com'}><ImMail/></ContactLink>
+                    <ContactLink title={'linkedin'} to={'https://www.linkedin.com/in/sebastian-taboada-1b96a956/'}><FaLinkedin/></ContactLink>
+                    <ContactLink title={'github'} to={'https://github.com/Coriannder'}><FaGithubSquare/></ContactLink>
                 </motion.div>
             </div>
         </section>

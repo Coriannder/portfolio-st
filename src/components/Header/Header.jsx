@@ -2,7 +2,7 @@ import './Header.scss';
 
 import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import { CursorContext } from '../../Context/CursorContext';
 import { HeaderLink } from './HeaderLink/HeaderLink';
 
@@ -17,8 +17,8 @@ export const Header = () => {
     const [hover, setHover] = useState(false)
 
 
-    let disapear
-
+    // timeout id for delayed scrollDirection changes (not stored)
+    
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -36,15 +36,15 @@ export const Header = () => {
 
 
 
-    const handleScroll = () => {
+    const handleScroll = useCallback(() => {
         if(window.scrollY > lastScrollPosition){
             setScrollDirection('down')
         } else {
-        setScrollDirection('up')
-        disapear = setTimeout( () => setScrollDirection( 'down') , 2500)
+            setScrollDirection('up')
+            setTimeout(() => setScrollDirection('down'), 2500)
         }
         setLastScrollPosition(window.scrollY)
-    }
+    }, [lastScrollPosition])
 
     const variants = {
 
@@ -67,7 +67,7 @@ export const Header = () => {
         return () => {
             window.removeEventListener('scroll' , handleScroll)
         }
-    },[lastScrollPosition])
+    },[lastScrollPosition, handleScroll])
 
    
     return (

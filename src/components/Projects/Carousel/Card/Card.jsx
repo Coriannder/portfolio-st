@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import './Card.scss';
 import { CardButton } from './CardButton/CardButton';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion'
 
 export const Card = ({ data, isActive, revealActive, revealIndex }) => {
@@ -24,18 +22,7 @@ export const Card = ({ data, isActive, revealActive, revealIndex }) => {
 		visibility,
 	} = data;
 
-		const slugify = (s) =>
-			s
-				? s
-						.toString()
-						.toLowerCase()
-						.replace(/[^\u0000-\u007F]/g, '')
-						.replace(/[^a-z0-9\s-]/g, '')
-						.trim()
-						.replace(/\s+/g, '-')
-				: '';
-
-		const idOrSlug = data.id || slugify(title);
+		// slugify removed from Card: ProjectDetail uses its own slugify implementation
 
 	return (
 		<div className={`card ${isActive ? 'card--featured' : 'card--preview'}`}>

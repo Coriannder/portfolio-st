@@ -1,8 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
-import { scroller } from 'react-scroll';
 import './ProjectDetail.scss';
 import ReactMarkdown from 'react-markdown';
 import { motion, useAnimation } from 'framer-motion';
@@ -16,6 +15,8 @@ const ProjectDetail = () => {
   const [toc, setToc] = useState([]);
   const mountedRef = useRef(true);
   const controls = useAnimation();
+  const location = useLocation();
+  const enterFrom = location.state?.enterFrom;
 
   const fetchReadme = async (id) => {
     if (!id) return;
@@ -70,12 +71,12 @@ const ProjectDetail = () => {
     String(str)
       .toLowerCase()
       .trim()
-      .replace(/[`~!@#$%^&*()_=+\[\]{}\\|;:'",.<>/?]+/g, '')
+      .replace(/[`~!@#$%^&*()_=+[\]{}\\|;:'",.<>/?]+/g, '')
       .replace(/\s+/g, '-')
       .replace(/--+/g, '-');
 
   // Parse headings from raw markdown to build a TOC (fast and avoids extra deps)
-  const parseHeadings = (md) => {
+  const parseHeadings = useCallback((md) => {
     if (!md) return [];
     const lines = md.split('\n');
     const headings = [];
@@ -89,7 +90,7 @@ const ProjectDetail = () => {
       }
     }
     return headings;
-  };
+  }, []);
 
   // When the markdown changes, extract TOC
   useEffect(() => {
@@ -99,7 +100,17 @@ const ProjectDetail = () => {
     }
     const headings = parseHeadings(readmeMd);
     setToc(headings);
-  }, [readmeMd]);
+  }, [readmeMd, parseHeadings]);
+
+  useEffect(() => {
+    // start entry animation
+    controls.start('visible').catch(() => {})
+  }, [controls])
+
+  // Default to entering from the left for coherence with carousel exit
+  const initialAnim = enterFrom === 'right'
+    ? { x: window?.innerWidth || 1000, opacity: 0 }
+    : { x: -(window?.innerWidth || 1000), opacity: 0 }
 
   if (!identifier) return null;
 
@@ -213,18 +224,6 @@ const ProjectDetail = () => {
     tap: { scale: 0.95 }
   };
 
-  useEffect(() => {
-    // start entry animation
-    controls.start('visible').catch(() => {})
-  }, [controls])
-
-  const location = useLocation()
-  const enterFrom = location.state?.enterFrom
-  // Default to entering from the left for coherence with carousel exit
-  const initialAnim = enterFrom === 'right'
-    ? { x: window?.innerWidth || 1000, opacity: 0 }
-    : { x: -(window?.innerWidth || 1000), opacity: 0 }
-
   const handleFabClick = async () => {
     // Start the exit animation immediately but don't wait for it to finish.
     // This allows the Projects entry animation (on the main page) to begin earlier
@@ -331,22 +330,22 @@ const ProjectDetail = () => {
               >
                 <ReactMarkdown
                   components={{
-                    h1: ({ node, ...props }) => {
+                    h1: ({ ...props }) => {
                       const text = String(props.children)?.replace(/<[^>]+>/g, '') || '';
                       const id = slugify(text);
                       return <h1 id={id} {...props} />;
                     },
-                    h2: ({ node, ...props }) => {
+                    h2: ({ ...props }) => {
                       const text = String(props.children)?.replace(/<[^>]+>/g, '') || '';
                       const id = slugify(text);
                       return <h2 id={id} {...props} />;
                     },
-                    h3: ({ node, ...props }) => {
+                    h3: ({ ...props }) => {
                       const text = String(props.children)?.replace(/<[^>]+>/g, '') || '';
                       const id = slugify(text);
                       return <h3 id={id} {...props} />;
                     },
-                    h4: ({ node, ...props }) => {
+                    h4: ({ ...props }) => {
                       const text = String(props.children)?.replace(/<[^>]+>/g, '') || '';
                       const id = slugify(text);
                       return <h4 id={id} {...props} />;
