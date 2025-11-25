@@ -88,23 +88,42 @@
 	margin-top: 1rem;
 	/* default (mobile): keep in document flow below the carousel */
 	position: static;
+		@include tablet {
+			position: absolute;
+			bottom: 8px; /* moved closer to the card */
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 100; /* ensure it's always above the card and its shadow */
+				margin-top: 0;
+				pointer-events: auto; /* ensure clickable */
+				/* capsule for contrast and larger hit area */
+				padding: 6px 12px;
+				background: rgba(0, 0, 0, 0.22);
+				border-radius: 999px;
+				box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+		}
+}
 
-	@include tablet {
-		position: absolute;
-		bottom: -30px; /* lift further above the card to avoid being visually covered by shadow */
-		left: 50%;
-		transform: translateX(-50%);
-		z-index: 100; /* ensure it's always above the card and its shadow */
-		margin-top: 0;
-		pointer-events: auto; /* ensure clickable */
-		/* capsule for contrast and larger hit area */
-		padding: 6px 12px;
-		background: rgba(0, 0, 0, 0.22);
-		border-radius: 999px;
-		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+/* If viewport height is small, avoid absolute positioning which can overlap the card.
+	 Switch the dots to static flow so they sit below the carousel and don't overlap. */
+@media (max-height: 720px) {
+	.carousel__dots {
+		position: static !important;
+		bottom: auto !important;
+		left: auto !important;
+		transform: none !important;
+		z-index: auto !important;
+		margin-top: 1rem;
+		padding: 0;
+		background: transparent;
+		box-shadow: none;
 	}
 
-    @include xxlarge {
-        bottom: 20px;
-    }
+	/* keep indicator animation but allow it to flow with the dots */
+	.carousel__dot-indicator {
+		position: relative;
+		box-shadow: none;
+		display: inline-block;
+		margin-left: 6px;
+	}
 }
