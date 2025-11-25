@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
  * @param {number} options.activeIndex
  * @param {number} options.size
  */
-export const useIndicator = ({ dotsRef, activeIndex, size = 16, debug = false } = {}) => {
+export const useIndicator = ({ dotsRef, activeIndex, size = 16 } = {}) => {
   const [indicator, setIndicator] = useState({ left: 0, top: 0, width: size })
 
   useEffect(() => {
@@ -38,14 +38,13 @@ export const useIndicator = ({ dotsRef, activeIndex, size = 16, debug = false } 
     let mo = null
     try {
       if (dotsRef && dotsRef.current && typeof MutationObserver !== 'undefined') {
-        mo = new MutationObserver((mutations) => {
-          if (debug) console.log('useIndicator: DOM mutation detected', mutations)
+        mo = new MutationObserver(() => {
           requestAnimationFrame(update)
         })
         mo.observe(dotsRef.current, { childList: true, subtree: true, attributes: true })
       }
     } catch (e) {
-      if (debug) console.warn('useIndicator: MutationObserver failed', e)
+      // ignore MutationObserver errors in older environments
     }
 
     return () => {
