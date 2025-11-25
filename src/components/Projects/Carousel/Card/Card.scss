@@ -7,22 +7,25 @@
     height: 592px;
 	display: flex;
     flex-direction: column;
-
-	max-width: 400px;
-	background-color: rgba(39, 20, 79, 0.118);
-	backdrop-filter: blur(5px);
 	border: 1px solid $border-card;
 	box-shadow: 0 4px 25px rgba(0, 0, 0, 0.45);
 	border-radius: 16px;
 	overflow: hidden;
 
 	@include tablet {
-		height: 285px;
+		height: 400px;
 	}
 
-	&--center {
-		max-width: 300px;
-		min-height: 562px;
+	&--featured {
+		max-width: 400px;
+		@include tablet {
+			max-width: 562px;
+		}
+	}
+
+	&--preview{
+		max-width: 480px;
+		height: 380px;
 	}
 
 	&__media {
@@ -38,13 +41,14 @@
 
 	&__body {
 
-		padding: 1rem;
+		padding: 1.4rem;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		background-color: rgb(36, 31, 36);
 
 		@include tablet {
-			padding: 0.5rem;
+			padding: 0.7rem;
 		}
 	}
 
@@ -56,25 +60,25 @@
 
 	&__type {
 		text-transform: uppercase;
-		letter-spacing: 0.5px;
+		letter-spacing: 0.7px;
 		color: rgba($text-light, 0.65);
 
 		@include tablet {
-			font-size: 0.55rem;
+			font-size: 0.77rem;
 		}
 	}
 
 
 	&__visibility {
 		text-transform: capitalize;
-		padding: 2px 8px;
+		padding: 2.8px 11.2px;
 		border-radius: 6px;
 		white-space: nowrap;
 		&.public  { background: $primary-light-bg; color: $primary; }
 		&.private { background: rgba(255,255,255,0.08); color: rgba($text-light, 0.75); }
 
 		@include tablet {
-			font-size: 0.55rem;
+			font-size: 0.77rem;
 		}
 	}
 
@@ -84,8 +88,8 @@
 		line-height: 1.2;
 
 		@include tablet {
-			margin: 0 0 .35rem 0;
-			font-size: clamp(0.75rem, .5rem + .4vw, 1.2rem);
+			margin: 0 0 .49rem 0;
+			font-size: 1.05rem //clamp(1.05rem, .7rem + 5.6vw, 1.2rem);
 		}
 	}
 
@@ -95,8 +99,8 @@
 		margin: 0 0 1rem 0;
 
 		@include tablet {
-			font-size: clamp(.6rem, .1rem + .2vw, 1rem);
-			margin-bottom: 0.5rem;
+			font-size: .84rem;  //clamp(.6rem, .1rem + .2vw, 1rem);
+			margin-bottom: 0.7rem;
 		}
 	}
 
@@ -104,8 +108,8 @@
 	&__tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: .4rem;
-		margin: .5rem 0 .8rem 0;
+		gap: .56rem;
+		margin: .7rem 0 1.12rem 0;
 
 		@include tablet {
 			margin: auto 0;
@@ -114,7 +118,7 @@
 
 	&__tag {
 		line-height: 1;
-		padding: 5px 10px;
+		padding: 7.1px 14.3px;
 		border-radius: 999px;
 		color: rgba($text-light, 0.7);
 		background: rgba(255, 255, 255, 0.06);
@@ -122,14 +126,13 @@
 		backdrop-filter: blur(2px);
 
 		@include tablet {
-			font-size: .5rem;
+			font-size: .7rem;
 		}
 	}
 
 	&__actions {
 		display: flex;
-		gap: 10px;
-		//margin-top: 20px;
+		gap: 14px;
 		flex-grow: 1;
 		align-items: flex-end;
 

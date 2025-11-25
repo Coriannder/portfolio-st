@@ -18,8 +18,8 @@ export const Card = ({ data, isActive, revealActive, revealIndex }) => {
 		stack,
 		type,
 		readme,
-			demoUrl,
-			codeUrl,
+		demoUrl,
+		codeUrl,
 		//featured,
 		visibility,
 	} = data;

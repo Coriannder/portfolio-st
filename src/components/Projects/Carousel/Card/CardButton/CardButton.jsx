@@ -82,7 +82,7 @@ export const CardButton = ( {to, title, blank = true, disabled = false} ) => {
                 <motion.div
                     className="cardButton__link cardButton__link--background"
                     initial={{x:-100}}
-                    animate={{x: hover? -1 : -200}}
+                    animate={{x: hover? 1 : -200}}
                     transition={{duration: .2, easings: 'spring'}}
                 />
 
