@@ -13,7 +13,7 @@ import { useRef, useEffect, useCallback } from 'react'
  * @param {boolean} options.enabled - allow autoplay (can be toggled)
  * @returns {{ start: Function, stop: Function, pauseThenResume: Function, resume: Function, isRunning: Function }}
  */
-export default function useAutoplay({ interval = 5000, resumeDelay = 3000, enabled = true } = {}) {
+export const useAutoplay = ({ interval = 5000, resumeDelay = 3000, enabled = true } = {}) => {
   const autoplayRef = useRef(null)
   const resumeTimeoutRef = useRef(null)
   const isPausedRef = useRef(false)
