@@ -21,7 +21,15 @@ export const ViewCVButton = () => {
 	}, [])
 
 	return (
-		<div
+		<motion.div
+
+		
+                    initial={{x:100, opacity:0}}
+                    whileInView={{x: 0, opacity:1 }}
+                    transition= {{ duration: .5, type: "spring", delay: .8}}
+
+
+
 			className="view-cv-button__container"
 			onMouseOver={() => contextValue.overTag && contextValue.overTag('button')}
 			onMouseOut={() => contextValue.outTag && contextValue.outTag()}
@@ -41,7 +49,7 @@ export const ViewCVButton = () => {
 
         	<div className="view-cv-button__btn view-cv-button__content"> Ver CV</div>
 
-    	</div>
+    	</motion.div>
   )
 }
 

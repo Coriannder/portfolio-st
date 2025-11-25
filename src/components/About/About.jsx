@@ -22,7 +22,6 @@ export const About = () => {
                     initial={{x: 180, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .5, type: "spring", delay: .3}}
-                    //viewport={{ once: true }}
 
                     onMouseOver={ () => contextValue.overTag('title')}
                     onMouseOut={contextValue.outTag}
@@ -35,11 +34,11 @@ export const About = () => {
                     initial={{x:100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: 1, type: "spring", delay: .5}}
-                    //viewport={{ once: true }}
                 >
                     <p>{about}</p>
-                    <ViewCVButton />
                 </motion.div>
+
+                <ViewCVButton />
 
                 <motion.div
                     className='about__img-container'
