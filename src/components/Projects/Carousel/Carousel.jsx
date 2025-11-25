@@ -14,9 +14,6 @@ export const Carousel = () => {
 	const [activeIndex, setActiveIndex] = useState(items.findIndex(p => p.featured) !== -1 ? items.findIndex(p => p.featured): 0)
 	const [direction, setDirection] = useState(0)
 
-	// prevent rapid interactions while animation runs
-	//const [isAnimating, setIsAnimating] = useState(false)
-
 	// detect mobile (match CSS breakpoint) so we can adjust center scale on small screens
 	const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false)
 
@@ -68,6 +65,56 @@ export const Carousel = () => {
 	// cursor context so dots can trigger the same cursor animation as the section title
 	const cursorContext = useContext(CursorContext)
 
+	/* ===== Autoplay (respect prefers-reduced-motion and hybrid devices) ===== */
+	const AUTOPLAY_INTERVAL = 5000
+	const AUTOPLAY_RESUME_DELAY = 3000
+
+	const autoplayRef = useRef(null)
+	const resumeTimeoutRef = useRef(null)
+	const isPausedRef = useRef(false)
+
+	const canAutoplay = () => {
+		if (typeof window === 'undefined') return false
+		if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
+		const hasHoverFine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+		const hasMouseClass = typeof document !== 'undefined' && document.body.classList.contains('has-mouse')
+		return hasHoverFine || hasMouseClass
+	}
+
+	const startAutoplay = () => {
+		if (!canAutoplay()) return
+		if (autoplayRef.current) return
+		autoplayRef.current = setInterval(() => {
+			setDirection(-1)
+			setActiveIndex(i => mod(i + 1, items.length))
+		}, AUTOPLAY_INTERVAL)
+	}
+
+	const stopAutoplay = () => {
+		if (autoplayRef.current) {
+			clearInterval(autoplayRef.current)
+			autoplayRef.current = null
+		}
+	}
+
+	const pauseThenResume = () => {
+		isPausedRef.current = true
+		stopAutoplay()
+		if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+		resumeTimeoutRef.current = setTimeout(() => {
+			isPausedRef.current = false
+			//startAutoplay()
+		}, AUTOPLAY_RESUME_DELAY)
+	}
+
+	useEffect(() => {
+		//startAutoplay()
+		return () => {
+			stopAutoplay()
+			if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+		}
+	}, [items.length])
+
 
 	// 4) Handlers de navegación
 	const goRight = () => {
@@ -79,6 +126,8 @@ export const Carousel = () => {
 				// debug measurement placeholder
     }, 50) // ajustar tiempo si hay animaciones/timeout
   })
+		// pause autoplay briefly after manual navigation
+		pauseThenResume()
 }
 
 const goLeft = () => {
@@ -89,6 +138,8 @@ const goLeft = () => {
 			// debug measurement placeholder
     }, 50)
   })
+	// pause autoplay briefly after manual navigation
+	pauseThenResume()
 }
 
 // Swipe handling for touch devices on the center card
@@ -181,6 +232,8 @@ const handleCenterClick = (e) => {
 				setDirection(1)
 			}
 			setActiveIndex(newIndex)
+			// pause autoplay briefly after manual navigation
+			pauseThenResume()
 		}
 			//setTimeout(() => setIsAnimating(false), 420)
 		//}, [activeIndex, isAnimating, items.length])
@@ -193,102 +246,113 @@ const handleCenterClick = (e) => {
 		// Conservative animation: only translate X + fade (no scale) to preserve original layout
 		const OFFSET = 380
 
-		const cardVariants = {
-			enter: (dir) => ({
-				x: -dir * OFFSET,
-				opacity: 0,
-				scale: .6,
-				transition: {
-					x: {
-						type: 'tween',
-						duration: 0.28,
-						ease: 'easeInOut'
-					},
-					opacity: {
-						duration: 0.4
-					}
+	const cardVariants = {
+		enter: (dir) => ({
+			x:-dir * OFFSET,
+			scale: 0.4,
+			//opacity: 0,
+			/* transition: {
+				x: {
+					type: 'tween',
+					duration: 0.08,
+					ease: 'easeInOut'
+				},
+				opacity: {
+					duration: 0.08
 				}
-			}),
-			center: {
-				x: 0,
-				opacity: 1,
-				scale: isMobile ? 1 : 1.4,
-				// use a tween for center to avoid any spring-like bounce when settling
-				transition: {
-					x: {
-						type: 'tween',
-						duration: 0.32,
-						ease: 'easeOut'
-					},
-					opacity: {
-						duration: 0.1
-					}
+			} */
+		}),
+		center: {
+			x: 0,
+			opacity: 1,
+			scale: 1,
+			transition: {
+				x: {
+					type: 'tween',
+					duration: 0.32,
+					ease: 'easeOut'
+				},
+				opacity: {
+					duration: 0.1
 				}
-			},
-			exit: (dir) => ({
-				x: dir * OFFSET,
-				opacity: 0,
-				scale: .45,
-				transition: {
-					x:{
-						type: 'tween',
-						duration: 0.18
-					},
-					opacity: {
-						duration: .2
-					}
+			}
+		},
+		exit: (dir) => ({
+			x: dir * OFFSET,
+			opacity: 0,
+			scale: 0.4,
+			transition: {
+				opacity: {
+					duration: .3
 				}
-			}),
-		}
-
-		// preview parallax variants (subtle movement opposite to center)
+			}
+		}),
+	}		// preview parallax variants (subtle movement opposite to center)
 		// softened: much smaller offset and subtler scale/opacity so previews don't distract
 		const PREVIEW_OFFSET = Math.round(OFFSET * 0.01)
-		const previewVariants = {
-			enter: (dir) => ({
-				x: dir > 0 ? -PREVIEW_OFFSET : PREVIEW_OFFSET,
-				opacity: 0.1,
-				scale: .9,
-				transition: {
-					x: { type: 'tween', duration: 0.28 },
-					opacity: { duration: 0.9 }}
-			}),
-			center: {
-				x: 0,
-				opacity: 0.72,
-				scale: 0.7,
-				transition: { duration: 0.28 }
-			},
-			exit: (dir) => ({
-				x: dir > 0 ? PREVIEW_OFFSET : -PREVIEW_OFFSET,
-				opacity: 0.1,
-				scale: .8,
-				transition: {
-					x: { type: 'tween', duration: .04 },
-					opacity: { duration: 0.5 }
-				}
-			}),
-		}
-
-    return (
-
-        <div className='carousel'>
+	const previewVariants = {
+		enter: (dir) => ({
+			x: dir > 0 ? -PREVIEW_OFFSET : PREVIEW_OFFSET,
+			opacity: 0.1,
+			scale: 0.2,
+			transition: {
+				x: { type: 'tween', duration: 0.28 },
+				opacity: { duration: 0.5 }}
+		}),
+		center: {
+			x: 0,
+			opacity: 0.72,
+			// no scale - dimensions handled by CSS
+			scale: 0.6,
+			transition: { duration: 0.28 }
+		},
+		exit: (dir) => ({
+			x: dir > 0 ? -PREVIEW_OFFSET : PREVIEW_OFFSET,
+			opacity: 0.2,
+			scale: 1,
+			transition: {
+				x: { type: 'tween', duration: .04 },
+				opacity: { duration: 0.5 }
+			}
+		}),
+	}
+	
+	return (
+		<div
+			className='carousel'
+			onPointerDown={() => pauseThenResume()}
+			onMouseEnter={() => stopAutoplay()}
+			//onMouseLeave={() => { if (!isPausedRef.current) startAutoplay() }}
+			onFocus={() => stopAutoplay()}
+			//onBlur={() => { if (!isPausedRef.current) startAutoplay() }}
+		>
 
 
             <div className='carousel__viewport'>
 
-				<motion.div className='carousel__card carousel__card--preview'
-					key={leftIndex}
-					custom={direction}
-					variants={previewVariants}
-					initial="enter"
-					animate="center"
-					exit="exit"
-					aria-hidden="true"
+				<motion.div
+					initial={{x:100, opacity:0}}
+                    whileInView={{x: 0, opacity:1 }}
+                    transition= {{ duration: .7, type: "spring", delay: .7}}
 				>
-					<Card data={{...items[leftIndex], isActive: false}} />
+					<motion.div className='carousel__card--preview'
+						key={leftIndex}
+						custom={direction}
+						variants={previewVariants}
+						initial="enter"
+						animate="center"
+						exit="exit"
+						aria-hidden="true"
+					>
+						<Card data={{...items[leftIndex], isActive: false}} />
+					</motion.div>
 				</motion.div>
 
+				<motion.div
+					initial={{x:0, opacity:0}}
+                    whileInView={{ opacity:1 }}
+                    transition= {{ duration: .4, type: "spring", delay: .2}}
+				>
 					<AnimatePresence initial={false} custom={direction} mode="sync">
 						<motion.div
 							key={activeIndex}
@@ -298,7 +362,7 @@ const handleCenterClick = (e) => {
 							animate="center"
 							exit="exit"
 
-							className='carousel__card carousel__card--center'
+							className='carousel__card--center'
 							aria-live="polite"
 							onPointerDown={handlePointerDown}
 							onPointerMove={handlePointerMove}
@@ -310,7 +374,14 @@ const handleCenterClick = (e) => {
 						</motion.div>
 					</AnimatePresence>
 
-				<motion.div className='carousel__card carousel__card--preview'
+				</motion.div>
+
+				<motion.div
+					initial={{x:100, opacity:0}}
+                    whileInView={{x: 0, opacity:1 }}
+                    transition= {{ duration: .7, type: "spring", delay: .77}}
+				>
+					<motion.div className='carousel__card--preview'
 					key={rightIndex}
 					custom={direction}
 					variants={previewVariants}
@@ -320,6 +391,8 @@ const handleCenterClick = (e) => {
 					aria-hidden="true"
 				>
 					<Card data={{...items[rightIndex], isActive: false}} />
+					</motion.div>
+
 				</motion.div>
 
 			</div>

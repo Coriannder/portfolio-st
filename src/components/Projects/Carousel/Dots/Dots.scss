@@ -9,10 +9,11 @@
 	border-radius: 50%;
 	background: rgba($text-light, 0.18);
 	border: none;
-	padding: 6px; /* keep a generous hit area while reducing visual dot size */
+	padding: 7px; /* keep a generous hit area while reducing visual dot size */
 	display: inline-block;
 	cursor: pointer;
 	transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+
 }
 
 .carousel__dot:focus-visible {
@@ -26,7 +27,7 @@
 .carousel__dots-inner {
 	position: relative;
 	display: inline-flex;
-	gap: 8px;
+	gap: 9px;
 	align-items: center;
 }
 
@@ -104,6 +105,6 @@
 	}
 
     @include xxlarge {
-        bottom: 40px;
+        bottom: 20px;
     }
 }

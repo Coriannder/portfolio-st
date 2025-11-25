@@ -33,6 +33,8 @@
     &__card {
 
         &--preview {
+
+
             display: none;
 
 
@@ -47,13 +49,18 @@
             position: absolute;
             justify-self: anchor-center;
 
+            //display: none;
+
+
+            //display: none;
+
             /* allow vertical page scrolling while still receiving horizontal pointer moves
                so we can detect horizontal swipes without blocking scroll */
             touch-action: pan-y;
 
 
             @include tablet {
-                transform: scale(1.6);
+                //transform: scale(1.6);
                 z-index: 10;
             }
         }
