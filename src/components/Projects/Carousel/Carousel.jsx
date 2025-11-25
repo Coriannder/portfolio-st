@@ -25,7 +25,8 @@ export const Carousel = () => {
 	// refs for moving dot indicator
 	const dotsRef = useRef(null)
 	const INDICATOR_SIZE = 16
-	const indicator = useIndicator({ dotsRef, activeIndex, size: INDICATOR_SIZE })
+	// enable debug to observe MutationObserver logs during development
+	const indicator = useIndicator({ dotsRef, activeIndex, size: INDICATOR_SIZE, debug: true })
 
 	// cursor context so dots can trigger the same cursor animation as the section title
 	const cursorContext = useContext(CursorContext)
