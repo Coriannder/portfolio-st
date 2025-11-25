@@ -226,9 +226,6 @@ const ProjectDetail = () => {
     : { x: -(window?.innerWidth || 1000), opacity: 0 }
 
   const handleFabClick = async () => {
-    // Scroll to top FIRST to prevent observer from seeing Contact section when Main mounts
-    window.scrollTo({ top: 0, behavior: 'auto' })
-    
     // Start the exit animation immediately but don't wait for it to finish.
     // This allows the Projects entry animation (on the main page) to begin earlier
     // and overlap, improving perceived fluidity. We still navigate after a short
@@ -243,16 +240,7 @@ const ProjectDetail = () => {
     // animation without changing the Projects animation implementation.
     const NAV_DELAY = 130 // ms — tuned small so overlap feels natural
     setTimeout(() => {
-      // Disconnect the observer BEFORE navigation to prevent it from detecting
-      // intermediate sections (e.g., contact) while the page is navigating/mounting.
-      // Main will reconnect it after the programmatic jump completes.
-      try {
-        if (window.__mainObserver) {
-          window.__mainObserver.disconnect()
-        }
-      } catch (e) {}
-
-      navigate('/projects')
+      navigate('/', { state: { scrollToProjects: 'instant' } })
     }, NAV_DELAY)
   }
 

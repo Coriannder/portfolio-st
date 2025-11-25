@@ -19,7 +19,7 @@ export const Projects = () => {
             <div className='projects__container'>
                 <motion.h2
                     className='projects__h2'
-                    initial={{x: 200, opacity:0}}
+                    initial={{x: 100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .5, type: "spring", delay: 0.2}}
                     //viewport={{ once: true }}
@@ -30,13 +30,11 @@ export const Projects = () => {
                 </motion.h2>
                 <motion.div
                     className='projects__carouselContainer'
-                    initial={{ x: 200, opacity: 0 }}
+                    initial={{ x: 100, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, type: 'spring', delay: 0.3 }}
-                    //viewport={{ once: true, amount: 0.35 }}
+                    transition={{ duration: .8, type: 'spring', delay: 0.6 }}
                 >
                     <Carousel />
-                    {/* <Card data={items[0]} /> */}
                 </motion.div>
             </div>
         </div>
