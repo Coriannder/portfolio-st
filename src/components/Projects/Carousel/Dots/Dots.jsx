@@ -3,7 +3,7 @@ import './Dots.scss'
 export const Dots = ({ items, activeIndex, goToIndex, dotsRef, indicator, cursorContext }) => {
     return (
         <div
-            className="carousel__dots"
+            className="dots"
             role="tablist"
             aria-label="Carousel pagination"
             onPointerEnter={() => cursorContext && cursorContext.overTag && cursorContext.overTag('title')}
@@ -11,10 +11,10 @@ export const Dots = ({ items, activeIndex, goToIndex, dotsRef, indicator, cursor
             onFocusCapture={() => cursorContext && cursorContext.overTag && cursorContext.overTag('title')}
             onBlurCapture={() => cursorContext && cursorContext.outTag && cursorContext.outTag()}
         >
-            <div ref={dotsRef} className="carousel__dots-inner">
+            <div ref={dotsRef} className="dots-inner">
                 <div
-                    className="carousel__dot-indicator"
-                    style={{ left: indicator.left + 'px', top: indicator.top + 'px', width: indicator.width + 'px', height: indicator.width + 'px' }}
+                    className="dot-indicator"
+                    style={{ left: (indicator.left ) + 'px', top: indicator.top + 'px', width: indicator.width + 'px', height: indicator.width + 'px' }}
                     aria-hidden="true"
                 />
 
@@ -23,7 +23,7 @@ export const Dots = ({ items, activeIndex, goToIndex, dotsRef, indicator, cursor
                         key={idx}
                         type="button"
                         data-idx={idx}
-                        className={`carousel__dot ${idx === activeIndex ? 'carousel__dot--active' : ''}`}
+                        className={`dot ${idx === activeIndex ? 'dot--active' : ''}`}
                         aria-label={`Go to slide ${idx + 1}`}
                         aria-current={idx === activeIndex}
                         onClick={(e) => {

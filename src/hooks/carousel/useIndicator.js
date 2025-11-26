@@ -11,6 +11,12 @@ import { useState, useEffect } from 'react'
 export const useIndicator = ({ dotsRef, activeIndex, size = 16 } = {}) => {
   const [indicator, setIndicator] = useState({ left: 0, top: 0, width: size })
 
+  // Detect Safari/iOS - they calculate getBoundingClientRect differently
+  const isSafari = typeof navigator !== 'undefined' && (
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
+    /iPad|iPhone|iPod/.test(navigator.userAgent)
+  )
+
   useEffect(() => {
     if (typeof window === 'undefined') return
 
@@ -23,7 +29,11 @@ export const useIndicator = ({ dotsRef, activeIndex, size = 16 } = {}) => {
       if (!btn) return
       const rect = btn.getBoundingClientRect()
       const containerRect = dotsRef.current.getBoundingClientRect()
-      const left = rect.left - containerRect.left + rect.width / 2 - (size / 2)
+      
+      // Safari/iOS offset correction (they handle padding differently in getBoundingClientRect)
+      const safariOffset = isSafari ? -6 : 0
+      
+      const left = rect.left - containerRect.left + rect.width / 2 - (size / 2) + safariOffset
       const top = rect.top - containerRect.top + rect.height / 2 - (size / 2)
       setIndicator({ left, top, width: size })
     }
