@@ -8,42 +8,74 @@ export const Main = ({children}) => {
     const navigate = useNavigate()
     const observerRef = useRef(null)
     const lastSectionRef = useRef('')
+    const hasScrolledRef = useRef(false)
 
     useEffect(() => {
         // Soporta requests programáticas: location.state.scrollTo may indicar la sección a scrollear
         const scrollToId = location.state?.scrollTo || (location.state?.scrollToProjects ? 'projects__section' : null)
         const instantRequested = location.state?.scrollToProjects === 'instant'
+        
         if (scrollToId) {
-            setTimeout(() => {
-                if (instantRequested) {
-                    // Instant jump to avoid revealing intermediate sections during smooth scroll
-                    const el = document.getElementById(scrollToId) || document.querySelector(`.${scrollToId}`)
-                    if (el) {
-                        const top = el.getBoundingClientRect().top + window.scrollY
-                        window.scrollTo({ top, behavior: 'auto' })
+            hasScrolledRef.current = true // Marcar que hicimos scroll programático
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+            
+            const doScroll = () => {
+                const el = document.getElementById(scrollToId) || document.querySelector(`.${scrollToId}`)
+                if (el) {
+                    const top = el.getBoundingClientRect().top + window.scrollY
+                    
+                    // iOS Safari no soporta bien { behavior: 'smooth' }
+                    // Usar el formato antiguo window.scrollTo(x, y)
+                    if (isIOS) {
+                        window.scrollTo(0, top)
+                    } else {
+                        window.scrollTo({ 
+                            top, 
+                            behavior: instantRequested ? 'auto' : 'smooth'
+                        })
                     }
-                } else {
-                    scroller.scrollTo(scrollToId, {
-                        smooth: 'easeOutQuint',
-                        offset: -300,
-                        duration: 1000
-                    })
+                    return true
                 }
-
-                // limpiar state para que no vuelva a scrollear si el usuario navega de nuevo
-                try {
-                    navigate(location.pathname, { replace: true, state: {} })
-                } catch (e) {
-                    // ignore navigation errors (defensive)
+                return false
+            }
+            
+            if (isIOS) {
+                // iOS: intentar varias veces con delays incrementales
+                let attempts = 0
+                const maxAttempts = 5
+                const tryScroll = () => {
+                    attempts++
+                    if (doScroll()) {
+                        // Éxito - limpiar state PERO mantener hasScrolledRef
+                        try {
+                            navigate(location.pathname, { replace: true, state: { __scrolled: true } })
+                        } catch (e) {}
+                    } else if (attempts < maxAttempts) {
+                        // Reintentar con más delay
+                        setTimeout(tryScroll, 100 * attempts)
+                    }
                 }
-            }, 100)
+                setTimeout(tryScroll, 100)
+            } else {
+                // Desktop: una sola vez
+                setTimeout(() => {
+                    doScroll()
+                    try {
+                        navigate(location.pathname, { replace: true, state: { __scrolled: true } })
+                    } catch (e) {}
+                }, 100)
+            }
+        } else {
+            // No hay scroll programático, resetear el flag
+            hasScrolledRef.current = false
         }
     }, [location, navigate])
 
     // If the pathname directly targets a section (e.g. /about, /projects, /contact),
     // perform an immediate jump to that section (no smooth scrolling) unless a state-driven scroll is requested.
     useEffect(() => {
-        if (location.state && (location.state.scrollTo || location.state.scrollToProjects)) return
+        if (location.state && (location.state.scrollTo || location.state.scrollToProjects || location.state.__scrolled)) return
+        if (hasScrolledRef.current) return
 
         const pathToSection = {
             '/': 'home__section',
