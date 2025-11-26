@@ -94,6 +94,12 @@
             @include xlarge {
                 width: 600px;
             }
+            color: $text-light;
+
+            strong {
+                color: $pinkMiami;
+                font-weight: 700;
+            }
         }
     }
 
