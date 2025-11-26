@@ -17,26 +17,10 @@ export const HeaderLink = ( { to, title } ) => {
     const handleClick = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        // Determine the pathname that normally corresponds to this section.
-        const sectionPathMap = {
-            'home__section': '/',
-            'about__section': '/about',
-            'projects__section': '/projects',
-            'contact__section': '/contact'
-        }
-
-        const targetPath = sectionPathMap[to] || '/'
-
-        // If we're already on the target pathname, navigate to the same pathname
-        // but include the scroll state so Main handles the instant jump without
-        // switching to `/` (this avoids jumping back to root when clicking the
-        // currently active section link).
+        
+        // Always navigate with scroll state, never rely on pathname-based scroll
         try {
-            if (location.pathname === targetPath) {
-                navigate(location.pathname, { state: { scrollTo: to, scrollToProjects: 'instant' } })
-            } else {
-                navigate('/', { state: { scrollTo: to, scrollToProjects: 'instant' } })
-            }
+            navigate('/', { state: { scrollTo: to } })
         } catch (err) {
             // ignore navigation errors
         }
