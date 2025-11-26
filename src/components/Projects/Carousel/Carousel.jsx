@@ -1,52 +1,41 @@
 // Carousel.jsx
 import './Carousel.scss'
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useEffect, useRef, useContext } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Card } from './Card/Card'
 import { motion, AnimatePresence } from 'framer-motion'
 import projectsData from '../../../json/newProject.json'
 import { CarouselButton } from './CarouselButton/CarouselButton'
 import { CursorContext } from '../../../Context/CursorContext'
 import Dots from './Dots/Dots'
+import { useAutoplay } from '../../../hooks/carousel/useAutoplay'
+import { useSwipe } from '../../../hooks/carousel/useSwipe'
+import { useCarouselState } from '../../../hooks/carousel/useCarouselState'
+import { useIndicator } from '../../../hooks/carousel/useIndicator'
 
 export const Carousel = () => {
 	const items = projectsData
+	const location = useLocation()
 
-	const [activeIndex, setActiveIndex] = useState(items.findIndex(p => p.featured) !== -1 ? items.findIndex(p => p.featured): 0)
-	const [direction, setDirection] = useState(0)
+	// Determine initial index: if returning from ProjectDetail, use that project's index
+	const getInitialIndex = () => {
+		const returnId = location.state?.returnToProjectId
+		if (returnId) {
+			const idx = items.findIndex(p => String(p.id) === String(returnId))
+			if (idx !== -1) return idx
+		}
+		// fallback: featured project or first
+		const featuredIdx = items.findIndex(p => p.featured)
+		return featuredIdx !== -1 ? featuredIdx : 0
+	}
 
-	// (mobile breakpoint detection removed — not used currently)
+	// 3) Carousel state (active index, direction, wrap-around)
+	const { activeIndex, direction, leftIndex, rightIndex, goLeft, goRight, goToIndex } = useCarouselState({ initialIndex: getInitialIndex(), length: items.length })
 
-	// 3) Helpers para wrap-around
-	const mod = (n, m) => ((n % m) + m) % m
-	const leftIndex   = mod(activeIndex - 1, items.length)
-	const rightIndex  = mod(activeIndex + 1, items.length)
-
-	// refs + state for moving dot indicator
+	// refs for moving dot indicator
 	const dotsRef = useRef(null)
 	const INDICATOR_SIZE = 16
-	const [indicator, setIndicator] = useState({ left: 0, top: 0, width: INDICATOR_SIZE })
-
-	// update indicator position/size based on activeIndex (center the circular indicator)
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-		const update = () => {
-			if (!dotsRef.current) return
-			const btn = dotsRef.current.querySelector(`button[data-idx="${activeIndex}"]`)
-			if (!btn) return
-			const rect = btn.getBoundingClientRect()
-			const containerRect = dotsRef.current.getBoundingClientRect()
-			// center the indicator on the button (horizontal + vertical)
-			const left = rect.left - containerRect.left + rect.width / 2 - (INDICATOR_SIZE / 2)
-			const top = rect.top - containerRect.top + rect.height / 2 - (INDICATOR_SIZE / 2)
-			setIndicator({ left, top, width: INDICATOR_SIZE })
-		}
-
-		// small rAF to ensure layout settled after animations
-		requestAnimationFrame(update)
-
-		window.addEventListener('resize', update)
-		return () => window.removeEventListener('resize', update)
-	}, [activeIndex, items.length])
+	const indicator = useIndicator({ dotsRef, activeIndex, size: INDICATOR_SIZE })
 
 	// cursor context so dots can trigger the same cursor animation as the section title
 	const cursorContext = useContext(CursorContext)
@@ -54,159 +43,63 @@ export const Carousel = () => {
 	/* ===== Autoplay (respect prefers-reduced-motion and hybrid devices) ===== */
 	const AUTOPLAY_RESUME_DELAY = 3000
 
-	const autoplayRef = useRef(null)
-	const resumeTimeoutRef = useRef(null)
-	const isPausedRef = useRef(false)
-
-
-
-	const stopAutoplay = () => {
-		if (autoplayRef.current) {
-			clearInterval(autoplayRef.current)
-			autoplayRef.current = null
-		}
-	}
-
-	const pauseThenResume = () => {
-		isPausedRef.current = true
-		stopAutoplay()
-		if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
-		resumeTimeoutRef.current = setTimeout(() => {
-			isPausedRef.current = false
-			// autoplay resume intentionally left disabled
-		}, AUTOPLAY_RESUME_DELAY)
-	}
+	// useAutoplay hook controls interval and pause/resume behaviour
+	const { start, stop, pauseThenResume, resume } = useAutoplay({ interval: 5000, resumeDelay: AUTOPLAY_RESUME_DELAY, enabled: true })
 
 	useEffect(() => {
-		//startAutoplay()
-		return () => {
-			stopAutoplay()
-			if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
-		}
-	}, [items.length])
+		// start autoplay with the carousel state's goRight (advances to next)
+		start(goRight)
+		return () => stop()
+	}, [start, stop, goRight])
 
 
-	// 4) Handlers de navegación
-	const goRight = () => {
-  setDirection(-1)
-  setActiveIndex(i => mod(i + 1, items.length))
-  // medir después del cambio / posible scroll programático
-  requestAnimationFrame(() => {
-    setTimeout(() => {
+	// 4) Handlers de navegación: wrap the hook actions to keep measurement and pause behavior
+	const handleGoRight = () => {
+		// use carousel state goRight (stable)
+		goRight()
+		// medir después del cambio / posible scroll programático
+		requestAnimationFrame(() => {
+			setTimeout(() => {
 				// debug measurement placeholder
-    }, 50) // ajustar tiempo si hay animaciones/timeout
-  })
+			}, 50)
+		})
 		// pause autoplay briefly after manual navigation
 		pauseThenResume()
-}
+	}
 
-const goLeft = () => {
-  setDirection(1)
-  setActiveIndex(i => mod(i - 1, items.length))
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-			// debug measurement placeholder
-    }, 50)
-  })
-	// pause autoplay briefly after manual navigation
-	pauseThenResume()
-}
+	const handleGoLeft = () => {
+		goLeft()
+		requestAnimationFrame(() => {
+			setTimeout(() => {
+				// debug measurement placeholder
+			}, 50)
+		})
+		pauseThenResume()
+	}
 
-// Swipe handling for touch devices on the center card
-const swipe = useRef({ startX: 0, startY: 0, startTime: 0, isSwiping: false, pointerId: null, moved: 0, skipClick: false })
-const SWIPE_DISTANCE = 60 // px
+// Swipe handling for touch devices on the center card — extracted to hook
+const SWIPE_DISTANCE = 30 // px (reduced for snappier responses)
 const SWIPE_TIME = 500 // ms for velocity consideration
 
-const handlePointerDown = (e) => {
-	// prefer touch/pen but also allow mouse for desktop testing (only primary button)
-	if (e.pointerType === 'mouse' && e.button !== 0) return
-	swipe.current.pointerId = e.pointerId
-	swipe.current.startX = e.clientX
-	swipe.current.startY = e.clientY
-	swipe.current.startTime = Date.now()
-	swipe.current.isSwiping = false
-	swipe.current.moved = 0
-	swipe.current.skipClick = false
-	try { e.currentTarget.setPointerCapture(e.pointerId) } catch (err) { console.debug(err) }
-}
-
-const handlePointerMove = (e) => {
-	if (swipe.current.pointerId !== e.pointerId) return
-	const dx = e.clientX - swipe.current.startX
-	const dy = e.clientY - swipe.current.startY
-	// if vertical movement is larger, treat as scroll — ignore
-	if (!swipe.current.isSwiping && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 10) {
-		// abandon swipe tracking
-		swipe.current.pointerId = null
-		return
-	}
-	if (Math.abs(dx) > 10) {
-		swipe.current.isSwiping = true
-		swipe.current.moved = dx
-		swipe.current.skipClick = true
-	}
-}
-
-const handlePointerUp = (e) => {
-	if (swipe.current.pointerId !== e.pointerId) return
-	const dx = e.clientX - swipe.current.startX
-	const dt = Date.now() - swipe.current.startTime
-	// determine swipe by distance or speed
-	const velocity = Math.abs(dx) / Math.max(dt, 1)
-	if (Math.abs(dx) > SWIPE_DISTANCE || velocity > (SWIPE_DISTANCE / SWIPE_TIME)) {
-		if (dx < 0) {
-			// swipe left -> next
-			goRight()
-		} else {
-			// swipe right -> prev
-			goLeft()
-		}
-	}
-	swipe.current.pointerId = null
-	// release capture
-	try { e.currentTarget.releasePointerCapture(e.pointerId) } catch (err) { console.debug(err) }
-	// small timeout before allowing clicks again
-	setTimeout(() => { swipe.current.skipClick = false }, 50)
-}
-
-const handlePointerCancel = (e) => {
-	if (swipe.current.pointerId !== e.pointerId) return
-	swipe.current.pointerId = null
-	swipe.current.isSwiping = false
-	swipe.current.skipClick = false
-}
+const { handlers: swipeHandlers, skipClickRef } = useSwipe({ onSwipeLeft: handleGoRight, onSwipeRight: handleGoLeft, threshold: SWIPE_DISTANCE, maxTime: SWIPE_TIME })
 
 const handleCenterClick = (e) => {
-	if (swipe.current.skipClick) {
+	if (skipClickRef.current) {
 		// prevent accidental click after swipe
 		e.preventDefault()
 		e.stopPropagation()
 		return
 	}
 	// fallback: clicking center advances
-	goRight()
+	handleGoRight()
 }
 
-		// jump to a specific index from the dots; pick direction based on shortest path
-		const goToIndex = (newIndex) => {
-			if (newIndex === activeIndex) return
-			//if (isAnimating) return
-			//setIsAnimating(true)
-			const len = items.length
-			const forwardDistance = (newIndex - activeIndex + len) % len
-			const backwardDistance = (activeIndex - newIndex + len) % len
-			// choose the shorter path; note: "advance" (visual right) uses direction -1
-			if (forwardDistance <= backwardDistance) {
-				setDirection(-1)
-			} else {
-				setDirection(1)
-			}
-			setActiveIndex(newIndex)
-			// pause autoplay briefly after manual navigation
-			pauseThenResume()
-		}
-			//setTimeout(() => setIsAnimating(false), 420)
-		//}, [activeIndex, isAnimating, items.length])
+// jump to a specific index from the dots; use goToIndex wrapper to preserve pause
+const handleGoToIndex = (newIndex) => {
+	if (newIndex === activeIndex) return
+	goToIndex(newIndex)
+	pauseThenResume()
+}
 
 
 
@@ -291,10 +184,10 @@ const handleCenterClick = (e) => {
 		<div
 			className='carousel'
 			onPointerDown={() => pauseThenResume()}
-			onMouseEnter={() => stopAutoplay()}
-			//onMouseLeave={() => { if (!isPausedRef.current) startAutoplay() }}
-			onFocus={() => stopAutoplay()}
-			//onBlur={() => { if (!isPausedRef.current) startAutoplay() }}
+			onMouseEnter={() => stop()}
+			onMouseLeave={() => resume(goRight)}
+			onFocus={() => stop()}
+			onBlur={() => resume(goRight)}
 		>
 
 
@@ -331,13 +224,16 @@ const handleCenterClick = (e) => {
 							initial="enter"
 							animate="center"
 							exit="exit"
-
 							className='carousel__card--center'
 							aria-live="polite"
-							onPointerDown={handlePointerDown}
-							onPointerMove={handlePointerMove}
-							onPointerUp={handlePointerUp}
-							onPointerCancel={handlePointerCancel}
+							onPointerDown={(e) => { pauseThenResume(); swipeHandlers.onPointerDown && swipeHandlers.onPointerDown(e); }}
+							onPointerMove={swipeHandlers.onPointerMove}
+							onPointerUp={swipeHandlers.onPointerUp}
+							onPointerCancel={swipeHandlers.onPointerCancel}
+							onMouseEnter={() => stop()}
+							onMouseLeave={() => resume(goRight)}
+							onFocus={() => stop()}
+							onBlur={() => resume(goRight)}
 							onClick={handleCenterClick}
 						>
 							<Card data={{...items[activeIndex]}} isActive={true} />
@@ -367,16 +263,16 @@ const handleCenterClick = (e) => {
 
 			</div>
 
-		<div className='carousel__nav'>
-					<CarouselButton direction="left" onClick={goLeft} ariaLabel="previous" />
-					<CarouselButton direction="right" onClick={goRight} ariaLabel="next" />
-				</div>
+			<div className='carousel__nav'>
+					<CarouselButton direction="left" onClick={handleGoLeft} ariaLabel="previous" />
+					<CarouselButton direction="right" onClick={handleGoRight} ariaLabel="next" />
+			</div>
 
 				{/* dots / pagination (moved to Dots component) */}
 				<Dots
 					items={items}
 					activeIndex={activeIndex}
-					goToIndex={goToIndex}
+					goToIndex={handleGoToIndex}
 					dotsRef={dotsRef}
 					indicator={indicator}
 					cursorContext={cursorContext}

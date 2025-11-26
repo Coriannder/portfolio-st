@@ -144,18 +144,20 @@
 
 	/* ===== Hover for featured card (desktop only) ===== */
 	@media (hover: hover) and (pointer: fine) {
-		.card {
-			&--featured{
-			transition: transform .15s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
-			will-change: transform, box-shadow;
-		}
+		@include tablet {
+			.card {
+				&--featured{
+					transition: transform .15s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+					will-change: transform, box-shadow;
+				}
 
-		&--featured:hover,
-		&--featured:focus-visible {
-				/* avoid scaling the whole card (which can make text render blurry)
-				   keep only a subtle lift + tonal glow */
-				transform: translateY(-3px) translateZ(0);
-				box-shadow: /* 0 20px 6px rgba(0, 0, 0, 0.30), */ inset 0 8px 36px rgba($primary, 0.16);
+				&--featured:hover,
+				&--featured:focus-visible {
+					/* avoid scaling the whole card (which can make text render blurry)
+					   keep only a subtle lift + tonal glow */
+					transform: translateY(-3px) translateZ(0);
+					box-shadow: /* 0 20px 6px rgba(0, 0, 0, 0.30), */ inset 0 8px 36px rgba($primary, 0.16);
+				}
 			}
 		}
 	}
@@ -168,31 +170,45 @@
 /* Fallback: some touchscreen laptops report no primary hover but DO have a mouse -
    use any-hover to detect if any input can hover (covers hybrid devices). */
 @media (any-hover: hover) {
-	.card {
-		&--featured {
+	@include tablet {
+		.card {
+			&--featured {
+				transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
+				will-change: transform, box-shadow;
+			}
+
+			&--featured:hover,
+			&--featured:focus-visible {
+				/* subtle lift without scaling to preserve text clarity */
+				transform: translateY(-4px) translateZ(0);
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+			}
+		}
+	}
+}
+
+.has-mouse {
+	@include tablet {
+		.card--featured {
 			transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
 			will-change: transform, box-shadow;
 		}
 
-		&--featured:hover,
-		&--featured:focus-visible {
-			/* subtle lift without scaling to preserve text clarity */
+		.card--featured:hover,
+		.card--featured:focus-visible {
 			transform: translateY(-4px) translateZ(0);
 			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
 		}
 	}
 }
 
-.has-mouse .card--featured {
-  transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
-  will-change: transform, box-shadow;
-}
-
-.has-mouse .card--featured:hover,
-.has-mouse .card--featured:focus-visible {
-	transform: translateY(-4px) translateZ(0);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
-}
+/* Ensure hover effects (and custom cursor) remain active on devices that report a mouse
+	 even when the viewport is narrow. The general hover rules are still gated by
+	 pointer/hover media queries, but `.has-mouse` forces the hover styling when present. */
+/* Do not force hover on narrow viewports. The `.has-mouse` variant above
+   already applies hover rules scoped to `@include tablet` to cover hybrid
+   devices; removing the unconditional rules prevents hover from appearing
+   on mobile-sized viewports even if `body.has-mouse` is present. */
 
 /* Improve text rendering when transforms are applied */
 .card__body, .card__title, .card__tags, .card__desc {

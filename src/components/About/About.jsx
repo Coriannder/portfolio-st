@@ -35,7 +35,7 @@ export const About = () => {
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: 1, type: "spring", delay: .5}}
                 >
-                    <p>{about}</p>
+                    <p dangerouslySetInnerHTML={{ __html: about }} />
                 </motion.div>
 
                 <ViewCVButton />
