@@ -225,21 +225,21 @@ const ProjectDetail = () => {
   };
 
   const handleFabClick = async () => {
-    // Start the exit animation immediately but don't wait for it to finish.
-    // This allows the Projects entry animation (on the main page) to begin earlier
-    // and overlap, improving perceived fluidity. We still navigate after a short
-    // delay so the Projects component can mount and animate normally.
+    // 1. Scroll to top FIRST to avoid Contact flash when navigating
+    window.scrollTo({ top: 0, behavior: 'auto' })
+
+    // 2. Start exit animation (don't wait for it to finish)
     try {
       controls.start({ x: -window.innerWidth, opacity: 0, transition: { duration: 0.45, ease: 'easeInOut' } })
     } catch (e) {
       // ignore animation start errors
     }
 
-    // navigate shortly after starting the animation so Projects can begin its own
-    // animation without changing the Projects animation implementation.
+    // 3. Navigate after a short delay so Projects can begin its animation
+    // Pass the project identifier so Carousel shows the same project as center card
     const NAV_DELAY = 130 // ms — tuned small so overlap feels natural
     setTimeout(() => {
-      navigate('/', { state: { scrollToProjects: 'instant' } })
+      navigate('/', { state: { scrollToProjects: 'instant', returnToProjectId: identifier } })
     }, NAV_DELAY)
   }
 

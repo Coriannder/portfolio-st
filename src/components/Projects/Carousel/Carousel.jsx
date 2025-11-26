@@ -1,6 +1,7 @@
 // Carousel.jsx
 import './Carousel.scss'
 import { useEffect, useRef, useContext } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Card } from './Card/Card'
 import { motion, AnimatePresence } from 'framer-motion'
 import projectsData from '../../../json/newProject.json'
@@ -14,13 +15,22 @@ import { useIndicator } from '../../../hooks/carousel/useIndicator'
 
 export const Carousel = () => {
 	const items = projectsData
+	const location = useLocation()
 
-
-
-	// (mobile breakpoint detection removed — not used currently)
+	// Determine initial index: if returning from ProjectDetail, use that project's index
+	const getInitialIndex = () => {
+		const returnId = location.state?.returnToProjectId
+		if (returnId) {
+			const idx = items.findIndex(p => String(p.id) === String(returnId))
+			if (idx !== -1) return idx
+		}
+		// fallback: featured project or first
+		const featuredIdx = items.findIndex(p => p.featured)
+		return featuredIdx !== -1 ? featuredIdx : 0
+	}
 
 	// 3) Carousel state (active index, direction, wrap-around)
-	const { activeIndex, direction, leftIndex, rightIndex, goLeft, goRight, goToIndex } = useCarouselState({ initialIndex: items.findIndex(p => p.featured) !== -1 ? items.findIndex(p => p.featured): 0, length: items.length })
+	const { activeIndex, direction, leftIndex, rightIndex, goLeft, goRight, goToIndex } = useCarouselState({ initialIndex: getInitialIndex(), length: items.length })
 
 	// refs for moving dot indicator
 	const dotsRef = useRef(null)
