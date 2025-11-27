@@ -38,7 +38,7 @@
 		"title": "Charada Rental - Alquiler de Utilería Audiovisual",
 		"alt": "Plataforma de alquiler de utilería para producciones audiovisuales",
 		"description": "Sitio web para alquiler de utilería audiovisual. Incluye catálogo completo de productos organizados por categorías, visualizador de imágenes y formulario de contacto integrado.",
-		"stack": ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Cloudinary"],
+		"stack": ["React", "TypeScript", "Cloudinary", "Tailwind CSS", "Framer Motion"],
 		"problem": "Productoras audiovisuales necesitaban una forma eficiente de explorar y alquilar utilería para sus producciones.",
 		"approach": "Desarrollé una SPA con React y TypeScript, implementando un catálogo dinámico con filtros por categoría, carrusel de imágenes optimizadas con Cloudinary y formulario de contacto conectado a backend.",
 		"result": "Plataforma funcional con diseño responsivo, navegación fluida y gestión optimizada de imágenes que facilita la búsqueda y alquiler de utilería.",
