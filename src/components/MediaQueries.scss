@@ -40,3 +40,9 @@
         @content
     }
 };
+
+@mixin maxHeight720 {
+    @media (max-height: 720px) {
+        @content;
+    }
+}

@@ -43,14 +43,21 @@ export const Carousel = () => {
 	/* ===== Autoplay (respect prefers-reduced-motion and hybrid devices) ===== */
 	const AUTOPLAY_RESUME_DELAY = 3000
 
+	// Detect if device is mobile/tablet (disable autoplay on touch devices)
+	const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
+	const isTablet = typeof window !== 'undefined' && window.matchMedia('(min-width: 768px) and (max-width: 991px)').matches
+	const autoplayEnabled = !isMobile && !isTablet
+
 	// useAutoplay hook controls interval and pause/resume behaviour
-	const { start, stop, pauseThenResume, resume } = useAutoplay({ interval: 5000, resumeDelay: AUTOPLAY_RESUME_DELAY, enabled: true })
+	const { start, stop, pauseThenResume, resume } = useAutoplay({ interval: 5000, resumeDelay: AUTOPLAY_RESUME_DELAY, enabled: autoplayEnabled })
 
 	useEffect(() => {
 		// start autoplay with the carousel state's goRight (advances to next)
-		start(goRight)
+		if (autoplayEnabled) {
+			start(goRight)
+		}
 		return () => stop()
-	}, [start, stop, goRight])
+	}, [start, stop, goRight, autoplayEnabled])
 
 
 	// 4) Handlers de navegación: wrap the hook actions to keep measurement and pause behavior
@@ -224,16 +231,16 @@ const handleGoToIndex = (newIndex) => {
 							initial="enter"
 							animate="center"
 							exit="exit"
-							className='carousel__card--center'
-							aria-live="polite"
-							onPointerDown={(e) => { pauseThenResume(); swipeHandlers.onPointerDown && swipeHandlers.onPointerDown(e); }}
-							onPointerMove={swipeHandlers.onPointerMove}
-							onPointerUp={swipeHandlers.onPointerUp}
-							onPointerCancel={swipeHandlers.onPointerCancel}
-							onMouseEnter={() => stop()}
-							onMouseLeave={() => resume(goRight)}
-							onFocus={() => stop()}
-							onBlur={() => resume(goRight)}
+						className='carousel__card--center'
+						aria-live="polite"
+						onPointerDown={(e) => { pauseThenResume(); swipeHandlers.onPointerDown && swipeHandlers.onPointerDown(e); }}
+						onPointerMove={swipeHandlers.onPointerMove}
+						onPointerUp={swipeHandlers.onPointerUp}
+						onPointerCancel={swipeHandlers.onPointerCancel}
+						onMouseEnter={() => stop()}
+						onMouseLeave={() => resume(goRight)}
+						onFocus={() => stop()}
+						onBlur={() => resume(goRight)}
 							onClick={handleCenterClick}
 						>
 							<Card data={{...items[activeIndex]}} isActive={true} />

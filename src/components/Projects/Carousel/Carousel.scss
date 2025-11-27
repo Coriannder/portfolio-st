@@ -21,7 +21,10 @@
         width: 100%;
         position: relative;
         height: 595px;
-        overflow: hidden;
+        
+        @include maxHeight720 {
+            height: 500px;
+        }
 
         @include tablet {
             overflow: visible;
@@ -47,7 +50,8 @@
 
         &--center {
             position: absolute;
-            justify-self: anchor-center;
+            //justify-self: anchor-center;
+            translate: -50%;
 
             //display: none;
 
@@ -70,7 +74,9 @@
         position: absolute;
        // background-color: violet;
        // width: 100%;
-        width: 800px;
+       width: 100vw;
+        max-width: 800px;
+        //padding: 20px;
 
     display: flex;
     justify-content: space-between;

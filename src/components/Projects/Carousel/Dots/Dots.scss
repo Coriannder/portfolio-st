@@ -4,13 +4,28 @@
 
 /* Container / capsule for dots (moved from Carousel.scss) */
 .dots {
-	display: flex;
+	display: none;
 	gap: 8px;
 	justify-content: center;
 	align-items: center;
 	margin-top: 1rem;
-	/* default (mobile): keep in document flow below the carousel */
 	position: static;
+
+	@include maxHeight720 {
+		position: static !important;
+		bottom: auto !important;
+		left: auto !important;
+		transform: none !important;
+		z-index: auto !important;
+		margin-top: 1rem;
+		padding: 0;
+		background: transparent;
+		box-shadow: none;
+	}
+
+	@include mobile {
+		display: flex;
+	}
 
 	@include tablet {
 		position: absolute;
@@ -26,15 +41,14 @@
 		border-radius: 999px;
 		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 	}
-}
 
-
-/* moving indicator (a circle that slides) */
-.dots-inner {
-	position: relative;
-	display: inline-flex;
-	gap: 9px;
-	align-items: center;
+	/* moving indicator (a circle that slides) */
+	&-inner {
+		position: relative;
+		display: inline-flex;
+		gap: 9px;
+		align-items: center;
+	}
 }
 
 
@@ -49,14 +63,13 @@
 	display: inline-block;
 	cursor: pointer;
 	transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-
 	-webkit-tap-highlight-color: transparent; /* disable default tap highlight on mobile so we don't get the blue flash */
-
-
 
 	&--active {
 		//background: $pinkMiami;
 		box-shadow: 0 6px 18px rgba($pinkMiami, 0.22);
+		transform: scale(.98);
+		opacity: 0.92;
 	}
 
 	&:focus-visible {
@@ -75,6 +88,13 @@
 		transition: left .36s cubic-bezier(.2,.9,.2,1), top .28s cubic-bezier(.2,.9,.2,1), width .24s ease, height .24s ease;
 		pointer-events: none;
 		box-shadow: 0 10px 28px rgba($pinkMiami, 0.22);
+
+		@include maxHeight720 {
+			position: relative;
+			box-shadow: none;
+			display: inline-block;
+			margin-left: 6px;
+		}
 	}
 
 }
@@ -103,33 +123,3 @@
 	}
 }
 
-/* subtle pressed state to give immediate feedback before the indicator arrives */
-.dot--active {
-	transform: scale(.98);
-	opacity: 0.92;
-}
-
-/* If viewport height is small, avoid absolute positioning which can overlap the card.
-	 Switch the dots to static flow so they sit below the carousel and don't overlap. */
-@media (max-height: 720px) {
-	.dots {
-		position: static !important;
-		bottom: auto !important;
-		left: auto !important;
-		transform: none !important;
-		z-index: auto !important;
-		margin-top: 1rem;
-		padding: 0;
-		background: transparent;
-		box-shadow: none;
-	}
-
-	/* keep indicator animation but allow it to flow with the dots */
-	.dot-indicator {
-		position: relative;
-		box-shadow: none;
-		display: inline-block;
-		margin-left: 6px;
-		//translate: -50%;
-	}
-}
