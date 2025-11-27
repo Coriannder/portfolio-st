@@ -4,6 +4,7 @@
 .projects {
 
     &__section {
+
         margin: 0;
         padding-top: 80px;
         width: 100vw;
@@ -17,15 +18,18 @@
         box-sizing: border-box;
         scroll-snap-align: start;
 
+        @include maxHeight720 {
+            padding-top: 70px;
+        }
     }
 
     &__container {
 
         width: 90%;
-        height: 100%;
         max-width: 1200px;
         display: flex;
         flex-direction: column;
+
 
         @include mobile {
             width: 80%;
@@ -49,15 +53,21 @@
         text-align: end;
         margin-bottom: 20px;
 
+           //background-color: red;
+
         @include tablet {
             font-size: 75px;
         }
     }
 
     &__carouselContainer{
-       // background-color: chartreuse;
+        //background-color: chartreuse;
         //height: 40vh;
         margin: 3rem 0 ;
+
+        @include maxHeight720 {
+            margin: 1rem 0 ;
+        }
 
         @include tablet {
             margin: 1rem 0 ;

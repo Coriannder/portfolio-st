@@ -11,13 +11,25 @@
 	box-shadow: 0 4px 25px rgba(0, 0, 0, 0.45);
 	border-radius: 16px;
 	overflow: hidden;
+	
 
 	@include tablet {
 		height: 400px;
 	}
 
 	&--featured {
+
+		width: 90vw;
 		max-width: 400px;
+
+		@include maxHeight720 {
+			height: 500px;
+
+			@include tablet {
+				height: 400px;
+			}
+		}
+
 		@include tablet {
 			max-width: 562px;
 		}
@@ -32,6 +44,10 @@
 		aspect-ratio: 16/9;
 		background-position: center;
 
+		@include maxHeight720 {
+			aspect-ratio: 16/7;
+		}
+
 		@include tablet {
 			min-width: 100%;
 			aspect-ratio: 16/4.5;
@@ -40,6 +56,8 @@
 	}
 
 	&__body {
+
+		font-size: 15px;
 
 		padding: 1.4rem;
 		display: flex;
@@ -56,6 +74,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		font-size: 14px;
 	}
 
 	&__type {
@@ -85,7 +104,9 @@
 	&__title {
 
 		font-weight: 500;
+		font-size: 1.1rem; //clamp(1.2rem, .8rem + 4.8vw, 1.4rem);
 		line-height: 1.2;
+		margin: 8px 0 12px 0;
 
 		@include tablet {
 			margin: 0 0 .49rem 0;
@@ -96,11 +117,17 @@
 	&__desc {
 		color: rgba($text-light, 0.86);
 		line-height: 1.45;
-		margin: 0 0 1rem 0;
+		margin-bottom: 1rem;
+
+		@include maxHeight720 {
+			font-size: 14px;
+			margin-top: 0;
+			margin-bottom: .5rem;
+		}
 
 		@include tablet {
 			font-size: .84rem;  //clamp(.6rem, .1rem + .2vw, 1rem);
-			margin-bottom: 0.7rem;
+			margin-bottom: 1.2rem;
 		}
 	}
 
@@ -110,6 +137,10 @@
 		flex-wrap: wrap;
 		gap: .56rem;
 		margin: .7rem 0 1.12rem 0;
+
+		@include maxHeight720 {
+			font-size: 13px;
+		}
 
 		@include tablet {
 			margin: auto 0;
@@ -175,13 +206,13 @@
 			&--featured {
 				transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
 				will-change: transform, box-shadow;
-			}
 
-			&--featured:hover,
-			&--featured:focus-visible {
-				/* subtle lift without scaling to preserve text clarity */
-				transform: translateY(-4px) translateZ(0);
-				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+				&:hover,
+				&:focus-visible {
+					/* subtle lift without scaling to preserve text clarity */
+					transform: translateY(-4px) translateZ(0);
+					box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+				}
 			}
 		}
 	}
@@ -192,12 +223,13 @@
 		.card--featured {
 			transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s ease;
 			will-change: transform, box-shadow;
-		}
 
-		.card--featured:hover,
-		.card--featured:focus-visible {
-			transform: translateY(-4px) translateZ(0);
-			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+			&:hover,
+			&:focus-visible {
+				/* subtle lift without scaling to preserve text clarity */
+				transform: translateY(-4px) translateZ(0);
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 8px 36px rgba($primary, 0.16);
+			}
 		}
 	}
 }
