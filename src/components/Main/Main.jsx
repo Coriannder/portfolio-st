@@ -221,6 +221,8 @@ export const Main = ({children}) => {
             threshold: 0.5
         }
 
+        let debounceTimer = null
+
         observerRef.current = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
@@ -233,8 +235,13 @@ export const Main = ({children}) => {
                     lastSectionRef.current = cls
                     const path = sectionMap[cls]
                     if (!path) return
-                    // update URL without adding an extra history entry
-                    navigate(path, { replace: true })
+                    
+                    // Debounce URL updates para evitar flash durante scroll
+                    if (debounceTimer) clearTimeout(debounceTimer)
+                    debounceTimer = setTimeout(() => {
+                        // update URL without adding an extra history entry
+                        navigate(path, { replace: true })
+                    }, 500)
                 }
             })
         }, options)
@@ -242,6 +249,7 @@ export const Main = ({children}) => {
         sections.forEach(s => observerRef.current.observe(s))
 
         return () => {
+            if (debounceTimer) clearTimeout(debounceTimer)
             if (observerRef.current) {
                 observerRef.current.disconnect()
                 observerRef.current = null
