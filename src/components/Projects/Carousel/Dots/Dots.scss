@@ -5,36 +5,29 @@
 /* Container / capsule for dots (moved from Carousel.scss) */
 .dots {
 	display: none;
-	gap: 8px;
-	justify-content: center;
-	align-items: center;
-	margin-top: 1rem;
-	position: static;
 
-	@include maxHeight720 {
-		position: static !important;
-		bottom: auto !important;
-		left: auto !important;
-		transform: none !important;
-		z-index: auto !important;
-		margin-top: 1rem;
-		padding: 0;
-		background: transparent;
-		box-shadow: none;
-	}
+
 
 	@include mobile {
 		display: flex;
+		gap: 8px;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem auto 0;
+		position: relative;
+		width: fit-content;
 	}
 
 	@include tablet {
-		position: absolute;
-		bottom: 8px; /* moved closer to the card */
-		left: 50%;
-		transform: translateX(-50%);
-		z-index: 100; /* ensure it's always above the card and its shadow */
-		margin-top: 0;
-		pointer-events: auto; /* ensure clickable */
+		position: relative; /* ya no absolute */
+		bottom: auto;
+		left: auto;
+		transform: none;
+		z-index: 100;
+		margin: 32px auto 0; /* centrado horizontal + separación del viewport */
+		width: fit-content; /* solo el ancho necesario */
+		pointer-events: auto;
+		justify-content: center; /* centrar horizontalmente */
 		/* capsule for contrast and larger hit area */
 		padding: 6px 12px;
 		background: rgba(0, 0, 0, 0.22);
@@ -89,7 +82,7 @@
 		pointer-events: none;
 		box-shadow: 0 10px 28px rgba($pinkMiami, 0.22);
 
-		@include maxHeight720 {
+		@include smallScreensMaxHeight720 {
 			position: relative;
 			box-shadow: none;
 			display: inline-block;

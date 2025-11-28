@@ -41,8 +41,8 @@
     }
 };
 
-@mixin maxHeight720 {
-    @media (max-height: 720px) {
+@mixin smallScreensMaxHeight720 {
+    @media (max-height: 720px) and (max-width: 991px) {
         @content;
     }
 }

@@ -22,7 +22,7 @@
         position: relative;
         height: 595px;
         
-        @include maxHeight720 {
+        @include smallScreensMaxHeight720 {
             height: 500px;
         }
 
