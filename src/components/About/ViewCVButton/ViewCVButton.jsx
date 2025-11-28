@@ -22,7 +22,7 @@ export const ViewCVButton = () => {
       initial={{ x: 100, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, type: 'spring', delay: 0.8 }}
-      viewport={{once: true}}
+      //viewport={{once: true}}
       className="view-cv-button__container"
       onMouseOver={() => contextValue.overTag && contextValue.overTag('button')}
       onMouseOut={() => contextValue.outTag && contextValue.outTag()}
