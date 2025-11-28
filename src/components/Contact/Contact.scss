@@ -13,6 +13,10 @@
         background: $pinkMiami;
 
         scroll-snap-align: start;
+
+        @include smallScreensMaxHeight720 {
+            padding-bottom: 150px;
+        }
     }
 
     &__container {

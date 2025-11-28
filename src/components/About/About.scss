@@ -5,6 +5,7 @@
     &__section {
         width: 100vw;
         min-height: 100vh;
+        min-height: 100dvh; /* Chrome iOS fix */
         display: flex;
         justify-content: center;
         align-items: end;
