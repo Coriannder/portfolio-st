@@ -18,7 +18,7 @@
         box-sizing: border-box;
         scroll-snap-align: start;
 
-        @include maxHeight720 {
+        @include smallScreensMaxHeight720 {
             padding-top: 70px;
         }
     }
@@ -65,7 +65,7 @@
         //height: 40vh;
         margin: 3rem 0 ;
 
-        @include maxHeight720 {
+        @include smallScreensMaxHeight720 {
             margin: 1rem 0 ;
         }
 
