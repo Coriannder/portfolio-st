@@ -204,6 +204,7 @@ const handleGoToIndex = (newIndex) => {
 					initial={{x:100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .7, type: "spring", delay: .7}}
+					viewport={{ once: true }}
 				>
 					<motion.div className='carousel__card--preview'
 						key={leftIndex}
@@ -222,6 +223,7 @@ const handleGoToIndex = (newIndex) => {
 					initial={{x:0, opacity:0}}
                     whileInView={{ opacity:1 }}
                     transition= {{ duration: .4, type: "spring", delay: .2}}
+					viewport={{ once: true }}
 				>
 					<AnimatePresence initial={false} custom={direction} mode="sync">
 						<motion.div
@@ -253,6 +255,7 @@ const handleGoToIndex = (newIndex) => {
 					initial={{x:100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .7, type: "spring", delay: .77}}
+					viewport={{ once: true }}
 				>
 					<motion.div className='carousel__card--preview'
 					key={rightIndex}

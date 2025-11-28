@@ -21,6 +21,7 @@ export const About = () => {
                     className='about__h2'
                     initial={{x: 180, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
+                    viewport={{ once: true }}
                     transition= {{ duration: .5, type: "spring", delay: .3}}
 
                     onMouseOver={ () => contextValue.overTag('title')}
@@ -33,6 +34,7 @@ export const About = () => {
                     className='about__body'
                     initial={{x:100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
+                    viewport={{ once: true }}
                     transition= {{ duration: 1, type: "spring", delay: .5}}
                 >
                     <p dangerouslySetInnerHTML={{ __html: about }} />
@@ -45,7 +47,7 @@ export const About = () => {
                     initial={{y:350 , opacity: 0}}
                     whileInView={{y:0 , opacity: 1 }}
                     transition= {{ duration: 1, type: "spring"}}
-                    //viewport={{ once: true }}
+                    viewport={{ once: true }}
                 >
                     <img src={photo} />
                 </motion.div>

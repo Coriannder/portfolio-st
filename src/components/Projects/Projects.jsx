@@ -15,7 +15,7 @@ export const Projects = () => {
                     initial={{x: 100, opacity:0}}
                     whileInView={{x: 0, opacity:1 }}
                     transition= {{ duration: .5, type: "spring", delay: 0.2}}
-                    //viewport={{ once: true }}
+                    viewport={{ once: true }}
                     onMouseOver={ () => contextValue.overTag('title') }
                     onMouseOut={contextValue.outTag}
                 >
@@ -26,6 +26,7 @@ export const Projects = () => {
                     initial={{ x: 100, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: .8, type: 'spring', delay: 0.6 }}
+                    viewport={{ once: true }}
                 >
                     <Carousel />
                 </motion.div>

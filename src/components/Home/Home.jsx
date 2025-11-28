@@ -15,7 +15,7 @@ export const Home = () => {
                     onMouseOut={contextValue.outTag}
                     initial={{y: 10, opacity: 0}}
                     whileInView={{y: 0, opacity: 1}}
-
+                    viewport={{ once: true }}
                     transition={
                         {
                             ease: "easeOut",
