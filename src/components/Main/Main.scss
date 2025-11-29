@@ -7,7 +7,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        // overflow: hidden; <--- REMOVED DEFAULT
+
+        &--locked {
+            overflow: hidden;
+        }
 
         @include tablet {
             overflow: visible;
@@ -18,7 +22,3 @@
         }
     }
 }
-
-
-
-
