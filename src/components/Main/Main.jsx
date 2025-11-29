@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { scroller } from 'react-scroll'
 import useSwipePage from '../../hooks/useSwipePage'
 
-export const Main = ({children}) => {
+export const Main = ({ children }) => {
     const location = useLocation()
     const navigate = useNavigate()
     const observerRef = useRef(null)
@@ -24,7 +24,7 @@ export const Main = ({children}) => {
     const handleSwipe = useCallback((direction) => {
         // Solo ejecutar en mobile (< 1024px)
         if (window.innerWidth >= 1024) return
-        
+
         // Determinar sección actual basada en cuál está visible en viewport
         const sections = sectionOrder.map(className => ({
             className,
@@ -36,20 +36,20 @@ export const Main = ({children}) => {
         // Encontrar sección actualmente más visible
         const viewportTop = window.scrollY
         const viewportHeight = window.innerHeight
-        
+
         let currentIndex = 0
         let maxVisibility = 0
-        
+
         sections.forEach((section, i) => {
             const rect = section.element.getBoundingClientRect()
             const elementTop = rect.top + viewportTop
             const elementBottom = elementTop + rect.height
-            
+
             // Calcular cuánto de la sección está visible
             const visibleTop = Math.max(viewportTop, elementTop)
             const visibleBottom = Math.min(viewportTop + viewportHeight, elementBottom)
             const visibleHeight = Math.max(0, visibleBottom - visibleTop)
-            
+
             if (visibleHeight > maxVisibility) {
                 maxVisibility = visibleHeight
                 currentIndex = i
@@ -69,7 +69,7 @@ export const Main = ({children}) => {
         // Para swipes, hacer scroll directo más lento (sin navigate)
         hasScrolledRef.current = true
         const targetTop = targetEl.getBoundingClientRect().top + window.scrollY
-        
+
         // Scroll suave más lento para swipes
         const startY = window.scrollY
         const distance = targetTop - startY
@@ -84,9 +84,9 @@ export const Main = ({children}) => {
             const elapsed = currentTime - startTime
             const progress = Math.min(elapsed / duration, 1)
             const eased = easeOutQuad(progress)
-            
+
             window.scrollTo(0, startY + distance * eased)
-            
+
             if (progress < 1) {
                 requestAnimationFrame(animateScroll)
             } else {
@@ -98,33 +98,34 @@ export const Main = ({children}) => {
         }
 
         requestAnimationFrame(animateScroll)
-        
+
     }, [sectionMap, sectionOrder])
 
     // Activar detector de swipes táctiles (más sensible para mejor fluidez)
-    useSwipePage({ onSwipeDetected: handleSwipe, threshold: 30, cooldown: 400 })
+    const isSwipeEnabled = Object.values(sectionMap).includes(location.pathname)
+    useSwipePage({ onSwipeDetected: handleSwipe, threshold: 30, cooldown: 400, isEnabled: isSwipeEnabled })
 
     useEffect(() => {
         // Soporta requests programáticas: location.state.scrollTo may indicar la sección a scrollear
         const scrollToId = location.state?.scrollTo || (location.state?.scrollToProjects ? 'projects__section' : null)
         const instantRequested = location.state?.scrollToProjects === 'instant'
-        
+
         if (scrollToId) {
             hasScrolledRef.current = true // Marcar que hicimos scroll programático
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-            
+
             const doScroll = () => {
                 const el = document.getElementById(scrollToId) || document.querySelector(`.${scrollToId}`)
                 if (el) {
                     const top = el.getBoundingClientRect().top + window.scrollY
-                    
+
                     // iOS Safari no soporta bien { behavior: 'smooth' }
                     // Usar el formato antiguo window.scrollTo(x, y)
                     if (isIOS) {
                         window.scrollTo(0, top)
                     } else {
-                        window.scrollTo({ 
-                            top, 
+                        window.scrollTo({
+                            top,
                             behavior: instantRequested ? 'auto' : 'smooth'
                         })
                     }
@@ -132,7 +133,7 @@ export const Main = ({children}) => {
                 }
                 return false
             }
-            
+
             if (isIOS) {
                 // iOS: intentar varias veces con delays incrementales
                 let attempts = 0
@@ -143,7 +144,7 @@ export const Main = ({children}) => {
                         // Éxito - limpiar state PERO mantener hasScrolledRef
                         try {
                             navigate(location.pathname, { replace: true, state: { __scrolled: true } })
-                        } catch (e) {}
+                        } catch (e) { }
                         // Reset hasScrolledRef después de que termine el scroll
                         setTimeout(() => {
                             hasScrolledRef.current = false
@@ -160,7 +161,7 @@ export const Main = ({children}) => {
                     doScroll()
                     try {
                         navigate(location.pathname, { replace: true, state: { __scrolled: true } })
-                    } catch (e) {}
+                    } catch (e) { }
                     // Reset hasScrolledRef después de que termine el scroll suave
                     setTimeout(() => {
                         hasScrolledRef.current = false
@@ -190,7 +191,7 @@ export const Main = ({children}) => {
         const t = setTimeout(() => {
             // Double-check that no programmatic scroll is in progress
             if (hasScrolledRef.current) return
-            
+
             const el = document.getElementById(target) || document.querySelector(`.${target}`)
             if (el) {
                 // instant jump (no smooth)
@@ -228,14 +229,14 @@ export const Main = ({children}) => {
                 if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
                     // CRITICAL: Ignore section changes during programmatic scroll
                     if (hasScrolledRef.current) return
-                    
+
                     const cls = Array.from(entry.target.classList).find(c => c.endsWith('__section'))
                     if (!cls) return
                     if (lastSectionRef.current === cls) return
                     lastSectionRef.current = cls
                     const path = sectionMap[cls]
                     if (!path) return
-                    
+
                     // Debounce URL updates para evitar flash durante scroll
                     if (debounceTimer) clearTimeout(debounceTimer)
                     debounceTimer = setTimeout(() => {
@@ -258,8 +259,8 @@ export const Main = ({children}) => {
     }, [navigate])
 
     return (
-        <main className='main__container'>
-                {children}
+        <main className={`main__container ${isSwipeEnabled ? 'main__container--locked' : ''}`}>
+            {children}
         </main>
 
     )

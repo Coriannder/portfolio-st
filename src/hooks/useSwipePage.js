@@ -8,14 +8,16 @@ import { useEffect, useRef } from 'react'
  * @param {number} options.threshold - px mínimos para considerar swipe (default 80)
  * @param {number} options.cooldown - ms entre swipes permitidos (default 600)
  */
-export function useSwipePage({ onSwipeDetected, threshold = 80, cooldown = 600 } = {}) {
+export function useSwipePage({ onSwipeDetected, threshold = 80, cooldown = 600, isEnabled = true } = {}) {
   const state = useRef({ startY: 0, startX: 0, startTime: 0, isTracking: false })
   const lastSwipe = useRef(0)
 
   useEffect(() => {
+    if (!isEnabled) return
+
     const onTouchStart = (e) => {
       if (e.touches.length !== 1) return
-      
+
       state.current.startY = e.touches[0].clientY
       state.current.startX = e.touches[0].clientX
       state.current.startTime = Date.now()
@@ -25,30 +27,32 @@ export function useSwipePage({ onSwipeDetected, threshold = 80, cooldown = 600 }
     const onTouchMove = (e) => {
       if (!state.current.isTracking) return
       if (e.touches.length !== 1) return
-      
+
       const dy = e.touches[0].clientY - state.current.startY
       const dx = e.touches[0].clientX - state.current.startX
-      
+
       // Solo prevenir scroll en mobile (menos de 1024px)
       if (Math.abs(dy) > Math.abs(dx) && window.innerWidth < 1024) {
-        e.preventDefault()
+        if (e.cancelable) {
+          e.preventDefault()
+        }
       }
     }
 
     const onTouchEnd = (e) => {
       if (!state.current.isTracking) return
-      
+
       const now = Date.now()
       const dy = e.changedTouches[0].clientY - state.current.startY
       const dt = now - state.current.startTime
-      
+
       state.current.isTracking = false
-      
+
       // Cooldown para evitar múltiples triggers
       if (now - lastSwipe.current < cooldown) {
         return
       }
-      
+
       // Calcular si cumple umbral (distancia o velocidad)
       const velocity = Math.abs(dy) / Math.max(dt, 1)
       if (Math.abs(dy) > threshold || velocity > 0.3) {
@@ -76,7 +80,7 @@ export function useSwipePage({ onSwipeDetected, threshold = 80, cooldown = 600 }
       document.removeEventListener('touchend', onTouchEnd)
       document.removeEventListener('touchcancel', onTouchCancel)
     }
-  }, [onSwipeDetected, threshold, cooldown])
+  }, [onSwipeDetected, threshold, cooldown, isEnabled])
 }
 
 export default useSwipePage
