@@ -55,7 +55,11 @@ export function useSwipePage({ onSwipeDetected, threshold = 80, cooldown = 600, 
 
       // Calcular si cumple umbral (distancia o velocidad)
       const velocity = Math.abs(dy) / Math.max(dt, 1)
-      if (Math.abs(dy) > threshold || velocity > 0.3) {
+
+      // Strict direction check: vertical movement must be greater than horizontal
+      const isVertical = Math.abs(dy) > Math.abs(e.changedTouches[0].clientX - state.current.startX)
+
+      if (isVertical && (Math.abs(dy) > threshold || velocity > 0.3)) {
         const direction = dy < 0 ? 'up' : 'down'
         if (typeof onSwipeDetected === 'function') {
           onSwipeDetected(direction)
