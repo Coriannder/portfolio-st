@@ -175,7 +175,7 @@ export const Main = ({ children }) => {
     // If the pathname directly targets a section (e.g. /about, /projects, /contact),
     // perform an immediate jump to that section (no smooth scrolling) unless a state-driven scroll is requested.
     useEffect(() => {
-        if (location.state && (location.state.scrollTo || location.state.scrollToProjects || location.state.__scrolled)) return
+        if (location.state && (location.state.scrollTo || location.state.scrollToProjects || location.state.__scrolled || location.state.__fromObserver)) return
         if (hasScrolledRef.current) return
 
         const pathToSection = {
@@ -241,7 +241,7 @@ export const Main = ({ children }) => {
                     if (debounceTimer) clearTimeout(debounceTimer)
                     debounceTimer = setTimeout(() => {
                         // update URL without adding an extra history entry
-                        navigate(path, { replace: true })
+                        navigate(path, { replace: true, state: { __fromObserver: true } })
                     }, 500)
                 }
             })
