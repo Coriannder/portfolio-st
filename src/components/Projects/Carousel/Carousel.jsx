@@ -1,6 +1,6 @@
 // Carousel.jsx
 import './Carousel.scss'
-import { useEffect, useRef, useContext } from 'react'
+import { useEffect,/*  useRef, */ useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Card } from './Card/Card'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -11,7 +11,7 @@ import Dots from './Dots/Dots'
 import { useAutoplay } from '../../../hooks/carousel/useAutoplay'
 import { useSwipe } from '../../../hooks/carousel/useSwipe'
 import { useCarouselState } from '../../../hooks/carousel/useCarouselState'
-import { useIndicator } from '../../../hooks/carousel/useIndicator'
+//import { useIndicator } from '../../../hooks/carousel/useIndicator'
 
 export const Carousel = () => {
 	const items = projectsData
@@ -33,9 +33,9 @@ export const Carousel = () => {
 	const { activeIndex, direction, leftIndex, rightIndex, goLeft, goRight, goToIndex } = useCarouselState({ initialIndex: getInitialIndex(), length: items.length })
 
 	// refs for moving dot indicator
-	const dotsRef = useRef(null)
-	const INDICATOR_SIZE = 16
-	const indicator = useIndicator({ dotsRef, activeIndex, size: INDICATOR_SIZE })
+	//const dotsRef = useRef(null)
+	//const INDICATOR_SIZE = 16
+	//const indicator = useIndicator({ dotsRef, activeIndex, size: INDICATOR_SIZE })
 
 	// cursor context so dots can trigger the same cursor animation as the section title
 	const cursorContext = useContext(CursorContext)
@@ -284,8 +284,8 @@ export const Carousel = () => {
 				items={items}
 				activeIndex={activeIndex}
 				goToIndex={handleGoToIndex}
-				dotsRef={dotsRef}
-				indicator={indicator}
+				//dotsRef={dotsRef}
+				//indicator={indicator}
 				cursorContext={cursorContext}
 			/>
 
