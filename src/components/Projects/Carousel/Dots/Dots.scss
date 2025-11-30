@@ -56,18 +56,24 @@
 
 /* ===== Dots appearance & active animation ===== */
 .dot {
-	width: 6px;
-	height: 6px;
+	//width: 6px;
+	//height: 6px;
 	border-radius: 50%;
 	background: rgba($text-light, 0.18);
 	border: none;
-	padding: 7px;
+	padding: 9px;
 	/* keep a generous hit area while reducing visual dot size */
 	display: inline-block;
 	cursor: pointer;
 	transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 	-webkit-tap-highlight-color: transparent;
 	/* disable default tap highlight on mobile so we don't get the blue flash */
+
+	@include mobile {
+		//width: 12px;
+		//height: 12px;
+		padding: 7px;
+	}
 
 	&--active {
 		//background: $pinkMiami;
