@@ -4,17 +4,23 @@
 
 /* Container / capsule for dots (moved from Carousel.scss) */
 .dots {
-	display: none;
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem auto 0;
+	position: relative;
+	width: fit-content;
 
 
 	@include mobile {
-		display: flex;
+		/* display: flex;
 		gap: 8px;
 		justify-content: center;
 		align-items: center;
 		margin: 1rem auto 0;
 		position: relative;
-		width: fit-content;
+		width: fit-content; */
 	}
 
 	@include tablet {

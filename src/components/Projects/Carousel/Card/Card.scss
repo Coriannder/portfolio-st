@@ -4,7 +4,7 @@
 
 .card {
 
-    height: 592px;
+    height: 450px;
 	display: flex;
     flex-direction: column;
 	border: 1px solid $border-card;
@@ -18,17 +18,16 @@
 	}
 
 	&--featured {
-
 		width: 90vw;
 		max-width: 400px;
 
-		@include smallScreensMaxHeight720 {
-			height: 500px;
+/* 		@include smallScreensMaxHeight720 {
+			//height: 480px;
 
 			@include tablet {
 				height: 400px;
 			}
-		}
+		} */
 
 		@include tablet {
 			max-width: 562px;
@@ -57,8 +56,6 @@
 
 	&__body {
 
-		font-size: 15px;
-
 		padding: 1.4rem;
 		display: flex;
 		flex-direction: column;
@@ -71,10 +68,14 @@
 	}
 
 	&__meta {
-		display: flex;
+		display: none;
 		justify-content: space-between;
 		align-items: center;
 		font-size: 14px;
+
+		@include tablet {
+			display: flex;
+		}
 	}
 
 	&__type {
@@ -104,12 +105,12 @@
 	&__title {
 
 		font-weight: 500;
-		font-size: 1.1rem; //clamp(1.2rem, .8rem + 4.8vw, 1.4rem);
+		font-size: 1rem; //clamp(1.2rem, .8rem + 4.8vw, 1.4rem);
 		line-height: 1.2;
-		margin: 8px 0 12px 0;
+		margin: 0 0 12px 0;
 
 		@include tablet {
-			margin: 0 0 .49rem 0;
+			margin: 8px 0 .49rem 0;
 			font-size: 1.05rem //clamp(1.05rem, .7rem + 5.6vw, 1.2rem);
 		}
 	}
@@ -119,8 +120,10 @@
 		line-height: 1.45;
 		margin-bottom: 1rem;
 
+		font-size: 13px;
+
 		@include smallScreensMaxHeight720 {
-			font-size: 14px;
+			//font-size: 14px;
 			margin-top: 0;
 			margin-bottom: .5rem;
 		}
@@ -136,10 +139,12 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: .56rem;
-		margin: .7rem 0 1.12rem 0;
+		margin: .2rem 0 1.12rem 0;
+
+		font-size: 11px;
 
 		@include smallScreensMaxHeight720 {
-			font-size: 13px;
+			
 		}
 
 		@include tablet {
