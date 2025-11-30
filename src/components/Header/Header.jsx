@@ -70,6 +70,7 @@ export const Header = () => {
     }, [lastScrollPosition, handleScroll])
 
 
+
     if (/^\/projects\/[^/]+$/.test(location.pathname)) {
         return null;
     }
