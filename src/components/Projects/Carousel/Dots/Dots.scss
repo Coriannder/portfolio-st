@@ -7,7 +7,6 @@
 	display: none;
 
 
-
 	@include mobile {
 		display: flex;
 		gap: 8px;
@@ -19,15 +18,19 @@
 	}
 
 	@include tablet {
-		position: relative; /* ya no absolute */
+		position: relative;
+		/* ya no absolute */
 		bottom: auto;
 		left: auto;
 		transform: none;
 		z-index: 100;
-		margin: 32px auto 0; /* centrado horizontal + separación del viewport */
-		width: fit-content; /* solo el ancho necesario */
+		margin: 32px auto 0;
+		/* centrado horizontal + separación del viewport */
+		width: fit-content;
+		/* solo el ancho necesario */
 		pointer-events: auto;
-		justify-content: center; /* centrar horizontalmente */
+		justify-content: center;
+		/* centrar horizontalmente */
 		/* capsule for contrast and larger hit area */
 		padding: 6px 12px;
 		background: rgba(0, 0, 0, 0.22);
@@ -52,11 +55,13 @@
 	border-radius: 50%;
 	background: rgba($text-light, 0.18);
 	border: none;
-	padding: 7px; /* keep a generous hit area while reducing visual dot size */
+	padding: 7px;
+	/* keep a generous hit area while reducing visual dot size */
 	display: inline-block;
 	cursor: pointer;
 	transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-	-webkit-tap-highlight-color: transparent; /* disable default tap highlight on mobile so we don't get the blue flash */
+	-webkit-tap-highlight-color: transparent;
+	/* disable default tap highlight on mobile so we don't get the blue flash */
 
 	&--active {
 		//background: $pinkMiami;
@@ -77,32 +82,42 @@
 		/* position is set from JS (top/left) to match the exact button center */
 		border-radius: 50%;
 		background: $pinkMiami;
-		z-index: 2; /* above dots so the pulse is visible */
-		transition: left .36s cubic-bezier(.2,.9,.2,1), top .28s cubic-bezier(.2,.9,.2,1), width .24s ease, height .24s ease;
+		z-index: 2;
+		/* above dots so the pulse is visible */
+		transition: left .36s cubic-bezier(.2, .9, .2, 1), top .28s cubic-bezier(.2, .9, .2, 1), width .24s ease, height .24s ease;
 		pointer-events: none;
 		box-shadow: 0 10px 28px rgba($pinkMiami, 0.22);
 
 		@include smallScreensMaxHeight720 {
-			position: relative;
+			//position: relative;
 			box-shadow: none;
 			display: inline-block;
-			margin-left: 6px;
 		}
 	}
 
 }
 
 @keyframes dotPulse {
-	0% { transform: scale(1); }
-	50% { transform: scale(1.18); }
-	100% { transform: scale(1); }
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.18);
+	}
+
+	100% {
+		transform: scale(1);
+	}
 }
 
 /* Animate the active dot subtly, but respect reduced-motion */
 
 @media (prefers-reduced-motion: no-preference) {
 	.dot {
-		&--active, &-indicator {
+
+		&--active,
+		&-indicator {
 			animation: dotPulse 1.8s ease-in-out infinite;
 		}
 	}
@@ -110,9 +125,10 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.dot {
-		&--active, &-indicator {
+
+		&--active,
+		&-indicator {
 			animation: none !important;
 		}
 	}
 }
-
