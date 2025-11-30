@@ -101,7 +101,11 @@ export const Main = ({ children }) => {
 
     // Activar detector de swipes táctiles (más sensible para mejor fluidez)
     const isSwipeEnabled = Object.values(sectionMap).includes(location.pathname)
-    useSwipePage({ onSwipeDetected: handleSwipe, threshold: 30, cooldown: 400, isEnabled: isSwipeEnabled })
+
+    // Aumentar threshold en projects para evitar conflictos con el carrusel horizontal
+    const swipeThreshold = location.pathname === '/projects' ? 100 : 30
+
+    useSwipePage({ onSwipeDetected: handleSwipe, threshold: swipeThreshold, cooldown: 400, isEnabled: isSwipeEnabled })
 
     // Hooks para navegación y observer
     useScrollNavigation(location, hasScrolledRef)
