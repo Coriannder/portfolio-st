@@ -1,8 +1,16 @@
 import './Main.scss'
 import { useEffect, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { scroller } from 'react-scroll'
 import useSwipePage from '../../hooks/useSwipePage'
+
+// Mapa de secciones (reutilizamos el mismo que usa el observer)
+const sectionMap = {
+    'home__section': '/',
+    'about__section': '/about',
+    'projects__section': '/projects',
+    'contact__section': '/contact'
+}
+const sectionOrder = ['home__section', 'about__section', 'projects__section', 'contact__section']
 
 export const Main = ({ children }) => {
     const location = useLocation()
@@ -10,15 +18,6 @@ export const Main = ({ children }) => {
     const observerRef = useRef(null)
     const lastSectionRef = useRef('')
     const hasScrolledRef = useRef(false)
-
-    // Mapa de secciones (reutilizamos el mismo que usa el observer)
-    const sectionMap = {
-        'home__section': '/',
-        'about__section': '/about',
-        'projects__section': '/projects',
-        'contact__section': '/contact'
-    }
-    const sectionOrder = ['home__section', 'about__section', 'projects__section', 'contact__section']
 
     // Handler para swipes táctiles - scroll más lento que el nav
     const handleSwipe = useCallback((direction) => {
@@ -99,7 +98,7 @@ export const Main = ({ children }) => {
 
         requestAnimationFrame(animateScroll)
 
-    }, [sectionMap, sectionOrder])
+    }, [])
 
     // Activar detector de swipes táctiles (más sensible para mejor fluidez)
     const isSwipeEnabled = Object.values(sectionMap).includes(location.pathname)
@@ -144,7 +143,7 @@ export const Main = ({ children }) => {
                         // Éxito - limpiar state PERO mantener hasScrolledRef
                         try {
                             navigate(location.pathname, { replace: true, state: { __scrolled: true } })
-                        } catch (e) { }
+                        } catch (e) { /* ignore */ }
                         // Reset hasScrolledRef después de que termine el scroll
                         setTimeout(() => {
                             hasScrolledRef.current = false
@@ -161,7 +160,7 @@ export const Main = ({ children }) => {
                     doScroll()
                     try {
                         navigate(location.pathname, { replace: true, state: { __scrolled: true } })
-                    } catch (e) { }
+                    } catch (e) { /* ignore */ }
                     // Reset hasScrolledRef después de que termine el scroll suave
                     setTimeout(() => {
                         hasScrolledRef.current = false
@@ -205,13 +204,7 @@ export const Main = ({ children }) => {
 
     useEffect(() => {
         // Observe sections and update the URL as the user scrolls
-        const sectionMap = {
-            'home__section': '/',
-            'about__section': '/about',
-            'projects__section': '/projects',
-            'contact__section': '/contact'
-        }
-
+        // sectionMap is now defined outside
         const selector = Object.keys(sectionMap).map(s => `.${s}`).join(', ')
         const sections = Array.from(document.querySelectorAll(selector))
         if (!sections.length) return

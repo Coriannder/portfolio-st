@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
 import './ProjectDetail.scss';
@@ -34,14 +33,14 @@ const ProjectDetail = () => {
       try {
         const res = await fetch(p);
         if (!mountedRef.current) return;
-            if (res.ok) {
-              const text = await res.text();
-              if (!mountedRef.current) return;
-              setReadmeMd(text);
-              setIsLoading(false);
-              setError(null);
-              return;
-            }
+        if (res.ok) {
+          const text = await res.text();
+          if (!mountedRef.current) return;
+          setReadmeMd(text);
+          setIsLoading(false);
+          setError(null);
+          return;
+        }
       } catch (e) {
         // ignore and try next
       }
@@ -105,7 +104,7 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     // start entry animation
-    controls.start('visible').catch(() => {})
+    controls.start('visible').catch(() => { })
   }, [controls])
 
   // Default to entering from the left for coherence with carousel exit
@@ -118,8 +117,8 @@ const ProjectDetail = () => {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       x: 0,
       transition: {
@@ -133,8 +132,8 @@ const ProjectDetail = () => {
 
   const tocVariants = {
     hidden: { x: -30, opacity: 0 },
-    visible: { 
-      x: 0, 
+    visible: {
+      x: 0,
       opacity: 1,
       transition: {
         type: 'tween',
@@ -147,8 +146,8 @@ const ProjectDetail = () => {
 
   const markdownVariants = {
     hidden: { x: 30, opacity: 0 },
-    visible: { 
-      x: 0, 
+    visible: {
+      x: 0,
       opacity: 1,
       transition: {
         type: 'tween',
@@ -161,8 +160,8 @@ const ProjectDetail = () => {
 
   const loadingVariants = {
     initial: { opacity: 0, scale: 0.8 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       scale: 1,
       transition: { duration: 0.3 }
     },
@@ -178,10 +177,10 @@ const ProjectDetail = () => {
 
   const errorVariants = {
     hidden: { opacity: 0, y: -10 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.4,
         type: "spring"
       }
@@ -193,37 +192,14 @@ const ProjectDetail = () => {
   };
 
   const buttonVariants = {
-    hover: { 
+    hover: {
       scale: 1.05,
       transition: { duration: 0.2 }
     },
     tap: { scale: 0.95 }
   };
 
-  const fabVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0,
-      y: 20
-    },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      y: -40,
-      transition: { 
-        duration: 0.4,
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    hover: {
-      scale: 1.1,
-      boxShadow: "0 8px 32px rgba(255, 20, 147, 0.4)",
-      transition: { duration: 0.3 }
-    },
-    tap: { scale: 0.95 }
-  };
+
 
   const handleFabClick = async () => {
     // 1. Scroll to top FIRST to avoid Contact flash when navigating
@@ -244,38 +220,38 @@ const ProjectDetail = () => {
     }, NAV_DELAY)
   }
 
-  
+
 
   return (
     <div className="projectDetail__section">
       <div className="projectDetail__container">
 
-        <motion.main 
+        <motion.main
           className="projectDetail__body"
           variants={containerVariants}
           initial={initialAnim}
           animate={controls}
         >
           {isLoading ? (
-            <motion.section 
+            <motion.section
               className="projectDetail__loading"
               variants={loadingVariants}
               initial="initial"
               animate={["animate", "pulse"]}
             >
-              <motion.div 
+              <motion.div
                 className="projectDetail__spinner"
                 animate={{ rotate: 360 }}
-                transition={{ 
-                  duration: 1, 
-                  repeat: Infinity, 
-                  ease: "linear" 
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "linear"
                 }}
               />
               Cargando documentación…
             </motion.section>
           ) : error ? (
-            <motion.section 
+            <motion.section
               className="projectDetail__error"
               variants={errorVariants}
               initial="hidden"
@@ -283,8 +259,8 @@ const ProjectDetail = () => {
             >
               <p>{error}</p>
               <div className="projectDetail__actions">
-                <motion.button 
-                  className="projectDetail__btn" 
+                <motion.button
+                  className="projectDetail__btn"
                   onClick={() => fetchReadme(identifier)}
                   variants={buttonVariants}
                   whileHover="hover"
@@ -292,8 +268,8 @@ const ProjectDetail = () => {
                 >
                   Reintentar
                 </motion.button>
-                <motion.button 
-                  className="projectDetail__btn" 
+                <motion.button
+                  className="projectDetail__btn"
                   onClick={() => navigate('/projects')}
                   variants={buttonVariants}
                   whileHover="hover"
@@ -306,7 +282,7 @@ const ProjectDetail = () => {
           ) : readmeMd ? (
             <div className="projectDetail__layout">
               {toc.length > 0 && (
-                <motion.aside 
+                <motion.aside
                   className="projectDetail__toc"
                   variants={tocVariants}
                   initial="hidden"
@@ -323,7 +299,7 @@ const ProjectDetail = () => {
                 </motion.aside>
               )}
 
-              <motion.article 
+              <motion.article
                 className="projectDetail__markdown"
                 variants={markdownVariants}
                 initial="hidden"
