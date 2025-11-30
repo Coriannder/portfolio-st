@@ -11,7 +11,6 @@ import Dots from './Dots/Dots'
 import { useAutoplay } from '../../../hooks/carousel/useAutoplay'
 import { useSwipe } from '../../../hooks/carousel/useSwipe'
 import { useCarouselState } from '../../../hooks/carousel/useCarouselState'
-//import { useIndicator } from '../../../hooks/carousel/useIndicator'
 
 export const Carousel = () => {
 	const items = projectsData
@@ -21,23 +20,17 @@ export const Carousel = () => {
 	const getInitialIndex = () => {
 		const returnId = location.state?.returnToProjectId
 		if (returnId) {
-			const idx = items.findIndex(p => String(p.id) === String(returnId))
+			const idx = items.findIndex(item => String(item.id) === String(returnId))
 			if (idx !== -1) return idx
 		}
 		// fallback: featured project or first
-		const featuredIdx = items.findIndex(p => p.featured)
+		const featuredIdx = items.findIndex(item => item.featured)
 		return featuredIdx !== -1 ? featuredIdx : 0
 	}
 
 	// 3) Carousel state (active index, direction, wrap-around)
 	const { activeIndex, direction, leftIndex, rightIndex, goLeft, goRight, goToIndex } = useCarouselState({ initialIndex: getInitialIndex(), length: items.length })
 
-	// refs for moving dot indicator
-	//const dotsRef = useRef(null)
-	//const INDICATOR_SIZE = 16
-	//const indicator = useIndicator({ dotsRef, activeIndex, size: INDICATOR_SIZE })
-
-	// cursor context so dots can trigger the same cursor animation as the section title
 	const cursorContext = useContext(CursorContext)
 
 	/* ===== Autoplay (respect prefers-reduced-motion and hybrid devices) ===== */
