@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
 import './ProjectDetail.scss';
@@ -63,6 +63,56 @@ const ProjectDetail = () => {
     fetchReadme(identifier);
     return () => {
       mountedRef.current = false;
+    };
+  }, [identifier]);
+
+  // Scroll fix for iOS Chrome
+  useLayoutEffect(() => {
+    // Save current setting
+    const originalRestoration = window.history.scrollRestoration;
+    // Disable auto restoration
+    if (window.history.scrollRestoration) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const forceScroll = () => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    };
+
+    // Immediate scroll
+    forceScroll();
+
+    // Aggressively force scroll to top for the first few frames
+    // This fights against iOS Safari/Chrome stubborn scroll restoration
+    let frameId;
+    let frames = 0;
+    const loop = () => {
+      if (frames < 20) { // Increased frames
+        forceScroll();
+        frames++;
+        frameId = requestAnimationFrame(loop);
+      }
+    };
+
+    // Start loop immediately
+    frameId = requestAnimationFrame(loop);
+
+    // ALSO start loop after a small delay to catch late restorations
+    const timeoutId = setTimeout(() => {
+      frames = 0; // reset frames to run loop again
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(loop);
+    }, 100);
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      clearTimeout(timeoutId);
+      // Restore setting on cleanup
+      if (window.history.scrollRestoration) {
+        window.history.scrollRestoration = originalRestoration;
+      }
     };
   }, [identifier]);
 
@@ -340,23 +390,6 @@ const ProjectDetail = () => {
         </motion.main>
 
         <BackFab onClick={handleFabClick} />
-
-        {/* {createPortal(
-          <motion.button
-            className="projectDetail__fab"
-            // Animate then navigate
-            onClick={handleFabClick}
-            variants={fabVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover="hover"
-            whileTap="tap"
-            aria-label="Volver a proyectos"
-          >
-            ←
-          </motion.button>,
-          document.body
-        )} */}
 
       </div>
     </div>
