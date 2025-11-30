@@ -1,7 +1,7 @@
 @import './color.scss';
 @import './components/MediaQueries.scss';
 
-:root{
+:root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -14,23 +14,23 @@
     overflow-x: hidden;
 }
 
-html{
+html {
 
-	overflow-y: scroll;
-	overflow-x: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     &::-webkit-scrollbar {
-    display: none;
-	}
+        display: none;
+    }
 
-	// Activar scroll-snap solo en desktop con mouse (no táctil)
-	@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-		scroll-snap-type: y mandatory;
-	}
+    // Activar scroll-snap solo en desktop con mouse (no táctil)
+    @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+        scroll-snap-type: y mandatory;
+    }
 
 }
 
-body{
+body {
     margin: 0;
     display: flex;
     place-items: center;
@@ -38,7 +38,7 @@ body{
     min-height: 100vh;
 }
 
-h1{
+h1 {
     font-size: 3.2em;
     line-height: 1.1;
 }
