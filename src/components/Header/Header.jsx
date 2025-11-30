@@ -10,15 +10,15 @@ import { HeaderLink } from './HeaderLink/HeaderLink';
 export const Header = () => {
 
     const contextValue = useContext(CursorContext)
-    const [lastScrollPosition , setLastScrollPosition ] = useState(window.scrollY)
-    const [scrollDirection , setScrollDirection ] = useState('default')
+    const [lastScrollPosition, setLastScrollPosition] = useState(window.scrollY)
+    const [scrollDirection, setScrollDirection] = useState('default')
 
 
     const [hover, setHover] = useState(false)
 
 
     // timeout id for delayed scrollDirection changes (not stored)
-    
+
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -37,7 +37,7 @@ export const Header = () => {
 
 
     const handleScroll = useCallback(() => {
-        if(window.scrollY > lastScrollPosition){
+        if (window.scrollY > lastScrollPosition) {
             setScrollDirection('down')
         } else {
             setScrollDirection('up')
@@ -62,41 +62,46 @@ export const Header = () => {
 
 
 
-    useEffect(()=>{
-        window.addEventListener('scroll' , handleScroll);
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
         return () => {
-            window.removeEventListener('scroll' , handleScroll)
+            window.removeEventListener('scroll', handleScroll)
         }
-    },[lastScrollPosition, handleScroll])
+    }, [lastScrollPosition, handleScroll])
 
-   
+
+
+    if (/^\/projects\/[^/]+$/.test(location.pathname)) {
+        return null;
+    }
+
     return (
         <motion.header className='header__section'
-            initial={ {opacity: 0 }}
-            variants={ variants }
-            animate={ scrollDirection }
+            initial={{ opacity: 0 }}
+            variants={variants}
+            animate={scrollDirection}
             transition={{
                 ease: "easeOut",
-                duration: scrollDirection === 'default' ?  .5 : .3,
-                delay: scrollDirection === 'default' ?  .8 : .2
+                duration: scrollDirection === 'default' ? .5 : .3,
+                delay: scrollDirection === 'default' ? .8 : .2
             }}
-            onMouseOver={ ()=>setHover(true) } onMouseOut={ ()=>setHover(false) }
+            onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}
         >
 
             <motion.nav className='header__navbar'>
 
-                <div className='header__brandName' onMouseOver={ () => contextValue.overTag('brandName') } onMouseOut={ contextValue.outTag} onClick={handleLogoClick} role="button" tabIndex={0}>
+                <div className='header__brandName' onMouseOver={() => contextValue.overTag('brandName')} onMouseOut={contextValue.outTag} onClick={handleLogoClick} role="button" tabIndex={0}>
                     ST
                 </div>
 
                 <ul className='header__menu'>
-                    <li><HeaderLink to={"home__section"} title={'Inicio'}/></li>
-                    <li><HeaderLink to={"about__section"} title={'Quien soy'}/></li>
+                    <li><HeaderLink to={"home__section"} title={'Inicio'} /></li>
+                    <li><HeaderLink to={"about__section"} title={'Quien soy'} /></li>
                     <li><HeaderLink to={"projects__section"} title={'Proyectos'} /></li>
-                    <li><HeaderLink to={"contact__section"} title={'Contacto'}/></li>
+                    <li><HeaderLink to={"contact__section"} title={'Contacto'} /></li>
                 </ul>
 
             </motion.nav>
         </motion.header>
-        )
-    }
+    )
+}

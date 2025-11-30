@@ -11,7 +11,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: start;
-		padding-top: 100px;
+		padding-top: 50px;
 		padding-bottom: 40px;
 		box-sizing: border-box;
 		position: relative;
@@ -74,7 +74,8 @@
 
 	/* ===== LOADING & ERROR STATES ===== */
 
-	&__loading, &__error {
+	&__loading,
+	&__error {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -173,6 +174,7 @@
 		@include tablet {
 			right: calc(env(safe-area-inset-right, 0px) + 7%);
 		}
+
 		@include xlarge {
 			right: max(calc((100vw - 1200px) / 2 + 20px), calc(5% + 20px));
 		}
@@ -202,7 +204,7 @@
 
 		@include large {
 			flex-direction: row;
-		gap: 2rem;
+			gap: 2rem;
 		}
 	}
 
@@ -296,11 +298,11 @@
 				font-size: 0.85rem;
 
 				@include small {
-				font-size: 0.9rem;
+					font-size: 0.9rem;
 				}
 
 				@include tablet {
-				font-size: 0.95rem;
+					font-size: 0.95rem;
 				}
 			}
 
@@ -309,12 +311,12 @@
 				font-size: 0.8rem;
 
 				@include small {
-				padding-left: 0.75rem;
-				font-size: 0.85rem;
+					padding-left: 0.75rem;
+					font-size: 0.85rem;
 				}
 
 				@include tablet {
-				font-size: 0.9rem;
+					font-size: 0.9rem;
 				}
 			}
 
@@ -323,12 +325,12 @@
 				font-size: 0.75rem;
 
 				@include small {
-				padding-left: 1.5rem;
-				font-size: 0.8rem;
+					padding-left: 1.5rem;
+					font-size: 0.8rem;
 				}
 
 				@include tablet {
-				font-size: 0.85rem;
+					font-size: 0.85rem;
 				}
 			}
 
@@ -339,12 +341,12 @@
 				font-size: 0.7rem;
 
 				@include small {
-				padding-left: 2.25rem;
-				font-size: 0.75rem;
+					padding-left: 2.25rem;
+					font-size: 0.75rem;
 				}
 
 				@include tablet {
-				font-size: 0.8rem;
+					font-size: 0.8rem;
 				}
 			}
 		}
@@ -366,19 +368,19 @@
 				width: 6px;
 			}
 
-		&::-webkit-scrollbar-track {
-			background: rgba(255, 255, 255, 0.02);
-			border-radius: 3px;
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background: rgba($pinkMiami, 0.3);
-			border-radius: 3px;
-
-			&:hover {
-			background: rgba($pinkMiami, 0.5);
+			&::-webkit-scrollbar-track {
+				background: rgba(255, 255, 255, 0.02);
+				border-radius: 3px;
 			}
-		}
+
+			&::-webkit-scrollbar-thumb {
+				background: rgba($pinkMiami, 0.3);
+				border-radius: 3px;
+
+				&:hover {
+					background: rgba($pinkMiami, 0.5);
+				}
+			}
 		}
 	}
 
@@ -396,8 +398,8 @@
 
 		/* Prevent horizontal overflow */
 		* {
-		max-width: 100%;
-		box-sizing: border-box;
+			max-width: 100%;
+			box-sizing: border-box;
 		}
 
 		/* ===== HEADINGS ===== */
@@ -622,8 +624,8 @@
 				margin-left: -0.9em;
 
 				@include small {
-				width: 1em;
-				margin-left: -1em;
+					width: 1em;
+					margin-left: -1em;
 				}
 			}
 		}
@@ -668,7 +670,7 @@
 		}
 
 		/* Inline code */
-		:not(pre) > code {
+		:not(pre)>code {
 			background: rgba($pinkMiami, 0.12);
 			color: $pinkMiami;
 			padding: 0.1rem 0.3rem;
@@ -710,12 +712,12 @@
 				line-height: 1.45;
 
 				@include small {
-				font-size: 0.8rem;
-				line-height: 1.5;
+					font-size: 0.8rem;
+					line-height: 1.5;
 				}
 
 				@include tablet {
-				font-size: 0.875rem;
+					font-size: 0.875rem;
 				}
 			}
 		}
