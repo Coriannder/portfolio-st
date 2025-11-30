@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import './ProjectDetail.scss';
 import ReactMarkdown from 'react-markdown';
 import { motion, useAnimation } from 'framer-motion';
+import BackFab from './BackFab/BackFab';
 
 const ProjectDetail = () => {
   const { identifier } = useParams();
@@ -362,7 +363,9 @@ const ProjectDetail = () => {
 
         </motion.main>
 
-        {createPortal(
+        <BackFab onClick={handleFabClick} />
+
+        {/* {createPortal(
           <motion.button
             className="projectDetail__fab"
             // Animate then navigate
@@ -377,7 +380,7 @@ const ProjectDetail = () => {
             ←
           </motion.button>,
           document.body
-        )}
+        )} */}
 
       </div>
     </div>
