@@ -1,16 +1,18 @@
 import './index.scss'
 
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
-import { Home} from './components/Home/Home';
+import { Home } from './components/Home/Home';
 import { About } from './components/About/About';
 import { Contact } from './components/Contact/Contact';
 import { BackgroundFigure } from './components/BackgroundFigure/BackgroundFigure';
 import { Projects } from './components/Projects/Projects';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProjectDetail from './components/Projects/ProjectDetail/ProjectDetail';
 import { CursorProvider } from './Context/CursorContext';
+
+// Lazy load ProjectDetail to improve initial bundle size
+const ProjectDetail = lazy(() => import('./components/Projects/ProjectDetail/ProjectDetail'));
 
 
 function App() {
@@ -47,21 +49,23 @@ function App() {
 	return (
 		<Router>
 			<CursorProvider>
-				<Header/>
-				<Routes>
-					<Route path="/projects/:identifier" element={<Main><ProjectDetail/></Main>} />
-					<Route path="/*" element={
-						<Main>
-							<Home/>
-							<About/>
-							<Projects/>
-							<Contact/>
-						</Main>
-					} />
-				</Routes>
-				<BackgroundFigure/>
+				<Header />
+				<Suspense fallback={<div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff' }}>Cargando...</div>}>
+					<Routes>
+						<Route path="/projects/:identifier" element={<Main><ProjectDetail /></Main>} />
+						<Route path="/*" element={
+							<Main>
+								<Home />
+								<About />
+								<Projects />
+								<Contact />
+							</Main>
+						} />
+					</Routes>
+				</Suspense>
+				<BackgroundFigure />
 			</CursorProvider>
 		</Router>
-		);
+	);
 }
 export default App;
