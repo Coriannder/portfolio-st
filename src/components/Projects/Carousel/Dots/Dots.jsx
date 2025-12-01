@@ -4,8 +4,8 @@ import './Dots.scss'
 export const Dots = ({ items, activeIndex, goToIndex, cursorContext }) => {
 
     const dotsRef = useRef(null)
-    const [position, setPosition] =  useState({left: 0, top: 0, width: 0, height: 0})
-   
+    const [position, setPosition] = useState({ left: 0, top: 0, width: 0, height: 0 })
+
 
 
     const handlePosition = (indexDot) => {
@@ -32,15 +32,19 @@ export const Dots = ({ items, activeIndex, goToIndex, cursorContext }) => {
             className="dots"
             role="tablist"
             aria-label="Carousel pagination"
-            onPointerEnter={() => cursorContext && cursorContext.overTag && cursorContext.overTag('title')}
-            onPointerLeave={() => cursorContext && cursorContext.outTag && cursorContext.outTag()}
+            onPointerEnter={(e) => {
+                if (e.pointerType === 'mouse') cursorContext && cursorContext.overTag && cursorContext.overTag('title')
+            }}
+            onPointerLeave={(e) => {
+                if (e.pointerType === 'mouse') cursorContext && cursorContext.outTag && cursorContext.outTag()
+            }}
             onFocusCapture={() => cursorContext && cursorContext.overTag && cursorContext.overTag('title')}
             onBlurCapture={() => cursorContext && cursorContext.outTag && cursorContext.outTag()}
         >
             <div ref={dotsRef} className="dots-inner">
                 <div
                     className="dot-indicator"
-                    style={{ left: ( position.left ) + 'px', top: position.top + 'px', width: position.width + 'px', height: position.height + 'px' }}
+                    style={{ left: (position.left) + 'px', top: position.top + 'px', width: position.width + 'px', height: position.height + 'px' }}
                     aria-hidden="true"
                 />
 
@@ -57,7 +61,9 @@ export const Dots = ({ items, activeIndex, goToIndex, cursorContext }) => {
                             e.currentTarget.blur();
                             cursorContext && cursorContext.outTag && cursorContext.overTag('title');
                         }}
-                        onMouseOver={() => cursorContext && cursorContext.overTag && cursorContext.overTag('title')}
+                        onPointerEnter={(e) => {
+                            if (e.pointerType === 'mouse') cursorContext && cursorContext.overTag && cursorContext.overTag('title')
+                        }}
                         onFocus={() => cursorContext && cursorContext.overTag && cursorContext.overTag('title')}
                     />
                 ))}

@@ -4,20 +4,24 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 
-export const ContactLink = ({title , children , to }) => {
+export const ContactLink = ({ title, children, to }) => {
 
     const [isMouseOver, setIsMouseOver] = useState(false)
 
     return (
         <motion.div
 
-            style={{overflow:'hidden'}}
-            onMouseOver={()=>setIsMouseOver(true)}
-            onMouseLeave={()=>setIsMouseOver(false)}
+            style={{ overflow: 'hidden' }}
+            onPointerEnter={(e) => {
+                if (e.pointerType === 'mouse') setIsMouseOver(true)
+            }}
+            onPointerLeave={(e) => {
+                if (e.pointerType === 'mouse') setIsMouseOver(false)
+            }}
 
-            initial={{x: 0}}
-            animate={{x: isMouseOver? 10 : 0}}
-            transition={{duration: .1, easings: 'spring'}}
+            initial={{ x: 0 }}
+            animate={{ x: isMouseOver ? 10 : 0 }}
+            transition={{ duration: .1, easings: 'spring' }}
         >
             <Link className='contactLink__container' to={to} target="_blank" rel="noopener noreferrer">
                 <span className='contactLink__iconContainer'>

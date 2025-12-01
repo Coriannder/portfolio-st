@@ -2,7 +2,7 @@ import './Home.scss'
 import logo2 from '../../assets/logo2.svg'
 import { CursorContext } from '../../Context/CursorContext'
 import { useContext } from 'react'
-import {  motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export const Home = () => {
 
@@ -10,25 +10,29 @@ export const Home = () => {
 
     return (
         <section className='home__section'>
-                <motion.div className='home__container'
-                    onMouseOver={ () => contextValue.overTag('name') }
-                    onMouseOut={contextValue.outTag}
-                    initial={{y: 10, opacity: 0}}
-                    whileInView={{y: 0, opacity: 1}}
-                    viewport={{ once: true }}
-                    transition={
-                        {
-                            ease: "easeOut",
-                            damping: 30,
-                            duration: .8,
-                            delay: .4
-                        }
+            <motion.div className='home__container'
+                onPointerEnter={(e) => {
+                    if (e.pointerType === 'mouse') contextValue.overTag('name')
+                }}
+                onPointerLeave={(e) => {
+                    if (e.pointerType === 'mouse') contextValue.outTag()
+                }}
+                initial={{ y: 10, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={
+                    {
+                        ease: "easeOut",
+                        damping: 30,
+                        duration: .8,
+                        delay: .4
                     }
+                }
 
-                >
-                    <div className='home__intro'>
-                        Hola como estas? Soy
-                    </div>
+            >
+                <div className='home__intro'>
+                    Hola como estas? Soy
+                </div>
 
                 <h1
 
@@ -36,14 +40,14 @@ export const Home = () => {
                     <span className='home__name'>
                         SEBAS
                     </span>
-                    <span style={{height: '100%'}}>
-                            <motion.img
-                                whileHover={{
-                                    rotate: 90,
-                                    transition: { duration: .5, type: "spring" },
-                                }}
-                                className='home__name-logo' src={logo2}
-                            />
+                    <span style={{ height: '100%' }}>
+                        <motion.img
+                            whileHover={{
+                                rotate: 90,
+                                transition: { duration: .5, type: "spring" },
+                            }}
+                            className='home__name-logo' src={logo2}
+                        />
                     </span>
                     <span className='home__lastName'>TABOADA</span>
                 </h1>
@@ -51,7 +55,7 @@ export const Home = () => {
                     <span>desarrollador web fullstack</span>
                 </h3>
 
-                </motion.div>
+            </motion.div>
         </section>
     )
 }

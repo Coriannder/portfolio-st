@@ -1,12 +1,16 @@
 @import '../../MediaQueries.scss';
 @import '../../../color.scss';
 
-.contactLink{
+.contactLink {
 
     &__container {
         display: flex;
         color: $blackLetter;
         text-decoration: none;
+
+        &:active {
+            scale: 0.9;
+        }
     }
 
     &__header {
