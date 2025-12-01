@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { CursorContext } from '../../../Context/CursorContext'
 import './ViewCVButton.scss'
 import { motion } from 'framer-motion'
@@ -7,28 +7,27 @@ export const ViewCVButton = () => {
   const contextValue = useContext(CursorContext)
   const [hover, setHover] = useState(false)
 
-  const handleOpen = useCallback(() => {
-    const url = '/files/sebasdev-cv-2025.pdf'
-    try {
-      window.open(url, '_blank', 'noopener')
-    } catch (err) {
-      console.error('Failed to open CV', err)
-      window.location.href = url
-    }
-  }, [])
-
   return (
-    <motion.div
+    <motion.a
+      href="/files/sebasdev-cv-2025.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
       initial={{ x: 100, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, type: 'spring', delay: 0.8 }}
-      //viewport={{once: true}}
       className="view-cv-button__container"
-      onMouseOver={() => contextValue.overTag && contextValue.overTag('button')}
-      onMouseOut={() => contextValue.outTag && contextValue.outTag()}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={handleOpen}
+      onPointerEnter={(e) => {
+        if (e.pointerType === 'mouse') {
+          setHover(true)
+          contextValue.overTag && contextValue.overTag('button')
+        }
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === 'mouse') {
+          setHover(false)
+          contextValue.outTag && contextValue.outTag()
+        }
+      }}
       aria-label="Ver CV de Sebastián Taboada"
     >
       <motion.div
@@ -40,6 +39,6 @@ export const ViewCVButton = () => {
       </motion.div>
 
       <div className="view-cv-button__btn view-cv-button__content">Ver CV</div>
-    </motion.div>
+    </motion.a>
   )
 }
