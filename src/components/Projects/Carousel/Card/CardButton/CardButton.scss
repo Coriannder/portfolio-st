@@ -2,7 +2,7 @@
 @import '../../../../MediaQueries.scss';
 
 .cardButton {
-    &__link{
+    &__link {
         padding: .28rem .7rem;
         border: 1px solid $pinkMiami;
         //padding: 4px 15px 6px 15px;
@@ -16,9 +16,13 @@
         text-decoration: none;
         position: relative;
         overflow: hidden;
-        color:$pinkMiami;
+        color: $pinkMiami;
         cursor: none;
         width: min-content;
+
+        &:active {
+            scale: 0.95;
+        }
 
         @include tablet {
             //font-size: .6rem;
@@ -35,7 +39,7 @@
 
 
 
-         &--background {
+        &--background {
             position: absolute;
             left: 0;
             background-color: #d48cbbad;
@@ -48,14 +52,11 @@
             cursor: none;
             right: 100px;
 
-            }
+        }
 
 
 
     }
 
-   
+
 }
-
-
-
