@@ -17,6 +17,7 @@ export const useAutoplay = ({ interval = 5000, resumeDelay = 3000, enabled = tru
   const autoplayRef = useRef(null)
   const resumeTimeoutRef = useRef(null)
   const isPausedRef = useRef(false)
+  const callbackRef = useRef(null) // Store the callback to resume later
 
   const canAutoplay = useCallback(() => {
     if (typeof window === 'undefined') return false
@@ -28,10 +29,11 @@ export const useAutoplay = ({ interval = 5000, resumeDelay = 3000, enabled = tru
   }, [enabled])
 
   const start = useCallback((cb) => {
+    if (typeof cb === 'function') callbackRef.current = cb
     if (!canAutoplay()) return
     if (autoplayRef.current) return
     autoplayRef.current = setInterval(() => {
-      if (typeof cb === 'function') cb()
+      if (callbackRef.current) callbackRef.current()
     }, interval)
   }, [canAutoplay, interval])
 
@@ -54,15 +56,48 @@ export const useAutoplay = ({ interval = 5000, resumeDelay = 3000, enabled = tru
 
   const resume = useCallback((cb) => {
     // Explicit resume: start playback again using provided callback
+    if (typeof cb === 'function') callbackRef.current = cb
     if (autoplayRef.current) return
     isPausedRef.current = false
     if (!canAutoplay()) return
     autoplayRef.current = setInterval(() => {
-      if (typeof cb === 'function') cb()
+      if (callbackRef.current) callbackRef.current()
     }, interval)
   }, [canAutoplay, interval])
 
   const isRunning = useCallback(() => !!autoplayRef.current, [])
+
+  // Handle Page Visibility (Tab switching)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Tab hidden: stop autoplay immediately to prevent animation stacking
+        stop()
+      } else {
+        // Tab visible: resume if it wasn't manually paused
+        if (!isPausedRef.current && callbackRef.current) {
+          // Re-trigger start with the stored callback
+          // We call start() directly which checks canAutoplay() internally
+          // We need to pass the stored callback to ensure it's set/used
+          // However, start() expects a callback. We can pass callbackRef.current
+          // But start() sets callbackRef.current = cb.
+          // If we pass callbackRef.current, it sets callbackRef.current = callbackRef.current (safe)
+          // But we need to be careful about closure staleness if start wasn't recreated.
+          // Fortunately start depends on [canAutoplay, interval].
+          // To be safe, we can just call the internal logic or just call start(callbackRef.current)
+          // Let's use the exposed start function.
+          // Note: start() checks autoplayRef.current, so if it's already running (edge case), it won't double up.
+          // But we called stop() when hidden, so it should be null.
+          start(callbackRef.current)
+        }
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [stop, start])
 
   useEffect(() => {
     return () => {
