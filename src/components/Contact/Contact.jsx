@@ -3,14 +3,21 @@ import { motion } from 'framer-motion'
 import { ContactLink } from './ContactLink/ContactLink'
 import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 import { ImMail } from "react-icons/im";
+import { useContext } from "react";
+import { CursorContext } from "../../Context/CursorContext";
 
 export const Contact = () => {
 
+    const contextValue = useContext(CursorContext)
+
     return(
-        <section className='contact__section'>
+        <section className='contact__section'
+        
+            onMouseOver={ () => contextValue.overTag('name') }
+            onMouseOut={contextValue.outTag}
+        >
 
             <div className='contact__container'>
-
 
                 <motion.div
                     className='contact__subtitle'
