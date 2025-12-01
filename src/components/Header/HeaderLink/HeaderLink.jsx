@@ -25,13 +25,27 @@ export const HeaderLink = ({ to, title }) => {
         }
     }
 
+    const handlePointerEnter = (e) => {
+        if (e.pointerType === 'mouse') {
+            setHover(true);
+        }
+    };
+
+    const handlePointerLeave = (e) => {
+        if (e.pointerType === 'mouse') {
+            setHover(false);
+        }
+    };
+
     return (
         <Link
             to="/"
             className={'headerLink__link'}
             onClick={handleClick}
-            onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
-            onMouseOver={() => contextValue.overTag('link')} onMouseOut={contextValue.outTag}
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
+            onMouseOver={() => contextValue.overTag('link')}
+            onMouseOut={() => contextValue.outTag()}
             onPointerDown={(e) => e.stopPropagation()}
         >
             {title}

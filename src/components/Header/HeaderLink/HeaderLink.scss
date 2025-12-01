@@ -1,23 +1,30 @@
 @import '../../../color.scss';
+@import '../../MediaQueries.scss';
 
 .headerLink {
-    &__link{
+    &__link {
         overflow-x: hidden;
-    color: $pinkMiami;
+        color: $pinkMiami;
         text-decoration: none;
 
         // force color for all link states to avoid browser default purple for visited
         &:link,
         &:visited,
-        &:active,
         &:focus {
             color: $pinkMiami;
         }
 
-        &:hover {
-            scale: 1.1;
-            font-weight:600;
-            cursor: none;
+        @include hover {
+            &:hover {
+                scale: 1.1;
+                font-weight: 600;
+                cursor: none;
+            }
+        }
+
+        &:active {
+            scale: 0.95;
+            color: $pinkMiami;
         }
     }
 

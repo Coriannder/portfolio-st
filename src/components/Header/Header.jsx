@@ -85,7 +85,13 @@ export const Header = () => {
                 duration: scrollDirection === 'default' ? .5 : .3,
                 delay: scrollDirection === 'default' ? .8 : .2
             }}
-            onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}
+            onPointerEnter={(e) => {
+                if (e.pointerType === 'mouse') setHover(true)
+            }}
+            onPointerLeave={(e) => {
+                if (e.pointerType === 'mouse') setHover(false)
+            }}
+            onClick={() => setScrollDirection('up')}
         >
 
             <motion.nav className='header__navbar'>

@@ -1,48 +1,68 @@
 // Small screens helper: used for subtle step-up from very small devices
 @mixin small {
-    @media screen and ( min-width: 400px) {
+    @media screen and (min-width: 400px) {
         @content
     }
-};
+}
+
+;
 
 @mixin mobile {
-    @media screen and ( min-width: 576px) {
+    @media screen and (min-width: 576px) {
         @content
     }
-};
+}
+
+;
 
 @mixin tablet {
-    @media screen and ( min-width: 768px) {
+    @media screen and (min-width: 768px) {
         @content
     }
-};
+}
+
+;
 
 @mixin large {
-    @media screen and ( min-width: 992px) {
+    @media screen and (min-width: 992px) {
         @content
     }
-};
+}
+
+;
 
 @mixin xlarge {
-    @media screen and ( min-width: 1200px) {
+    @media screen and (min-width: 1200px) {
         @content
     }
-};
+}
+
+;
 
 @mixin xxlarge {
-    @media screen and ( min-width: 1800px) {
+    @media screen and (min-width: 1800px) {
         @content
     }
-};
+}
+
+;
 
 @mixin xxxlarge {
-    @media screen and ( min-width: 2800px) {
+    @media screen and (min-width: 2800px) {
         @content
     }
-};
+}
+
+;
 
 @mixin smallScreensMaxHeight720 {
     @media (max-height: 720px) and (max-width: 991px) {
+        @content;
+    }
+}
+
+@mixin hover {
+    @media (hover: hover) {
         @content;
     }
 }
