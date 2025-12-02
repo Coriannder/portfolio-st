@@ -91,6 +91,15 @@ public/
 - La navegación entre secciones combina rutas y desplazamiento programático (scroll) para que los enlaces y las páginas de proyecto funcionen correctamente.
 - Al volver desde el detalle de un proyecto, el carrusel muestra automáticamente ese proyecto como tarjeta central.
 
+## Optimizaciones y Mejoras (v2.0)
+
+Esta versión incluye una auditoría completa enfocada en la experiencia de usuario móvil y performance:
+
+- **UX Móvil Nativa:** Reemplazo de eventos de mouse (`hover`) por `pointer events` y estados `:active` para una interacción táctil real y sin "hovers fantasma".
+- **Performance:** Implementación de `React.lazy` y `Suspense` para carga diferida de componentes pesados, y limpieza de dependencias no utilizadas.
+- **SEO:** Inclusión de meta etiquetas esenciales (Open Graph, Twitter Cards, descripción) para mejorar la visibilidad y el compartid.
+- **Gestión de Assets:** Estrategia de "Zona Segura" para imágenes responsivas, asegurando que el contenido principal se vea bien tanto en tarjetas panorámicas de escritorio como en vistas móviles 16:9.
+
 ## Contacto
 
 - **Email:** contacto@sebasdev.com
