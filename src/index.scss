@@ -24,7 +24,7 @@ html {
     }
 
     // Activar scroll-snap solo en desktop con mouse (no táctil)
-    @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+    @include large {
         scroll-snap-type: y mandatory;
     }
 
