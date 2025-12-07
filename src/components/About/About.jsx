@@ -52,6 +52,15 @@ export const About = () => {
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, type: "spring" }}
                     viewport={{ once: true }}
+
+                    onPointerEnter={(e) => {
+                        if (e.pointerType === 'mouse') contextValue.overTag('title')
+                    }}
+                    onPointerLeave={(e) => {
+                        if (e.pointerType === 'mouse') contextValue.outTag()
+                    }}
+
+
                 >
                     <img src={photo} />
                 </motion.div>
