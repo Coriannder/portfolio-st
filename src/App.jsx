@@ -11,27 +11,24 @@ import { Projects } from './components/Projects/Projects';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CursorProvider } from './Context/CursorContext';
 
-// Lazy load ProjectDetail to improve initial bundle size
+// Lazy load components
 const ProjectDetail = lazy(() => import('./components/Projects/ProjectDetail/ProjectDetail'));
+const CV = lazy(() => import('./components/CV/CV'));
 
 
 function App() {
 
 	// Add a lightweight runtime detection for hybrid (touch+mouse) laptops
-	// Some Windows laptops report no primary hover; when the user moves a mouse
-	// we add `has-mouse` to <body> so CSS can target hover styles safely.
 	useEffect(() => {
 		if (typeof window === 'undefined' || !document || !document.body) return;
 
 		const onPointerMove = (e) => {
-			// pointerType 'mouse' indicates a real mouse is active
 			if (e && e.pointerType === 'mouse') {
 				document.body.classList.add('has-mouse');
 			}
 		};
 
 		const onPointerDown = (e) => {
-			// if the user touches the screen, remove the class to avoid accidental hover
 			if (e && e.pointerType === 'touch') {
 				document.body.classList.remove('has-mouse');
 			}
@@ -52,6 +49,7 @@ function App() {
 				<Header />
 				<Suspense fallback={<div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff' }}>Cargando...</div>}>
 					<Routes>
+						<Route path="/cv" element={<Main><CV /></Main>} />
 						<Route path="/projects/:identifier" element={<Main><ProjectDetail /></Main>} />
 						<Route path="/*" element={
 							<Main>

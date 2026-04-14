@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview CV - Sebas Taboada</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { background: #f3f4f6; padding: 40px 20px; font-family: sans-serif; }
+        .controls { 
+            max-width: 800px; 
+            margin: 0 auto 20px; 
+            display: flex; 
+            gap: 10px; 
+            background: white; 
+            padding: 15px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        select, button { padding: 8px 12px; border-radius: 4px; border: 1px solid #ddd; cursor: pointer; }
+        button { background: #2563eb; color: white; border: none; font-weight: bold; }
+        #cv-content { 
+            background: white; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            min-height: 11in;
+        }
+        @media print {
+            @page { 
+                margin: 0; /* Elimina encabezados y pies de página (URL, Fecha, Título) */
+            }
+            .controls { display: none; }
+            body { 
+                padding: 0; 
+                margin: 1.6cm; /* Añadimos margen manual para compensar */
+                background: white; 
+            }
+            #cv-content { box-shadow: none; margin: 0; max-width: none; }
+            /* Forzado de color para habilidades en impresión */
+            #cv-content blockquote, 
+            #cv-content blockquote * {
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        /* Forzado de color para habilidades en pantalla (preview) */
+        #cv-content blockquote, 
+        #cv-content blockquote * {
+            color: #000 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <select id="cv-selector">
+            <option value="files/sebasdev-cv-es.md">Versión Español (ES)</option>
+            <option value="files/sebasdev-cv-en.md">Versión Inglés (EN)</option>
+        </select>
+        <button onclick="window.print()">Imprimir a PDF / Guardar</button>
+        <span style="margin-left: auto; align-self: center; font-size: 0.8rem; color: #666;">Usa Ctrl+P para ver el layout final</span>
+    </div>
+    <div id="cv-content"></div>
+
+    <script>
+        const contentDiv = document.getElementById('cv-content');
+        const selector = document.getElementById('cv-selector');
+
+        async function loadCV(path) {
+            try {
+                const response = await fetch(path);
+                const text = await response.text();
+                // Renderizamos el markdown
+                contentDiv.innerHTML = marked.parse(text);
+                
+                // Forzamos que los estilos que están dentro del MD se apliquen
+                // moviéndolos al head si es necesario, o simplemente dejando que el navegador los lea si se inyectan tal cual.
+                // Los estilos que puse en el MD están al final, así que se aplicarán al contenido.
+            } catch (err) {
+                contentDiv.innerHTML = `<p style="padding: 20px; color: red;">Error cargando el archivo: ${path}. Asegúrate de que el archivo existe en public/files/.</p>`;
+            }
+        }
+
+        selector.addEventListener('change', (e) => loadCV(e.target.value));
+        
+        // Carga inicial
+        loadCV(selector.value);
+    </script>
+</body>
+</html>
