@@ -5,7 +5,7 @@ Tucumán, Argentina | [contacto@sebasdev.com](mailto:contacto@sebasdev.com) | [l
 ---
 
 ## Perfil Profesional
-Desarrollador Full Stack **TypeScript** (Next.js / Node.js) e Ingeniero Biomédico. Especializado en el diseño y despliegue de sistemas de gestión clínica end-to-end. Foco en la creación de **APIs escalables**, implementación de seguridad **RBAC/JWT** y aseguramiento de calidad con **100% de cobertura de tests**. Interés técnico en la intersección de HealthTech y automatización de procesos.
+Desarrollador Full Stack **TypeScript** (Next.js / Node.js) e Ingeniero Biomédico. Especializado en el diseño de **APIs escalables** y sistemas integrales con un enfoque **AI-First**. Foco en la arquitectura robusta, seguridad **RBAC/JWT** y **100% de cobertura de tests**. Mi perfil híbrido aporta valor técnico en la intersección de HealthTech y la optimización de ciclos de desarrollo.
 
 ---
 
@@ -18,7 +18,7 @@ Desarrollador Full Stack **TypeScript** (Next.js / Node.js) e Ingeniero Biomédi
 > **Node.js**, **Express**, **TypeScript**, **Sequelize ORM**, **MySQL**, MongoDB, PostgreSQL, JWT, Passport, Multer, REST APIs.
 >
 > ### Automatización & QA
-> **n8n**, **Jest**, **Supertest**, React Testing Library, Postman, Vitest.
+> **Jest**, **Supertest**, React Testing Library, Postman, Vitest.
 >
 > ### Tools & Infrastructure
 > Git/GitHub, Vite, Cloudinary, Vercel, Render, Husky, ESLint, Prettier, Linux/Bash.
