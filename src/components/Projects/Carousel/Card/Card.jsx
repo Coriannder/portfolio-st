@@ -29,7 +29,10 @@ export const Card = ({ data, isActive, revealActive, revealIndex }) => {
 
 			<div
 				className="card__media"
-				style={image ? { backgroundImage: `url(${image})` } : undefined}
+				style={image ? { 
+					backgroundImage: `url(${image})`,
+					backgroundPosition: data.bgPosition || 'center'
+				} : undefined}
 				title={alt || title}
 				aria-hidden="true"
 			/>

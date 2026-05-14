@@ -12,7 +12,6 @@ const ProjectDetail = () => {
   const [readmeMd, setReadmeMd] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [toc, setToc] = useState([]);
   const mountedRef = useRef(true);
   const controls = useAnimation();
   const location = useLocation();
@@ -92,15 +91,7 @@ const ProjectDetail = () => {
     return headings;
   }, []);
 
-  // When the markdown changes, extract TOC
-  useEffect(() => {
-    if (!readmeMd) {
-      setToc([]);
-      return;
-    }
-    const headings = parseHeadings(readmeMd);
-    setToc(headings);
-  }, [readmeMd, parseHeadings]);
+  // When the markdown changes, extract TOC removed as TOC is no longer displayed
 
   useEffect(() => {
     // start entry animation
@@ -130,19 +121,7 @@ const ProjectDetail = () => {
     }
   };
 
-  const tocVariants = {
-    hidden: { x: -30, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'tween',
-        duration: 0.42,
-        delay: 0.16,
-        ease: 'easeOut'
-      }
-    }
-  };
+  // tocVariants removed
 
   const markdownVariants = {
     hidden: { x: 30, opacity: 0 },
@@ -281,23 +260,6 @@ const ProjectDetail = () => {
             </motion.section>
           ) : readmeMd ? (
             <div className="projectDetail__layout">
-              {toc.length > 0 && (
-                <motion.aside
-                  className="projectDetail__toc"
-                  variants={tocVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <strong>Contenido</strong>
-                  <ul>
-                    {toc.map((h) => (
-                      <li key={h.id} className={`toc-level-${h.level}`}>
-                        <a href={`#${h.id}`}>{h.text}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.aside>
-              )}
 
               <motion.article
                 className="projectDetail__markdown"

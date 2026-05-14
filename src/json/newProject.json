@@ -24,6 +24,29 @@
 		"visibility": "private"
 	},
 	{
+		"id": "5",
+		"title": "Josefina Psicología — Landing Page Premium",
+		"alt": "Landing page para servicios de psicología online",
+		"description": "Sitio web profesional para psicóloga clínica en Florencia, Italia, orientado a expatriados. Diseño premium con enfoque empático, UI moderna y efectos de glassmorphism.",
+		"stack": [
+			"Next.js 15",
+			"TypeScript",
+			"Tailwind CSS",
+			"Shadcn UI"
+		],
+		"problem": "Necesidad de una presencia digital profesional y empática para ofrecer servicios de psicología online a argentinos expatriados, transmitiendo confianza y alta calidad.",
+		"approach": "Desarrollé una SPA utilizando Next.js App Router. Implementé un diseño premium con Tailwind CSS y componentes de Shadcn UI, incorporando un sistema de interacción inteligente para evitar 'hovers' persistentes en dispositivos móviles.",
+		"result": "Un sitio web rápido, responsivo y estéticamente refinado que facilita la presentación de los servicios y el contacto directo, destacando la propuesta de valor.",
+		"codeUrl": null,
+		"demoUrl": "https://jocha-web.vercel.app/",
+		"image": "/assets/jocha-web.png",
+		"bgPosition": "center 20%",
+		"featured": true,
+		"type": "frontend",
+		"readme": "/readmes/readme_project_5.md",
+		"visibility": "private"
+	},
+	{
 		"id": "2",
 		"title": "Isla Gourmet — Sitio Corporativo (maquetado)",
 		"alt": "Isla Gourmet - catering y eventos",
